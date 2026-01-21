@@ -6,8 +6,10 @@ import ActivePlayingView from './components/ActivePlayingView'
 import SavedSongs from './components/SavedSongs'
 import ArtistList from './components/ArtistList'
 import ArtistLibrary from './components/ArtistLibrary'
+import ExpansionMenu from './components/ExpansionMenu'
+import ChordScratchpad from './components/ChordScratchpad'
 
-type ViewType = 'dashboard' | 'active' | 'library' | 'utility' | 'artists' | 'artist-detail'
+type ViewType = 'dashboard' | 'active' | 'library' | 'utility' | 'artists' | 'artist-detail' | 'expansion' | 'scratchpad'
 
 function App() {
   const [currentView, setCurrentView] = useState<ViewType>('dashboard')
@@ -23,20 +25,31 @@ function App() {
   }
 
   const handleAddProgression = (progression: any) => {
-    // Transform artist progression format to the format expected by ActivePlayingView
-    const formattedSong = {
-      id: progression.id,
-      title: progression.name,
-      artist: selectedArtistId?.toUpperCase() || 'UNKNOWN',
-      tempo: progression.bpm,
-      sections: [
-        {
-          name: progression.suggested_section || 'VERSE',
-          bars: progression.chords.map((c: any) => c.root + (c.quality !== 'm' ? c.quality : ''))
+    const sectionName = progression.suggested_section || 'VERSE'
+    const bars = progression.chords.map((c: any) => c.root + (c.quality || ''))
+
+    setActiveSong((prev: any) => {
+      // Create a copy of the sections
+      const newSections = prev.sections ? [...prev.sections] : []
+      const existingSectionIdx = newSections.findIndex((s: any) => s.name === sectionName)
+
+      if (existingSectionIdx >= 0) {
+        newSections[existingSectionIdx] = {
+          ...newSections[existingSectionIdx],
+          bars: [...newSections[existingSectionIdx].bars, ...bars]
         }
-      ]
-    }
-    setActiveSong(formattedSong)
+      } else {
+        newSections.push({ name: sectionName, bars })
+      }
+
+      return {
+        ...prev,
+        title: progression.name || prev.title,
+        artist: selectedArtistId?.toUpperCase() || prev.artist,
+        sections: newSections
+      }
+    })
+
     setCurrentView('active')
   }
 
@@ -76,6 +89,19 @@ function App() {
         <ArtistLibrary
           artistId={selectedArtistId}
           onBack={() => setCurrentView('artists')}
+          onAddProgression={handleAddProgression}
+        />
+      )}
+
+      {currentView === 'expansion' && (
+        <ExpansionMenu
+          onBack={() => setCurrentView('dashboard')}
+        />
+      )}
+
+      {currentView === 'scratchpad' && (
+        <ChordScratchpad
+          onBack={() => setCurrentView('dashboard')}
           onAddProgression={handleAddProgression}
         />
       )}

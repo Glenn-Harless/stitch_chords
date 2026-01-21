@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Expansion Techniques Menu</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "primary": "#2eeaff",
+            "background-light": "#f5f8f8",
+            "background-dark": "#0f2123",
+          },
+          fontFamily: {
+            "display": ["Space Grotesk", "monospace"]
+          },
+          borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+        },
+      },
+    }
+  </script>
+<style>
+    body {
+      font-family: 'Space Grotesk', sans-serif;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    .terminal-cursor::after {
+      content: '_';
+      animation: blink 1s step-end infinite;
+    }
+    @keyframes blink {
+      from, to { opacity: 1; }
+      50% { opacity: 0; }
+    }
+    .scanline {
+      width: 100%;
+      height: 100px;
+      z-index: 10;
+      background: linear-gradient(0deg, rgba(46, 234, 255, 0.03) 0%, rgba(46, 234, 255, 0) 100%);
+      opacity: 0.1;
+      position: absolute;
+      bottom: 100%;
+      pointer-events: none;
+    }
+  </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark text-slate-800 dark:text-slate-200 min-h-screen font-display flex flex-col overflow-hidden">
+<!-- Scanline Effect Container -->
+<div class="fixed inset-0 pointer-events-none z-50 overflow-hidden opacity-20">
+<div class="scanline"></div>
+</div>
+<!-- Top Navigation Bar -->
+<header class="border-b border-primary/20 bg-background-light dark:bg-background-dark px-4 pt-10 pb-4">
+<div class="flex items-center justify-between max-w-md mx-auto">
+<button class="flex items-center gap-1 group">
+<span class="material-symbols-outlined text-primary text-sm">arrow_back_ios</span>
+<span class="text-xs font-bold tracking-widest text-primary/80 group-active:text-primary uppercase">ESC</span>
+</button>
+<div class="flex items-center gap-2">
+<div class="size-1.5 rounded-full bg-primary animate-pulse"></div>
+<h1 class="text-xs font-bold tracking-[0.2em] text-slate-400 dark:text-slate-500 uppercase">System::Reference</h1>
+</div>
+</div>
+</header>
+<!-- Main Content Area -->
+<main class="flex-1 flex flex-col max-w-md mx-auto w-full">
+<!-- Hero Header Component (Modified TopAppBar style) -->
+<div class="p-6 pt-8 pb-4">
+<div class="border-l-2 border-primary pl-4">
+<h2 class="text-2xl font-bold leading-none tracking-tighter text-slate-900 dark:text-white uppercase italic">
+          EXPANSION_TECHNIQUES
+        </h2>
+<p class="text-[10px] mt-2 font-medium text-primary/60 tracking-[0.3em] uppercase">
+          Harmonic Utility v4.02
+        </p>
+</div>
+</div>
+<!-- List Section -->
+<nav class="flex-1 overflow-y-auto px-6 py-4 space-y-1">
+<!-- List Item A -->
+<a class="group flex items-center justify-between py-4 border-b border-white/5 transition-all active:bg-primary/5" href="#">
+<div class="flex items-baseline gap-4">
+<span class="text-[10px] font-bold text-slate-400 dark:text-slate-600">01</span>
+<p class="text-lg font-medium tracking-tight text-primary group-hover:translate-x-1 transition-transform uppercase">
+            A. PROLONGATION
+          </p>
+</div>
+<span class="material-symbols-outlined text-primary opacity-0 group-hover:opacity-100 transition-opacity">chevron_right</span>
+</a>
+<!-- List Item B -->
+<a class="group flex items-center justify-between py-4 border-b border-white/5 transition-all active:bg-primary/5" href="#">
+<div class="flex items-baseline gap-4">
+<span class="text-[10px] font-bold text-slate-400 dark:text-slate-600">02</span>
+<p class="text-lg font-medium tracking-tight text-primary group-hover:translate-x-1 transition-transform uppercase">
+            B. PASSING CHORDS
+          </p>
+</div>
+<span class="material-symbols-outlined text-primary opacity-0 group-hover:opacity-100 transition-opacity">chevron_right</span>
+</a>
+<!-- List Item C -->
+<a class="group flex items-center justify-between py-4 border-b border-white/5 transition-all active:bg-primary/5" href="#">
+<div class="flex items-baseline gap-4">
+<span class="text-[10px] font-bold text-slate-400 dark:text-slate-600">03</span>
+<p class="text-lg font-medium tracking-tight text-primary group-hover:translate-x-1 transition-transform uppercase">
+            C. MODAL SWAPS
+          </p>
+</div>
+<span class="material-symbols-outlined text-primary opacity-0 group-hover:opacity-100 transition-opacity">chevron_right</span>
+</a>
+<!-- List Item D -->
+<a class="group flex items-center justify-between py-4 border-b border-white/5 transition-all active:bg-primary/5" href="#">
+<div class="flex items-baseline gap-4">
+<span class="text-[10px] font-bold text-slate-400 dark:text-slate-600">04</span>
+<p class="text-lg font-medium tracking-tight text-primary group-hover:translate-x-1 transition-transform uppercase">
+            D. DOMINANT DELAY
+          </p>
+</div>
+<span class="material-symbols-outlined text-primary opacity-0 group-hover:opacity-100 transition-opacity">chevron_right</span>
+</a>
+<!-- List Item E -->
+<a class="group flex items-center justify-between py-4 border-b border-white/5 transition-all active:bg-primary/5" href="#">
+<div class="flex items-baseline gap-4">
+<span class="text-[10px] font-bold text-slate-400 dark:text-slate-600">05</span>
+<p class="text-lg font-medium tracking-tight text-primary group-hover:translate-x-1 transition-transform uppercase">
+            E. PEDAL BASS
+          </p>
+</div>
+<span class="material-symbols-outlined text-primary opacity-0 group-hover:opacity-100 transition-opacity">chevron_right</span>
+</a>
+<!-- List Item F -->
+<a class="group flex items-center justify-between py-4 border-b border-white/5 transition-all active:bg-primary/5" href="#">
+<div class="flex items-baseline gap-4">
+<span class="text-[10px] font-bold text-slate-400 dark:text-slate-600">06</span>
+<p class="text-lg font-medium tracking-tight text-primary group-hover:translate-x-1 transition-transform uppercase">
+            F. ENERGY SCALING
+          </p>
+</div>
+<span class="material-symbols-outlined text-primary opacity-0 group-hover:opacity-100 transition-opacity">chevron_right</span>
+</a>
+</nav>
+<!-- Visual Divider Decor -->
+<div class="px-6 py-4">
+<div class="w-full h-[1px] bg-white/10 relative">
+<div class="absolute right-0 top-0 h-[3px] w-12 bg-primary -mt-[1px]"></div>
+</div>
+</div>
+</main>
+<!-- Footer Status Bar -->
+<footer class="bg-background-light dark:bg-background-dark/80 backdrop-blur-sm border-t border-primary/10 px-6 py-6 pb-8">
+<div class="max-w-md mx-auto flex justify-between items-end">
+<div class="space-y-1">
+<div class="flex items-center gap-2">
+<span class="text-[9px] font-bold tracking-widest text-slate-400 uppercase">Status:</span>
+<span class="text-[9px] font-bold tracking-widest text-primary terminal-cursor uppercase">Ready_to_load</span>
+</div>
+<p class="text-[8px] font-medium text-slate-500 tracking-tighter">LOC: MEM_SECTOR_0x7F // CORE_REF_ID: 9912</p>
+</div>
+<div class="text-right">
+<p class="text-[10px] font-bold text-slate-400 dark:text-slate-600">6_TECHNIQUES_LOADED</p>
+<div class="flex gap-0.5 justify-end mt-1">
+<div class="size-1 bg-primary"></div>
+<div class="size-1 bg-primary"></div>
+<div class="size-1 bg-primary"></div>
+<div class="size-1 bg-primary/20"></div>
+<div class="size-1 bg-primary/20"></div>
+</div>
+</div>
+</div>
+</footer>
+</body></html>

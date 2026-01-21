@@ -6,70 +6,1905 @@
             "genre": "ELECTRONIC / AMBIENT",
             "progressions": [
                 {
-                    "id": "prog_01",
-                    "name": "I - VI - III - VII",
+                    "id": "apparat_01",
+                    "name": "i - VI - III - VII",
                     "bpm": 112,
                     "key": "Am",
                     "chords": [
                         {
                             "root": "A",
                             "quality": "m9",
-                            "extensions": "A C E G B"
+                            "notes": "A C E G B"
+                        },
+                        {
+                            "root": "A",
+                            "quality": "m11",
+                            "notes": "A C E G B D"
                         },
                         {
                             "root": "F",
                             "quality": "maj7",
-                            "extensions": "F A C E"
+                            "notes": "F A C E"
+                        },
+                        {
+                            "root": "F",
+                            "quality": "maj7(add6)",
+                            "notes": "F A C E D"
                         },
                         {
                             "root": "C",
                             "quality": "maj7",
-                            "extensions": "C E G B"
+                            "notes": "C E G B"
+                        },
+                        {
+                            "root": "C",
+                            "quality": "maj9",
+                            "notes": "C E G B D"
                         },
                         {
                             "root": "G",
                             "quality": "sus4",
-                            "extensions": "G C D"
+                            "notes": "G C D"
+                        },
+                        {
+                            "root": "G",
+                            "quality": "add9",
+                            "notes": "G B D A"
                         }
                     ],
-                    "suggested_section": "VERSE"
+                    "suggested_section": "VERSE",
+                    "vibe": "Emotional drift, floating sadness"
                 },
                 {
-                    "id": "prog_02",
-                    "name": "IV - I - V - I",
+                    "id": "apparat_02",
+                    "name": "iv - i - V - i",
                     "bpm": 120,
                     "key": "Dm",
                     "chords": [
                         {
                             "root": "G",
                             "quality": "m7",
-                            "extensions": "G Bb D F"
+                            "notes": "G Bb D F"
+                        },
+                        {
+                            "root": "G",
+                            "quality": "m9",
+                            "notes": "G Bb D F A"
                         },
                         {
                             "root": "D",
                             "quality": "m9",
-                            "extensions": "D F A C E"
+                            "notes": "D F A C E"
                         },
                         {
                             "root": "A",
-                            "quality": "7alt",
-                            "extensions": "A C# G Bb"
+                            "quality": "7",
+                            "notes": "A C# E G"
+                        },
+                        {
+                            "root": "A",
+                            "quality": "7sus4",
+                            "notes": "A D E G"
                         },
                         {
                             "root": "D",
                             "quality": "m",
-                            "extensions": "D F A"
+                            "notes": "D F A"
                         }
                     ],
-                    "suggested_section": "CHORUS"
+                    "suggested_section": "CHORUS",
+                    "vibe": "Building tension, slow release"
+                },
+                {
+                    "id": "apparat_03",
+                    "name": "i - v - VI - IV",
+                    "bpm": 100,
+                    "key": "Em",
+                    "chords": [
+                        {
+                            "root": "E",
+                            "quality": "m7",
+                            "notes": "E G B D"
+                        },
+                        {
+                            "root": "E",
+                            "quality": "m9",
+                            "notes": "E G B D F#"
+                        },
+                        {
+                            "root": "B",
+                            "quality": "m7",
+                            "notes": "B D F# A"
+                        },
+                        {
+                            "root": "C",
+                            "quality": "maj9",
+                            "notes": "C E G B D"
+                        },
+                        {
+                            "root": "C",
+                            "quality": "maj7",
+                            "notes": "C E G B"
+                        },
+                        {
+                            "root": "A",
+                            "quality": "add9",
+                            "notes": "A C# E B"
+                        },
+                        {
+                            "root": "A",
+                            "quality": "sus2",
+                            "notes": "A B E"
+                        }
+                    ],
+                    "suggested_section": "VERSE",
+                    "vibe": "Goodbye, floating away"
+                }
+            ]
+        },
+        {
+            "id": "jon_hopkins",
+            "name": "JON HOPKINS",
+            "genre": "ELECTRONIC / AMBIENT TECHNO",
+            "progressions": [
+                {
+                    "id": "hopkins_01",
+                    "name": "I - I - IV - iv",
+                    "bpm": 135,
+                    "key": "D",
+                    "chords": [
+                        {
+                            "root": "D",
+                            "quality": "maj7",
+                            "notes": "D F# A C#"
+                        },
+                        {
+                            "root": "D",
+                            "quality": "add9",
+                            "notes": "D F# A E"
+                        },
+                        {
+                            "root": "D",
+                            "quality": "add9(no3)",
+                            "notes": "D A E"
+                        },
+                        {
+                            "root": "G",
+                            "quality": "maj7",
+                            "notes": "G B D F#"
+                        },
+                        {
+                            "root": "G",
+                            "quality": "maj7(#11)",
+                            "notes": "G B D F# C#"
+                        },
+                        {
+                            "root": "G",
+                            "quality": "m7",
+                            "notes": "G Bb D F"
+                        }
+                    ],
+                    "suggested_section": "BUILD",
+                    "vibe": "Open Eye Signal energy"
+                },
+                {
+                    "id": "hopkins_02",
+                    "name": "I - IV(#11)",
+                    "bpm": 128,
+                    "key": "D",
+                    "chords": [
+                        {
+                            "root": "D",
+                            "quality": "add9",
+                            "notes": "D F# A E"
+                        },
+                        {
+                            "root": "G",
+                            "quality": "maj7(#11)",
+                            "notes": "G B D F# C#"
+                        }
+                    ],
+                    "suggested_section": "DROP",
+                    "vibe": "Hypnotic two-chord loop"
+                },
+                {
+                    "id": "hopkins_03",
+                    "name": "i - VI - VII - i",
+                    "bpm": 70,
+                    "key": "Am",
+                    "chords": [
+                        {
+                            "root": "A",
+                            "quality": "m9",
+                            "notes": "A C E G B"
+                        },
+                        {
+                            "root": "A",
+                            "quality": "m11",
+                            "notes": "A C E G B D"
+                        },
+                        {
+                            "root": "F",
+                            "quality": "maj9",
+                            "notes": "F A C E G"
+                        },
+                        {
+                            "root": "F",
+                            "quality": "maj7(#11)",
+                            "notes": "F A C E B"
+                        },
+                        {
+                            "root": "G",
+                            "quality": "6",
+                            "notes": "G B D E"
+                        },
+                        {
+                            "root": "G",
+                            "quality": "add9",
+                            "notes": "G B D A"
+                        },
+                        {
+                            "root": "A",
+                            "quality": "m11",
+                            "notes": "A C E G B D"
+                        }
+                    ],
+                    "suggested_section": "AMBIENT",
+                    "vibe": "Immunity calm, patient drift"
+                },
+                {
+                    "id": "hopkins_04",
+                    "name": "i - VII - VI - VII",
+                    "bpm": 128,
+                    "key": "Cm",
+                    "chords": [
+                        {
+                            "root": "C",
+                            "quality": "m",
+                            "notes": "C Eb G"
+                        },
+                        {
+                            "root": "C",
+                            "quality": "m7",
+                            "notes": "C Eb G Bb"
+                        },
+                        {
+                            "root": "Bb",
+                            "quality": "sus2",
+                            "notes": "Bb C F"
+                        },
+                        {
+                            "root": "Ab",
+                            "quality": "maj7",
+                            "notes": "Ab C Eb G"
+                        },
+                        {
+                            "root": "Ab",
+                            "quality": "maj9",
+                            "notes": "Ab C Eb G Bb"
+                        },
+                        {
+                            "root": "Bb",
+                            "quality": "add9",
+                            "notes": "Bb D F C"
+                        }
+                    ],
+                    "suggested_section": "DROP",
+                    "vibe": "Everything Connected drive"
+                }
+            ]
+        },
+        {
+            "id": "thom_yorke",
+            "name": "THOM YORKE",
+            "genre": "ELECTRONIC / ART POP",
+            "progressions": [
+                {
+                    "id": "yorke_01",
+                    "name": "i - VI - III - iv",
+                    "bpm": 88,
+                    "key": "Gm",
+                    "chords": [
+                        {
+                            "root": "G",
+                            "quality": "m7",
+                            "notes": "G Bb D F"
+                        },
+                        {
+                            "root": "G",
+                            "quality": "m(add11)",
+                            "notes": "G Bb D C"
+                        },
+                        {
+                            "root": "Eb",
+                            "quality": "maj9",
+                            "notes": "Eb G Bb D F"
+                        },
+                        {
+                            "root": "Bb",
+                            "quality": "maj7/D",
+                            "notes": "D F Bb A"
+                        },
+                        {
+                            "root": "C",
+                            "quality": "m7",
+                            "notes": "C Eb G Bb"
+                        },
+                        {
+                            "root": "C",
+                            "quality": "m(add9)",
+                            "notes": "C Eb G D"
+                        }
+                    ],
+                    "suggested_section": "VERSE",
+                    "vibe": "Suspirium sadness, stepwise bass"
+                },
+                {
+                    "id": "yorke_02",
+                    "name": "IV - iv - I - I",
+                    "bpm": 76,
+                    "key": "C",
+                    "chords": [
+                        {
+                            "root": "F",
+                            "quality": "maj7",
+                            "notes": "F A C E"
+                        },
+                        {
+                            "root": "F",
+                            "quality": "maj9",
+                            "notes": "F A C E G"
+                        },
+                        {
+                            "root": "F",
+                            "quality": "m7",
+                            "notes": "F Ab C Eb"
+                        },
+                        {
+                            "root": "F",
+                            "quality": "m9",
+                            "notes": "F Ab C Eb G"
+                        },
+                        {
+                            "root": "C",
+                            "quality": "maj9",
+                            "notes": "C E G B D"
+                        },
+                        {
+                            "root": "C",
+                            "quality": "6/9",
+                            "notes": "C E G A D"
+                        }
+                    ],
+                    "suggested_section": "CHORUS",
+                    "vibe": "Bittersweet resolve, major-minor shift"
+                },
+                {
+                    "id": "yorke_03",
+                    "name": "i - bVII - bVI - V",
+                    "bpm": 92,
+                    "key": "Am",
+                    "chords": [
+                        {
+                            "root": "A",
+                            "quality": "m",
+                            "notes": "A C E"
+                        },
+                        {
+                            "root": "A",
+                            "quality": "m7",
+                            "notes": "A C E G"
+                        },
+                        {
+                            "root": "G",
+                            "quality": "maj7",
+                            "notes": "G B D F#"
+                        },
+                        {
+                            "root": "F",
+                            "quality": "maj7#11",
+                            "notes": "F A C E B"
+                        },
+                        {
+                            "root": "F",
+                            "quality": "maj9",
+                            "notes": "F A C E G"
+                        },
+                        {
+                            "root": "E",
+                            "quality": "7",
+                            "notes": "E G# B D"
+                        },
+                        {
+                            "root": "E",
+                            "quality": "7sus4",
+                            "notes": "E A B D"
+                        }
+                    ],
+                    "suggested_section": "BRIDGE",
+                    "vibe": "Dawn Chorus ache, unresolved"
                 }
             ]
         },
         {
             "id": "radiohead",
             "name": "RADIOHEAD",
-            "genre": "ART ROCK",
-            "progressions": []
+            "genre": "ART ROCK / ELECTRONIC",
+            "progressions": [
+                {
+                    "id": "radiohead_01",
+                    "name": "i - i - VI - V",
+                    "bpm": 80,
+                    "key": "Am",
+                    "chords": [
+                        {
+                            "root": "A",
+                            "quality": "m",
+                            "notes": "A C E"
+                        },
+                        {
+                            "root": "A",
+                            "quality": "m7",
+                            "notes": "A C E G"
+                        },
+                        {
+                            "root": "A",
+                            "quality": "m9",
+                            "notes": "A C E G B"
+                        },
+                        {
+                            "root": "F",
+                            "quality": "maj7",
+                            "notes": "F A C E"
+                        },
+                        {
+                            "root": "F",
+                            "quality": "maj9",
+                            "notes": "F A C E G"
+                        },
+                        {
+                            "root": "E",
+                            "quality": "7",
+                            "notes": "E G# B D"
+                        },
+                        {
+                            "root": "E",
+                            "quality": "7sus4",
+                            "notes": "E A B D"
+                        }
+                    ],
+                    "suggested_section": "VERSE",
+                    "vibe": "Exit Music gravity, slow descent"
+                },
+                {
+                    "id": "radiohead_02",
+                    "name": "I - iii - vi - IV",
+                    "bpm": 100,
+                    "key": "Eb",
+                    "chords": [
+                        {
+                            "root": "Eb",
+                            "quality": "maj7",
+                            "notes": "Eb G Bb D"
+                        },
+                        {
+                            "root": "Eb",
+                            "quality": "maj9",
+                            "notes": "Eb G Bb D F"
+                        },
+                        {
+                            "root": "G",
+                            "quality": "m9",
+                            "notes": "G Bb D F A"
+                        },
+                        {
+                            "root": "C",
+                            "quality": "m7",
+                            "notes": "C Eb G Bb"
+                        },
+                        {
+                            "root": "C",
+                            "quality": "m9",
+                            "notes": "C Eb G Bb D"
+                        },
+                        {
+                            "root": "Ab",
+                            "quality": "maj9",
+                            "notes": "Ab C Eb G Bb"
+                        },
+                        {
+                            "root": "Ab",
+                            "quality": "6/9",
+                            "notes": "Ab C Eb F Bb"
+                        }
+                    ],
+                    "suggested_section": "CHORUS",
+                    "vibe": "Weird Fishes shimmer, arpeggiated"
+                },
+                {
+                    "id": "radiohead_03",
+                    "name": "i - bII - bVII - i",
+                    "bpm": 108,
+                    "key": "Dm",
+                    "chords": [
+                        {
+                            "root": "D",
+                            "quality": "m9",
+                            "notes": "D F A C E"
+                        },
+                        {
+                            "root": "Eb",
+                            "quality": "maj7",
+                            "notes": "Eb G Bb D"
+                        },
+                        {
+                            "root": "Eb",
+                            "quality": "maj7(#11)",
+                            "notes": "Eb G Bb D A"
+                        },
+                        {
+                            "root": "C",
+                            "quality": "7sus4",
+                            "notes": "C F G Bb"
+                        },
+                        {
+                            "root": "C",
+                            "quality": "9sus4",
+                            "notes": "C F G Bb D"
+                        },
+                        {
+                            "root": "D",
+                            "quality": "m9",
+                            "notes": "D F A C E"
+                        }
+                    ],
+                    "suggested_section": "VERSE",
+                    "vibe": "Pyramid Song mystery, suspended loop"
+                }
+            ]
+        },
+        {
+            "id": "bonobo",
+            "name": "BONOBO",
+            "genre": "DOWNTEMPO / ELECTRONIC",
+            "progressions": [
+                {
+                    "id": "bonobo_01",
+                    "name": "i - iv - VI - III",
+                    "bpm": 95,
+                    "key": "Fm",
+                    "chords": [
+                        {
+                            "root": "F",
+                            "quality": "m9",
+                            "notes": "F Ab C Eb G"
+                        },
+                        {
+                            "root": "F",
+                            "quality": "m11",
+                            "notes": "F Ab C Eb G Bb"
+                        },
+                        {
+                            "root": "Bb",
+                            "quality": "m7",
+                            "notes": "Bb Db F Ab"
+                        },
+                        {
+                            "root": "Bb",
+                            "quality": "m9",
+                            "notes": "Bb Db F Ab C"
+                        },
+                        {
+                            "root": "Db",
+                            "quality": "maj7",
+                            "notes": "Db F Ab C"
+                        },
+                        {
+                            "root": "Db",
+                            "quality": "maj9",
+                            "notes": "Db F Ab C Eb"
+                        },
+                        {
+                            "root": "Ab",
+                            "quality": "add9",
+                            "notes": "Ab C Eb Bb"
+                        }
+                    ],
+                    "suggested_section": "VERSE",
+                    "vibe": "Kerala warmth, no tension just flow"
+                },
+                {
+                    "id": "bonobo_02",
+                    "name": "I - vi - ii - V",
+                    "bpm": 105,
+                    "key": "G",
+                    "chords": [
+                        {
+                            "root": "G",
+                            "quality": "maj9",
+                            "notes": "G B D F# A"
+                        },
+                        {
+                            "root": "G",
+                            "quality": "6/9",
+                            "notes": "G B D E A"
+                        },
+                        {
+                            "root": "E",
+                            "quality": "m7",
+                            "notes": "E G B D"
+                        },
+                        {
+                            "root": "E",
+                            "quality": "m9",
+                            "notes": "E G B D F#"
+                        },
+                        {
+                            "root": "A",
+                            "quality": "m9",
+                            "notes": "A C E G B"
+                        },
+                        {
+                            "root": "D",
+                            "quality": "9",
+                            "notes": "D F# A C E"
+                        },
+                        {
+                            "root": "D",
+                            "quality": "13",
+                            "notes": "D F# A C E B"
+                        }
+                    ],
+                    "suggested_section": "CHORUS",
+                    "vibe": "Cirrus lift, jazz-adjacent warmth"
+                }
+            ]
+        },
+        {
+            "id": "nils_frahm",
+            "name": "NILS FRAHM",
+            "genre": "NEO-CLASSICAL / AMBIENT",
+            "progressions": [
+                {
+                    "id": "frahm_01",
+                    "name": "I - V - vi - iii",
+                    "bpm": 72,
+                    "key": "F",
+                    "chords": [
+                        {
+                            "root": "F",
+                            "quality": "maj9",
+                            "notes": "F A C E G"
+                        },
+                        {
+                            "root": "F",
+                            "quality": "maj9(no3)",
+                            "notes": "F C E G"
+                        },
+                        {
+                            "root": "C",
+                            "quality": "add9",
+                            "notes": "C E G D"
+                        },
+                        {
+                            "root": "C",
+                            "quality": "sus2",
+                            "notes": "C D G"
+                        },
+                        {
+                            "root": "D",
+                            "quality": "m7",
+                            "notes": "D F A C"
+                        },
+                        {
+                            "root": "A",
+                            "quality": "m9",
+                            "notes": "A C E G B"
+                        }
+                    ],
+                    "suggested_section": "VERSE",
+                    "vibe": "Says slow burn, drop notes don't add"
+                },
+                {
+                    "id": "frahm_02",
+                    "name": "i - i - iv - VI",
+                    "bpm": 60,
+                    "key": "Am",
+                    "chords": [
+                        {
+                            "root": "A",
+                            "quality": "m",
+                            "notes": "A C E"
+                        },
+                        {
+                            "root": "A",
+                            "quality": "m(add9)",
+                            "notes": "A C E B"
+                        },
+                        {
+                            "root": "A",
+                            "quality": "m9",
+                            "notes": "A C E G B"
+                        },
+                        {
+                            "root": "D",
+                            "quality": "m7",
+                            "notes": "D F A C"
+                        },
+                        {
+                            "root": "D",
+                            "quality": "m(add9)",
+                            "notes": "D F A E"
+                        },
+                        {
+                            "root": "F",
+                            "quality": "maj7",
+                            "notes": "F A C E"
+                        }
+                    ],
+                    "suggested_section": "AMBIENT",
+                    "vibe": "Re minimal, patient evolution"
+                },
+                {
+                    "id": "frahm_03",
+                    "name": "I - IV - I - V",
+                    "bpm": 140,
+                    "key": "C",
+                    "chords": [
+                        {
+                            "root": "C",
+                            "quality": "maj7",
+                            "notes": "C E G B"
+                        },
+                        {
+                            "root": "C",
+                            "quality": "6",
+                            "notes": "C E G A"
+                        },
+                        {
+                            "root": "F",
+                            "quality": "maj7",
+                            "notes": "F A C E"
+                        },
+                        {
+                            "root": "C",
+                            "quality": "6/9",
+                            "notes": "C E G A D"
+                        },
+                        {
+                            "root": "G",
+                            "quality": "sus4",
+                            "notes": "G C D"
+                        },
+                        {
+                            "root": "G",
+                            "quality": "sus2",
+                            "notes": "G A D"
+                        }
+                    ],
+                    "suggested_section": "BUILD",
+                    "vibe": "All Melody pulse, rhythmic minimalism"
+                }
+            ]
+        },
+        {
+            "id": "four_tet",
+            "name": "FOUR TET",
+            "genre": "ELECTRONIC / FOLKTRONICA",
+            "progressions": [
+                {
+                    "id": "fourtet_01",
+                    "name": "I - I - IV - iv",
+                    "bpm": 128,
+                    "key": "Bb",
+                    "chords": [
+                        {
+                            "root": "Bb",
+                            "quality": "maj7",
+                            "notes": "Bb D F A"
+                        },
+                        {
+                            "root": "Bb",
+                            "quality": "6",
+                            "notes": "Bb D F G"
+                        },
+                        {
+                            "root": "Bb",
+                            "quality": "add9",
+                            "notes": "Bb D F C"
+                        },
+                        {
+                            "root": "Eb",
+                            "quality": "maj9",
+                            "notes": "Eb G Bb D F"
+                        },
+                        {
+                            "root": "Eb",
+                            "quality": "m7",
+                            "notes": "Eb Gb Bb Db"
+                        }
+                    ],
+                    "suggested_section": "LOOP",
+                    "vibe": "Parallel hypnotic, stop before resolving"
+                },
+                {
+                    "id": "fourtet_02",
+                    "name": "vi - IV - I - V",
+                    "bpm": 122,
+                    "key": "D",
+                    "chords": [
+                        {
+                            "root": "B",
+                            "quality": "m7",
+                            "notes": "B D F# A"
+                        },
+                        {
+                            "root": "B",
+                            "quality": "m9",
+                            "notes": "B D F# A C#"
+                        },
+                        {
+                            "root": "G",
+                            "quality": "maj7",
+                            "notes": "G B D F#"
+                        },
+                        {
+                            "root": "D",
+                            "quality": "add9",
+                            "notes": "D F# A E"
+                        },
+                        {
+                            "root": "D",
+                            "quality": "6",
+                            "notes": "D F# A B"
+                        },
+                        {
+                            "root": "A",
+                            "quality": "sus4",
+                            "notes": "A D E"
+                        },
+                        {
+                            "root": "A",
+                            "quality": "sus2",
+                            "notes": "A B E"
+                        }
+                    ],
+                    "suggested_section": "DROP",
+                    "vibe": "Baby euphoria, let rhythm do the work"
+                }
+            ]
+        },
+        {
+            "id": "olafur_arnalds",
+            "name": "ÓLAFUR ARNALDS",
+            "genre": "NEO-CLASSICAL / AMBIENT",
+            "progressions": [
+                {
+                    "id": "arnalds_01",
+                    "name": "i - VI - III - VII",
+                    "bpm": 65,
+                    "key": "Em",
+                    "chords": [
+                        {
+                            "root": "E",
+                            "quality": "m9",
+                            "notes": "E G B D F#"
+                        },
+                        {
+                            "root": "E",
+                            "quality": "m(add11)",
+                            "notes": "E G B A"
+                        },
+                        {
+                            "root": "C",
+                            "quality": "maj7",
+                            "notes": "C E G B"
+                        },
+                        {
+                            "root": "G",
+                            "quality": "maj7/B",
+                            "notes": "B D G F#"
+                        },
+                        {
+                            "root": "D",
+                            "quality": "add9",
+                            "notes": "D F# A E"
+                        }
+                    ],
+                    "suggested_section": "VERSE",
+                    "vibe": "Near Light delicate, voice-led patience"
+                },
+                {
+                    "id": "arnalds_02",
+                    "name": "i - v - iv - VI",
+                    "bpm": 58,
+                    "key": "Am",
+                    "chords": [
+                        {
+                            "root": "A",
+                            "quality": "m7",
+                            "notes": "A C E G"
+                        },
+                        {
+                            "root": "A",
+                            "quality": "m9",
+                            "notes": "A C E G B"
+                        },
+                        {
+                            "root": "E",
+                            "quality": "m7",
+                            "notes": "E G B D"
+                        },
+                        {
+                            "root": "D",
+                            "quality": "m9",
+                            "notes": "D F A C E"
+                        },
+                        {
+                            "root": "D",
+                            "quality": "m7",
+                            "notes": "D F A C"
+                        },
+                        {
+                            "root": "F",
+                            "quality": "maj9",
+                            "notes": "F A C E G"
+                        },
+                        {
+                            "root": "F",
+                            "quality": "maj7",
+                            "notes": "F A C E"
+                        }
+                    ],
+                    "suggested_section": "AMBIENT",
+                    "vibe": "Saman stillness, diatonic tenderness"
+                }
+            ]
+        },
+        {
+            "id": "tycho",
+            "name": "TYCHO",
+            "genre": "AMBIENT / CHILLWAVE",
+            "progressions": [
+                {
+                    "id": "tycho_01",
+                    "name": "I - iii - vi - IV",
+                    "bpm": 115,
+                    "key": "E",
+                    "chords": [
+                        {
+                            "root": "E",
+                            "quality": "maj7",
+                            "notes": "E G# B D#"
+                        },
+                        {
+                            "root": "E",
+                            "quality": "maj9",
+                            "notes": "E G# B D# F#"
+                        },
+                        {
+                            "root": "G#",
+                            "quality": "m7",
+                            "notes": "G# B D# F#"
+                        },
+                        {
+                            "root": "C#",
+                            "quality": "m9",
+                            "notes": "C# E G# B D#"
+                        },
+                        {
+                            "root": "A",
+                            "quality": "maj9",
+                            "notes": "A C# E G# B"
+                        },
+                        {
+                            "root": "A",
+                            "quality": "add6",
+                            "notes": "A C# E F#"
+                        }
+                    ],
+                    "suggested_section": "VERSE",
+                    "vibe": "Awake golden hour, bright and safe"
+                },
+                {
+                    "id": "tycho_02",
+                    "name": "I - V - vi - iii",
+                    "bpm": 108,
+                    "key": "D",
+                    "chords": [
+                        {
+                            "root": "D",
+                            "quality": "add9",
+                            "notes": "D F# A E"
+                        },
+                        {
+                            "root": "D",
+                            "quality": "maj7",
+                            "notes": "D F# A C#"
+                        },
+                        {
+                            "root": "A",
+                            "quality": "maj7",
+                            "notes": "A C# E G#"
+                        },
+                        {
+                            "root": "A",
+                            "quality": "add9",
+                            "notes": "A C# E B"
+                        },
+                        {
+                            "root": "B",
+                            "quality": "m7",
+                            "notes": "B D F# A"
+                        },
+                        {
+                            "root": "F#",
+                            "quality": "m9",
+                            "notes": "F# A C# E G#"
+                        }
+                    ],
+                    "suggested_section": "CHORUS",
+                    "vibe": "Dive warmth, elevated classic"
+                }
+            ]
+        },
+        {
+            "id": "massive_attack",
+            "name": "MASSIVE ATTACK",
+            "genre": "TRIP-HOP / ELECTRONIC",
+            "progressions": [
+                {
+                    "id": "massive_01",
+                    "name": "i - i - VII - VI",
+                    "bpm": 68,
+                    "key": "Dm",
+                    "chords": [
+                        {
+                            "root": "D",
+                            "quality": "m7",
+                            "notes": "D F A C"
+                        },
+                        {
+                            "root": "D",
+                            "quality": "m9",
+                            "notes": "D F A C E"
+                        },
+                        {
+                            "root": "C",
+                            "quality": "maj7",
+                            "notes": "C E G B"
+                        },
+                        {
+                            "root": "Bb",
+                            "quality": "maj9",
+                            "notes": "Bb D F A C"
+                        },
+                        {
+                            "root": "Bb",
+                            "quality": "add11",
+                            "notes": "Bb D F Eb"
+                        }
+                    ],
+                    "suggested_section": "VERSE",
+                    "vibe": "Teardrop darkness, avoid resolution"
+                },
+                {
+                    "id": "massive_02",
+                    "name": "i - bVI - bVII - i",
+                    "bpm": 85,
+                    "key": "Gm",
+                    "chords": [
+                        {
+                            "root": "G",
+                            "quality": "m",
+                            "notes": "G Bb D"
+                        },
+                        {
+                            "root": "G",
+                            "quality": "m7",
+                            "notes": "G Bb D F"
+                        },
+                        {
+                            "root": "Eb",
+                            "quality": "maj7",
+                            "notes": "Eb G Bb D"
+                        },
+                        {
+                            "root": "Eb",
+                            "quality": "maj9",
+                            "notes": "Eb G Bb D F"
+                        },
+                        {
+                            "root": "F",
+                            "quality": "7sus4",
+                            "notes": "F Bb C Eb"
+                        },
+                        {
+                            "root": "G",
+                            "quality": "m7",
+                            "notes": "G Bb D F"
+                        }
+                    ],
+                    "suggested_section": "CHORUS",
+                    "vibe": "Angel weight, suspended gravity"
+                },
+                {
+                    "id": "massive_03",
+                    "name": "i - iv - i - V",
+                    "bpm": 72,
+                    "key": "Am",
+                    "chords": [
+                        {
+                            "root": "A",
+                            "quality": "m7",
+                            "notes": "A C E G"
+                        },
+                        {
+                            "root": "A",
+                            "quality": "m9",
+                            "notes": "A C E G B"
+                        },
+                        {
+                            "root": "D",
+                            "quality": "m7",
+                            "notes": "D F A C"
+                        },
+                        {
+                            "root": "D",
+                            "quality": "m9",
+                            "notes": "D F A C E"
+                        },
+                        {
+                            "root": "A",
+                            "quality": "m9",
+                            "notes": "A C E G B"
+                        },
+                        {
+                            "root": "E",
+                            "quality": "7#9",
+                            "notes": "E G# B D G"
+                        }
+                    ],
+                    "suggested_section": "VERSE",
+                    "vibe": "Unfinished Sympathy longing"
+                },
+                {
+                    "id": "massive_04",
+                    "name": "i - VII - iv - iv",
+                    "bpm": 78,
+                    "key": "Fm",
+                    "chords": [
+                        {
+                            "root": "F",
+                            "quality": "m9",
+                            "notes": "F Ab C Eb G"
+                        },
+                        {
+                            "root": "F",
+                            "quality": "m7",
+                            "notes": "F Ab C Eb"
+                        },
+                        {
+                            "root": "Eb",
+                            "quality": "maj7",
+                            "notes": "Eb G Bb D"
+                        },
+                        {
+                            "root": "Bb",
+                            "quality": "m7",
+                            "notes": "Bb Db F Ab"
+                        },
+                        {
+                            "root": "Bb",
+                            "quality": "m9",
+                            "notes": "Bb Db F Ab C"
+                        },
+                        {
+                            "root": "Bb",
+                            "quality": "m11",
+                            "notes": "Bb Db F Ab C Eb"
+                        }
+                    ],
+                    "suggested_section": "BRIDGE",
+                    "vibe": "Safe From Harm, building tension"
+                },
+                {
+                    "id": "massive_05",
+                    "name": "i - bVI - III - VII",
+                    "bpm": 65,
+                    "key": "Cm",
+                    "chords": [
+                        {
+                            "root": "C",
+                            "quality": "m7",
+                            "notes": "C Eb G Bb"
+                        },
+                        {
+                            "root": "C",
+                            "quality": "m9",
+                            "notes": "C Eb G Bb D"
+                        },
+                        {
+                            "root": "Ab",
+                            "quality": "maj9",
+                            "notes": "Ab C Eb G Bb"
+                        },
+                        {
+                            "root": "Eb",
+                            "quality": "maj7",
+                            "notes": "Eb G Bb D"
+                        },
+                        {
+                            "root": "Eb",
+                            "quality": "6",
+                            "notes": "Eb G Bb C"
+                        },
+                        {
+                            "root": "Bb",
+                            "quality": "sus2",
+                            "notes": "Bb C F"
+                        }
+                    ],
+                    "suggested_section": "AMBIENT",
+                    "vibe": "Dissolved Girl haze, no resolution"
+                }
+            ]
+        },
+        {
+            "id": "zhu",
+            "name": "ZHU",
+            "genre": "DEEP HOUSE / ELECTRONIC",
+            "progressions": [
+                {
+                    "id": "zhu_01",
+                    "name": "i - VII - VI - VII",
+                    "bpm": 122,
+                    "key": "Gm",
+                    "chords": [
+                        {
+                            "root": "G",
+                            "quality": "m7",
+                            "notes": "G Bb D F"
+                        },
+                        {
+                            "root": "G",
+                            "quality": "m9",
+                            "notes": "G Bb D F A"
+                        },
+                        {
+                            "root": "F",
+                            "quality": "maj7",
+                            "notes": "F A C E"
+                        },
+                        {
+                            "root": "Eb",
+                            "quality": "maj9",
+                            "notes": "Eb G Bb D F"
+                        },
+                        {
+                            "root": "F",
+                            "quality": "add9",
+                            "notes": "F A C G"
+                        }
+                    ],
+                    "suggested_section": "DROP",
+                    "vibe": "Faded midnight drive, bass does the rest"
+                },
+                {
+                    "id": "zhu_02",
+                    "name": "i - iv - VII - III",
+                    "bpm": 118,
+                    "key": "Am",
+                    "chords": [
+                        {
+                            "root": "A",
+                            "quality": "m9",
+                            "notes": "A C E G B"
+                        },
+                        {
+                            "root": "A",
+                            "quality": "m7",
+                            "notes": "A C E G"
+                        },
+                        {
+                            "root": "D",
+                            "quality": "m7",
+                            "notes": "D F A C"
+                        },
+                        {
+                            "root": "D",
+                            "quality": "m9",
+                            "notes": "D F A C E"
+                        },
+                        {
+                            "root": "G",
+                            "quality": "maj7",
+                            "notes": "G B D F#"
+                        },
+                        {
+                            "root": "C",
+                            "quality": "maj9",
+                            "notes": "C E G B D"
+                        }
+                    ],
+                    "suggested_section": "VERSE",
+                    "vibe": "In The Morning haze, building"
+                },
+                {
+                    "id": "zhu_03",
+                    "name": "i - i - bVI - bVII",
+                    "bpm": 125,
+                    "key": "Dm",
+                    "chords": [
+                        {
+                            "root": "D",
+                            "quality": "m",
+                            "notes": "D F A"
+                        },
+                        {
+                            "root": "D",
+                            "quality": "m7",
+                            "notes": "D F A C"
+                        },
+                        {
+                            "root": "D",
+                            "quality": "m9",
+                            "notes": "D F A C E"
+                        },
+                        {
+                            "root": "Bb",
+                            "quality": "maj7",
+                            "notes": "Bb D F A"
+                        },
+                        {
+                            "root": "Bb",
+                            "quality": "maj9",
+                            "notes": "Bb D F A C"
+                        },
+                        {
+                            "root": "C",
+                            "quality": "7sus4",
+                            "notes": "C F G Bb"
+                        }
+                    ],
+                    "suggested_section": "BUILD",
+                    "vibe": "Working For It grind, club-functional"
+                },
+                {
+                    "id": "zhu_04",
+                    "name": "i - v - bVI - iv",
+                    "bpm": 115,
+                    "key": "Em",
+                    "chords": [
+                        {
+                            "root": "E",
+                            "quality": "m9",
+                            "notes": "E G B D F#"
+                        },
+                        {
+                            "root": "E",
+                            "quality": "m7",
+                            "notes": "E G B D"
+                        },
+                        {
+                            "root": "B",
+                            "quality": "m7",
+                            "notes": "B D F# A"
+                        },
+                        {
+                            "root": "C",
+                            "quality": "maj7",
+                            "notes": "C E G B"
+                        },
+                        {
+                            "root": "C",
+                            "quality": "maj9",
+                            "notes": "C E G B D"
+                        },
+                        {
+                            "root": "A",
+                            "quality": "m9",
+                            "notes": "A C E G B"
+                        }
+                    ],
+                    "suggested_section": "CHORUS",
+                    "vibe": "My Life neon pulse"
+                }
+            ]
+        },
+        {
+            "id": "bon_iver",
+            "name": "BON IVER",
+            "genre": "INDIE FOLK / EXPERIMENTAL",
+            "progressions": [
+                {
+                    "id": "boniver_01",
+                    "name": "I - I - IV - iv",
+                    "bpm": 78,
+                    "key": "C",
+                    "chords": [
+                        {
+                            "root": "C",
+                            "quality": "maj7",
+                            "notes": "C E G B"
+                        },
+                        {
+                            "root": "C",
+                            "quality": "maj9",
+                            "notes": "C E G B D"
+                        },
+                        {
+                            "root": "F",
+                            "quality": "maj7",
+                            "notes": "F A C E"
+                        },
+                        {
+                            "root": "F",
+                            "quality": "m7",
+                            "notes": "F Ab C Eb"
+                        },
+                        {
+                            "root": "F",
+                            "quality": "m(add9)",
+                            "notes": "F Ab C G"
+                        }
+                    ],
+                    "suggested_section": "VERSE",
+                    "vibe": "Skinny Love ache, major-minor collapse"
+                },
+                {
+                    "id": "boniver_02",
+                    "name": "I - iii - vi - IV",
+                    "bpm": 85,
+                    "key": "D",
+                    "chords": [
+                        {
+                            "root": "D",
+                            "quality": "add9",
+                            "notes": "D F# A E"
+                        },
+                        {
+                            "root": "D",
+                            "quality": "maj7",
+                            "notes": "D F# A C#"
+                        },
+                        {
+                            "root": "F#",
+                            "quality": "m7",
+                            "notes": "F# A C# E"
+                        },
+                        {
+                            "root": "F#",
+                            "quality": "m9",
+                            "notes": "F# A C# E G#"
+                        },
+                        {
+                            "root": "B",
+                            "quality": "m9",
+                            "notes": "B D F# A C#"
+                        },
+                        {
+                            "root": "G",
+                            "quality": "maj9",
+                            "notes": "G B D F# A"
+                        },
+                        {
+                            "root": "G",
+                            "quality": "6/9",
+                            "notes": "G B D E A"
+                        }
+                    ],
+                    "suggested_section": "CHORUS",
+                    "vibe": "Holocene vastness, wide open"
+                },
+                {
+                    "id": "boniver_03",
+                    "name": "vi - IV - I - V",
+                    "bpm": 92,
+                    "key": "Eb",
+                    "chords": [
+                        {
+                            "root": "C",
+                            "quality": "m9",
+                            "notes": "C Eb G Bb D"
+                        },
+                        {
+                            "root": "C",
+                            "quality": "m7",
+                            "notes": "C Eb G Bb"
+                        },
+                        {
+                            "root": "Ab",
+                            "quality": "maj7",
+                            "notes": "Ab C Eb G"
+                        },
+                        {
+                            "root": "Ab",
+                            "quality": "maj9",
+                            "notes": "Ab C Eb G Bb"
+                        },
+                        {
+                            "root": "Eb",
+                            "quality": "maj9",
+                            "notes": "Eb G Bb D F"
+                        },
+                        {
+                            "root": "Bb",
+                            "quality": "sus4",
+                            "notes": "Bb Eb F"
+                        },
+                        {
+                            "root": "Bb",
+                            "quality": "sus2",
+                            "notes": "Bb C F"
+                        }
+                    ],
+                    "suggested_section": "BRIDGE",
+                    "vibe": "Calgary shimmer, suspended resolve"
+                },
+                {
+                    "id": "boniver_04",
+                    "name": "I - V - vi - iii",
+                    "bpm": 68,
+                    "key": "F",
+                    "chords": [
+                        {
+                            "root": "F",
+                            "quality": "maj9",
+                            "notes": "F A C E G"
+                        },
+                        {
+                            "root": "F",
+                            "quality": "6/9",
+                            "notes": "F A C D G"
+                        },
+                        {
+                            "root": "C",
+                            "quality": "add9",
+                            "notes": "C E G D"
+                        },
+                        {
+                            "root": "C",
+                            "quality": "sus2",
+                            "notes": "C D G"
+                        },
+                        {
+                            "root": "D",
+                            "quality": "m7",
+                            "notes": "D F A C"
+                        },
+                        {
+                            "root": "A",
+                            "quality": "m9",
+                            "notes": "A C E G B"
+                        }
+                    ],
+                    "suggested_section": "VERSE",
+                    "vibe": "Re:Stacks quiet, fingerpicked"
+                },
+                {
+                    "id": "boniver_05",
+                    "name": "I - bVII - IV - iv",
+                    "bpm": 100,
+                    "key": "G",
+                    "chords": [
+                        {
+                            "root": "G",
+                            "quality": "maj7",
+                            "notes": "G B D F#"
+                        },
+                        {
+                            "root": "G",
+                            "quality": "6",
+                            "notes": "G B D E"
+                        },
+                        {
+                            "root": "F",
+                            "quality": "maj9",
+                            "notes": "F A C E G"
+                        },
+                        {
+                            "root": "C",
+                            "quality": "maj7",
+                            "notes": "C E G B"
+                        },
+                        {
+                            "root": "C",
+                            "quality": "m7",
+                            "notes": "C Eb G Bb"
+                        },
+                        {
+                            "root": "C",
+                            "quality": "m9",
+                            "notes": "C Eb G Bb D"
+                        }
+                    ],
+                    "suggested_section": "CHORUS",
+                    "vibe": "33 GOD strange beauty, modal shift"
+                },
+                {
+                    "id": "boniver_06",
+                    "name": "i - VI - III - iv",
+                    "bpm": 72,
+                    "key": "Am",
+                    "chords": [
+                        {
+                            "root": "A",
+                            "quality": "m7",
+                            "notes": "A C E G"
+                        },
+                        {
+                            "root": "A",
+                            "quality": "m9",
+                            "notes": "A C E G B"
+                        },
+                        {
+                            "root": "F",
+                            "quality": "maj7#11",
+                            "notes": "F A C E B"
+                        },
+                        {
+                            "root": "F",
+                            "quality": "maj7",
+                            "notes": "F A C E"
+                        },
+                        {
+                            "root": "C",
+                            "quality": "6/9",
+                            "notes": "C E G A D"
+                        },
+                        {
+                            "root": "D",
+                            "quality": "m9",
+                            "notes": "D F A C E"
+                        },
+                        {
+                            "root": "D",
+                            "quality": "m7",
+                            "notes": "D F A C"
+                        }
+                    ],
+                    "suggested_section": "AMBIENT",
+                    "vibe": "Woods layered voices, stacked harmonies"
+                }
+            ]
+        },
+        {
+            "id": "chet_faker",
+            "name": "CHET FAKER",
+            "genre": "ELECTRONIC SOUL / DOWNTEMPO",
+            "progressions": [
+                {
+                    "id": "faker_01",
+                    "name": "i - iv - VII - III",
+                    "bpm": 95,
+                    "key": "Gm",
+                    "chords": [
+                        {
+                            "root": "G",
+                            "quality": "m9",
+                            "notes": "G Bb D F A"
+                        },
+                        {
+                            "root": "G",
+                            "quality": "m7",
+                            "notes": "G Bb D F"
+                        },
+                        {
+                            "root": "C",
+                            "quality": "m7",
+                            "notes": "C Eb G Bb"
+                        },
+                        {
+                            "root": "C",
+                            "quality": "m9",
+                            "notes": "C Eb G Bb D"
+                        },
+                        {
+                            "root": "F",
+                            "quality": "9",
+                            "notes": "F A C Eb G"
+                        },
+                        {
+                            "root": "Bb",
+                            "quality": "maj7",
+                            "notes": "Bb D F A"
+                        },
+                        {
+                            "root": "Bb",
+                            "quality": "6/9",
+                            "notes": "Bb D F G C"
+                        }
+                    ],
+                    "suggested_section": "VERSE",
+                    "vibe": "Gold lazy groove, laid back"
+                },
+                {
+                    "id": "faker_02",
+                    "name": "i - VI - III - VII",
+                    "bpm": 88,
+                    "key": "Am",
+                    "chords": [
+                        {
+                            "root": "A",
+                            "quality": "m7",
+                            "notes": "A C E G"
+                        },
+                        {
+                            "root": "A",
+                            "quality": "m9",
+                            "notes": "A C E G B"
+                        },
+                        {
+                            "root": "F",
+                            "quality": "maj9",
+                            "notes": "F A C E G"
+                        },
+                        {
+                            "root": "F",
+                            "quality": "maj7",
+                            "notes": "F A C E"
+                        },
+                        {
+                            "root": "C",
+                            "quality": "maj7",
+                            "notes": "C E G B"
+                        },
+                        {
+                            "root": "G",
+                            "quality": "6",
+                            "notes": "G B D E"
+                        },
+                        {
+                            "root": "G",
+                            "quality": "add9",
+                            "notes": "G B D A"
+                        }
+                    ],
+                    "suggested_section": "CHORUS",
+                    "vibe": "Talk Is Cheap soul, singable"
+                },
+                {
+                    "id": "faker_03",
+                    "name": "ii - V - I - vi",
+                    "bpm": 82,
+                    "key": "F",
+                    "chords": [
+                        {
+                            "root": "G",
+                            "quality": "m9",
+                            "notes": "G Bb D F A"
+                        },
+                        {
+                            "root": "G",
+                            "quality": "m7",
+                            "notes": "G Bb D F"
+                        },
+                        {
+                            "root": "C",
+                            "quality": "9",
+                            "notes": "C E G Bb D"
+                        },
+                        {
+                            "root": "C",
+                            "quality": "13",
+                            "notes": "C E G Bb D A"
+                        },
+                        {
+                            "root": "F",
+                            "quality": "maj7",
+                            "notes": "F A C E"
+                        },
+                        {
+                            "root": "F",
+                            "quality": "maj9",
+                            "notes": "F A C E G"
+                        },
+                        {
+                            "root": "D",
+                            "quality": "m7",
+                            "notes": "D F A C"
+                        },
+                        {
+                            "root": "D",
+                            "quality": "m9",
+                            "notes": "D F A C E"
+                        }
+                    ],
+                    "suggested_section": "VERSE",
+                    "vibe": "I'm Into You jazzy, ii-V-I turnaround"
+                },
+                {
+                    "id": "faker_04",
+                    "name": "i - bVII - bVI - V",
+                    "bpm": 90,
+                    "key": "Dm",
+                    "chords": [
+                        {
+                            "root": "D",
+                            "quality": "m9",
+                            "notes": "D F A C E"
+                        },
+                        {
+                            "root": "D",
+                            "quality": "m7",
+                            "notes": "D F A C"
+                        },
+                        {
+                            "root": "C",
+                            "quality": "maj7",
+                            "notes": "C E G B"
+                        },
+                        {
+                            "root": "C",
+                            "quality": "maj9",
+                            "notes": "C E G B D"
+                        },
+                        {
+                            "root": "Bb",
+                            "quality": "maj9",
+                            "notes": "Bb D F A C"
+                        },
+                        {
+                            "root": "A",
+                            "quality": "7",
+                            "notes": "A C# E G"
+                        },
+                        {
+                            "root": "A",
+                            "quality": "7#9",
+                            "notes": "A C# E G C"
+                        }
+                    ],
+                    "suggested_section": "BRIDGE",
+                    "vibe": "No Diggity tension, dominant pull"
+                },
+                {
+                    "id": "faker_05",
+                    "name": "I - vi - ii - V",
+                    "bpm": 78,
+                    "key": "Bb",
+                    "chords": [
+                        {
+                            "root": "Bb",
+                            "quality": "maj9",
+                            "notes": "Bb D F A C"
+                        },
+                        {
+                            "root": "Bb",
+                            "quality": "6/9",
+                            "notes": "Bb D F G C"
+                        },
+                        {
+                            "root": "G",
+                            "quality": "m7",
+                            "notes": "G Bb D F"
+                        },
+                        {
+                            "root": "G",
+                            "quality": "m9",
+                            "notes": "G Bb D F A"
+                        },
+                        {
+                            "root": "C",
+                            "quality": "m9",
+                            "notes": "C Eb G Bb D"
+                        },
+                        {
+                            "root": "F",
+                            "quality": "13",
+                            "notes": "F A C Eb G D"
+                        },
+                        {
+                            "root": "F",
+                            "quality": "9",
+                            "notes": "F A C Eb G"
+                        }
+                    ],
+                    "suggested_section": "OUTRO",
+                    "vibe": "Cigarettes & Loneliness warm, jazzy fade"
+                }
+            ]
         }
     ]
 }

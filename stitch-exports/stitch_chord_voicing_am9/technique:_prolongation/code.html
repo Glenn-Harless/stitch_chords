@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#2eeaff",
+                        "background-light": "#f9fafa",
+                        "background-dark": "#1c1f22",
+                    },
+                    fontFamily: {
+                        "display": ["Space Grotesk", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+        .mono-text {
+            font-family: ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Monaco, Consolas, 'Courier New', monospace;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-white min-h-screen flex flex-col">
+<!-- TopAppBar -->
+<header class="sticky top-0 z-10 bg-background-light dark:bg-background-dark/95 backdrop-blur-md border-b border-slate-200 dark:border-slate-800">
+<div class="flex items-center p-4 justify-between max-w-md mx-auto">
+<div class="flex size-10 shrink-0 items-center justify-center rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors cursor-pointer">
+<span class="material-symbols-outlined">chevron_left</span>
+</div>
+<h2 class="text-lg font-bold leading-tight tracking-tight flex-1 text-center">Prolongation</h2>
+<div class="size-10 flex items-center justify-center opacity-0">
+<!-- Spacer for symmetry -->
+</div>
+</div>
+</header>
+<main class="flex-1 flex flex-col max-w-md mx-auto w-full pb-32">
+<!-- HeadlineText -->
+<div class="px-4 pt-8 pb-2">
+<h3 class="tracking-tight text-2xl font-bold leading-tight border-l-4 border-primary pl-4">
+                A. Prolongation <br/>
+<span class="text-primary/80 font-medium text-lg">(Same Harmony, New Color)</span>
+</h3>
+</div>
+<!-- BodyText -->
+<div class="px-4 pt-4 pb-6">
+<p class="text-slate-600 dark:text-slate-400 text-base font-normal leading-relaxed">
+                Extend the duration of a single harmonic function by adding color tones while maintaining the original root. This creates internal movement without changing the chord's functional role.
+            </p>
+</div>
+<!-- Sequence Header -->
+<div class="px-4 py-2 flex items-center justify-between opacity-50">
+<span class="text-xs font-bold uppercase tracking-widest">Harmonic Sequence</span>
+<span class="text-xs mono-text">01 // 03</span>
+</div>
+<!-- Chord Sequence Container -->
+<div class="flex flex-col gap-2 px-4">
+<!-- ListItem: Am9 -->
+<div class="group relative flex items-center gap-4 bg-slate-100 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-800 rounded-xl p-4 transition-all hover:border-primary/50">
+<div class="flex items-center gap-4 flex-1">
+<div class="text-primary flex items-center justify-center rounded-lg bg-primary/10 shrink-0 size-12">
+<span class="material-symbols-outlined">music_note</span>
+</div>
+<div class="flex flex-col justify-center">
+<p class="text-lg font-bold leading-none mb-1">Am9</p>
+<p class="text-slate-500 dark:text-slate-400 text-xs font-medium uppercase tracking-tighter">Root Harmony</p>
+</div>
+</div>
+<div class="shrink-0">
+<p class="mono-text text-sm bg-slate-200 dark:bg-background-dark px-3 py-1 rounded-md">
+                        A C E G <span class="text-primary">B</span>
+</p>
+</div>
+</div>
+<!-- Visual Connector -->
+<div class="flex justify-center py-1">
+<div class="h-6 w-px bg-gradient-to-b from-primary to-transparent"></div>
+</div>
+<!-- ListItem: Am11 -->
+<div class="group relative flex items-center gap-4 bg-slate-100 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-800 rounded-xl p-4 transition-all hover:border-primary/50">
+<div class="flex items-center gap-4 flex-1">
+<div class="text-primary flex items-center justify-center rounded-lg bg-primary/10 shrink-0 size-12">
+<span class="material-symbols-outlined">stat_1</span>
+</div>
+<div class="flex flex-col justify-center">
+<p class="text-lg font-bold leading-none mb-1">Am11</p>
+<p class="text-slate-500 dark:text-slate-400 text-xs font-medium uppercase tracking-tighter">+ 11th Tension</p>
+</div>
+</div>
+<div class="shrink-0">
+<p class="mono-text text-sm bg-slate-200 dark:bg-background-dark px-3 py-1 rounded-md">
+                        A C E G B <span class="text-primary font-bold">D</span>
+</p>
+</div>
+</div>
+<!-- Visual Connector -->
+<div class="flex justify-center py-1">
+<div class="h-6 w-px bg-gradient-to-b from-primary to-transparent"></div>
+</div>
+<!-- ListItem: Am(add13) -->
+<div class="group relative flex items-center gap-4 bg-slate-100 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-800 rounded-xl p-4 transition-all hover:border-primary/50">
+<div class="flex items-center gap-4 flex-1">
+<div class="text-primary flex items-center justify-center rounded-lg bg-primary/10 shrink-0 size-12">
+<span class="material-symbols-outlined">stat_2</span>
+</div>
+<div class="flex flex-col justify-center">
+<p class="text-lg font-bold leading-none mb-1">Am(add13)</p>
+<p class="text-slate-500 dark:text-slate-400 text-xs font-medium uppercase tracking-tighter">+ 13th Color</p>
+</div>
+</div>
+<div class="shrink-0">
+<p class="mono-text text-sm bg-slate-200 dark:bg-background-dark px-3 py-1 rounded-md">
+                        A C E G B <span class="text-primary font-bold">F#</span>
+</p>
+</div>
+</div>
+</div>
+<!-- Technical Metadata -->
+<div class="mt-12 px-6 border-t border-slate-200 dark:border-slate-800 pt-6">
+<div class="grid grid-cols-2 gap-4">
+<div class="flex flex-col gap-1">
+<span class="text-[10px] uppercase tracking-widest text-slate-500">Function</span>
+<span class="text-sm font-semibold">Tonic Prolongation</span>
+</div>
+<div class="flex flex-col gap-1 text-right">
+<span class="text-[10px] uppercase tracking-widest text-slate-500">Complexity</span>
+<div class="flex justify-end gap-1">
+<div class="size-2 rounded-full bg-primary"></div>
+<div class="size-2 rounded-full bg-primary"></div>
+<div class="size-2 rounded-full bg-primary/20"></div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Bottom Action Bar -->
+<div class="fixed bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-background-light dark:from-background-dark via-background-light/90 dark:via-background-dark/90 to-transparent">
+<button class="w-full max-w-md mx-auto block bg-primary text-background-dark py-4 rounded-xl font-bold text-sm tracking-[0.2em] transition-transform active:scale-[0.98] shadow-lg shadow-primary/20 flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[20px]">add_box</span>
+            [ DROP INTO CHART ]
+        </button>
+<div class="h-2"></div> <!-- Safe area spacing -->
+</div>
+</body></html>

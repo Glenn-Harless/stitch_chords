@@ -4,7 +4,7 @@ import chordsData from '../data/chords.json';
 interface DashboardProps {
     onSelect: () => void;
     songsCount: number;
-    onNavigate: (view: 'dashboard' | 'library' | 'utility' | 'artists') => void;
+    onNavigate: (view: 'dashboard' | 'library' | 'utility' | 'artists' | 'scratchpad' | 'expansion') => void;
 }
 
 const Dashboard: React.FC<DashboardProps> = ({ onSelect, songsCount, onNavigate }) => {
@@ -35,26 +35,49 @@ const Dashboard: React.FC<DashboardProps> = ({ onSelect, songsCount, onNavigate 
                             </div>
                             <div>
                                 <h3 className="font-mono font-bold text-sm tracking-tight uppercase group-hover:text-chord-cyan transition-colors">RESUME_LAST_SESSION</h3>
-                                <p className="text-[10px] opacity-40 uppercase tracking-widest mt-0.5">STAY - THE KID LAROI</p>
+                                <p className="text-[10px] opacity-40 uppercase tracking-widest mt-0.5">CONTINUE_ACTIVE_MAP</p>
                             </div>
                         </div>
                         <span className="material-symbols-outlined text-chord-cyan/40 group-hover:text-chord-cyan">chevron_right</span>
                     </div>
 
+                    <div className="grid grid-cols-2 gap-4">
+                        <div
+                            onClick={() => onNavigate('artists')}
+                            className="rounded border border-chord-cyan/20 bg-chord-cyan/5 p-4 flex flex-col gap-4 group hover:border-chord-cyan transition-all cursor-pointer"
+                        >
+                            <span className="material-symbols-outlined text-chord-cyan group-hover:text-glow transition-all">library_music</span>
+                            <div>
+                                <h3 className="font-mono font-bold text-[11px] tracking-tight uppercase">ARTIST_INSPIRATION</h3>
+                                <p className="text-[9px] opacity-40 uppercase tracking-widest mt-0.5">DISCOVER</p>
+                            </div>
+                        </div>
+                        <div
+                            onClick={() => onNavigate('scratchpad')}
+                            className="rounded border border-chord-cyan/20 bg-chord-cyan/5 p-4 flex flex-col gap-4 group hover:border-chord-cyan transition-all cursor-pointer"
+                        >
+                            <span className="material-symbols-outlined text-chord-cyan group-hover:text-glow transition-all">edit_square</span>
+                            <div>
+                                <h3 className="font-mono font-bold text-[11px] tracking-tight uppercase">CUSTOM_SCRATCHPAD</h3>
+                                <p className="text-[9px] opacity-40 uppercase tracking-widest mt-0.5">PARSE_CHORDS</p>
+                            </div>
+                        </div>
+                    </div>
+
                     <div
-                        onClick={() => onNavigate('artists')}
-                        className="rounded border border-chord-cyan/20 bg-chord-cyan/5 p-6 flex justify-between items-center group hover:border-chord-cyan transition-all cursor-pointer shadow-lg hover:shadow-[0_0_20px_rgba(0,212,255,0.05)]"
+                        onClick={() => onNavigate('expansion')}
+                        className="rounded border border-chord-cyan/20 bg-chord-card p-6 flex justify-between items-center group hover:border-chord-cyan transition-all cursor-pointer shadow-lg hover:shadow-[0_0_20px_rgba(0,212,255,0.05)] border-dashed"
                     >
                         <div className="flex items-center gap-4">
                             <div className="size-10 rounded-full border border-chord-cyan/30 flex items-center justify-center group-hover:border-chord-cyan transition-colors">
-                                <span className="material-symbols-outlined text-chord-cyan">library_music</span>
+                                <span className="material-symbols-outlined text-chord-cyan">analytics</span>
                             </div>
                             <div>
-                                <h3 className="font-mono font-bold text-sm tracking-tight uppercase group-hover:text-chord-cyan transition-colors">ARTIST_INSPIRATION</h3>
-                                <p className="text-[10px] opacity-40 uppercase tracking-widest mt-0.5">DISCOVER_PROGRESSIONS</p>
+                                <h3 className="font-mono font-bold text-sm tracking-tight uppercase group-hover:text-chord-cyan transition-colors">EXPANSION_TECHNIQUES</h3>
+                                <p className="text-[10px] opacity-40 uppercase tracking-widest mt-0.5">CREATIVE_ENGINE_V4.0</p>
                             </div>
                         </div>
-                        <span className="material-symbols-outlined text-chord-cyan/40 group-hover:text-chord-cyan">arrow_forward</span>
+                        <span className="material-symbols-outlined text-chord-cyan/40 group-hover:text-chord-cyan">bolt</span>
                     </div>
                 </div>
             </section>

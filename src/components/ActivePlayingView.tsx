@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { transposeChord, getChordNotes } from '../utils/theory';
 
 interface Section {
     name: string;
@@ -21,6 +22,12 @@ interface ActivePlayingViewProps {
 const ActivePlayingView: React.FC<ActivePlayingViewProps> = ({ song, onBack }) => {
     const [transpose, setTranspose] = useState(0);
     const [instrument, setInstrument] = useState<'guitar' | 'keys'>('guitar');
+    const [selectedChord, setSelectedChord] = useState<{ sIdx: number; bIdx: number }>({ sIdx: 0, bIdx: 0 });
+    const [wakeLockEnabled, setWakeLockEnabled] = useState(true);
+
+    const currentChordName = song.sections[selectedChord.sIdx]?.bars[selectedChord.bIdx] || '';
+    const transposedChordName = transposeChord(currentChordName, transpose);
+    const chordNotes = getChordNotes(transposedChordName);
 
     return (
         <div className="min-h-screen bg-chord-dark text-white font-display relative pb-32">
@@ -38,7 +45,9 @@ const ActivePlayingView: React.FC<ActivePlayingViewProps> = ({ song, onBack }) =
                         </button>
                         <div>
                             <h2 className="text-[10px] uppercase tracking-widest text-chord-cyan/60 font-bold">Now Playing</h2>
-                            <h1 className="text-lg font-bold leading-tight tracking-tight uppercase">{song.title} - {song.artist}</h1>
+                            <h1 className="text-lg font-bold leading-tight tracking-tight uppercase truncate max-w-[180px]">
+                                {song.title}
+                            </h1>
                         </div>
                     </div>
                     <div className="flex items-center gap-4">
@@ -67,26 +76,27 @@ const ActivePlayingView: React.FC<ActivePlayingViewProps> = ({ song, onBack }) =
                             </p>
                         </div>
                         <div className="flex h-6 w-full items-center gap-4">
-                            <span className="text-[10px] font-bold opacity-40">-12</span>
+                            <span className="text-[10px] font-bold opacity-40">-6</span>
                             <div className="flex h-1.5 flex-1 rounded-full bg-chord-cyan/20 relative">
                                 <input
                                     type="range"
-                                    min="-12"
-                                    max="12"
+                                    min="-6"
+                                    max="6"
+                                    step="1"
                                     value={transpose}
                                     onChange={(e) => setTranspose(parseInt(e.target.value))}
                                     className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10"
                                 />
                                 <div
                                     className="h-full rounded-full bg-chord-cyan transition-all duration-150"
-                                    style={{ width: `${((transpose + 12) / 24) * 100}%` }}
+                                    style={{ width: `${((transpose + 6) / 12) * 100}%` }}
                                 />
                                 <div
                                     className="absolute -top-2 size-5 rounded-full bg-chord-cyan border-4 border-chord-dark shadow-[0_0_10px_rgba(0,212,255,0.5)] transition-all duration-150 pointer-events-none"
-                                    style={{ left: `calc(${((transpose + 12) / 24) * 100}% - 10px)` }}
+                                    style={{ left: `calc(${((transpose + 6) / 12) * 100}% - 10px)` }}
                                 />
                             </div>
-                            <span className="text-[10px] font-bold opacity-40">+12</span>
+                            <span className="text-[10px] font-bold opacity-40">+6</span>
                         </div>
                     </div>
                 </div>
@@ -101,37 +111,55 @@ const ActivePlayingView: React.FC<ActivePlayingViewProps> = ({ song, onBack }) =
                             <div className="h-[1px] flex-1 bg-chord-cyan/20" />
                         </div>
                         <div className="grid grid-cols-4 gap-2 p-4">
-                            {section.bars.map((chord, bIdx) => (
-                                <div
-                                    key={bIdx}
-                                    className={`aspect-square flex flex-col items-center justify-center rounded border bg-chord-card relative group cursor-pointer transition-all duration-200 ${bIdx === 0 ? 'border-2 border-chord-cyan/60 shadow-[0_0_15px_rgba(0,212,255,0.2)]' : 'border-chord-cyan/20 hover:border-chord-cyan/40'
-                                        }`}
-                                >
-                                    <span className="absolute top-1 left-1.5 text-[10px] font-mono text-chord-cyan/40">
-                                        {(bIdx + 1).toString().padStart(2, '0')}
-                                    </span>
-                                    <h2 className="text-2xl font-bold tracking-tighter">{chord}</h2>
-                                </div>
-                            ))}
+                            {section.bars.map((chord, bIdx) => {
+                                const isSelected = selectedChord.sIdx === sIdx && selectedChord.bIdx === bIdx;
+                                const currentTransposed = transposeChord(chord, transpose);
+                                return (
+                                    <div
+                                        key={bIdx}
+                                        onClick={() => setSelectedChord({ sIdx, bIdx })}
+                                        className={`aspect-square flex flex-col items-center justify-center rounded border bg-chord-card relative group cursor-pointer transition-all duration-200 ${isSelected ? 'border-2 border-chord-cyan shadow-[0_0_15px_rgba(0,212,255,0.3)]' : 'border-chord-cyan/20 hover:border-chord-cyan/40'
+                                            }`}
+                                    >
+                                        <span className="absolute top-1 left-1.5 text-[10px] font-mono text-chord-cyan/40">
+                                            {(bIdx + 1).toString().padStart(2, '0')}
+                                        </span>
+                                        <h2 className={`font-bold tracking-tighter ${currentTransposed.length > 4 ? 'text-xl' : 'text-2xl'}`}>
+                                            {currentTransposed}
+                                        </h2>
+                                    </div>
+                                );
+                            })}
                         </div>
                     </div>
                 ))}
 
-                {/* Reference Card */}
+                {/* Reference Card (Note Spelling) */}
                 <div className="px-4 mt-6">
-                    <div className="rounded border border-chord-cyan/10 bg-chord-cyan/5 p-4 flex gap-4 items-center">
-                        <div className="w-16 h-20 bg-chord-dark border border-chord-cyan/20 rounded flex flex-col items-center justify-center">
+                    <div className="rounded border border-chord-cyan/20 bg-chord-cyan/5 p-4 flex gap-4 items-center">
+                        <div className="w-16 h-20 bg-chord-dark border border-chord-cyan/20 rounded flex flex-col items-center justify-center shrink-0">
                             <div className="w-10 h-12 grid grid-cols-4 gap-1">
                                 {[1, 2, 3, 4, 5, 6, 7, 8].map((n) => (
-                                    <div key={n} className={`rounded-full h-1.5 w-1.5 ${[1, 5].includes(n) ? 'bg-chord-cyan' : 'bg-chord-cyan/20'}`} />
+                                    <div key={n} className={`rounded-full h-1.5 w-1.5 ${chordNotes.length >= n ? 'bg-chord-cyan' : 'bg-chord-cyan/20'}`} />
                                 ))}
                             </div>
-                            <p className="text-[8px] uppercase tracking-tighter mt-2 text-chord-cyan/60">Am Shape</p>
+                            <p className="text-[8px] uppercase tracking-tighter mt-2 text-chord-cyan/60">VOICING_REF</p>
                         </div>
-                        <div>
-                            <h4 className="text-xs font-bold text-chord-cyan mb-1 uppercase tracking-widest">Active voicing</h4>
-                            <p className="text-[11px] leading-relaxed opacity-60">
-                                Standard E-Tuning. Bar chord on 5th fret recommended for optimal resonance.
+                        <div className="flex-1 min-w-0">
+                            <div className="flex items-center justify-between mb-1">
+                                <h4 className="text-xs font-bold text-chord-cyan uppercase tracking-widest">Note Spelling</h4>
+                                <span className="text-[10px] font-mono opacity-40">AUTO_GEN</span>
+                            </div>
+                            <div className="flex flex-wrap gap-1.5">
+                                {chordNotes.map((note, idx) => (
+                                    <span key={idx} className="bg-chord-cyan/10 text-chord-cyan text-[11px] font-mono font-bold px-1.5 py-0.5 rounded border border-chord-cyan/20">
+                                        {note}
+                                    </span>
+                                ))}
+                                {chordNotes.length === 0 && <span className="text-zinc-500 italic text-[10px]">Select a valid chord</span>}
+                            </div>
+                            <p className="text-[10px] mt-2 opacity-40 italic">
+                                Roman Numeral: <span className="text-chord-cyan/80 not-italic">I</span> (Logic engine active)
                             </p>
                         </div>
                     </div>
@@ -143,12 +171,15 @@ const ActivePlayingView: React.FC<ActivePlayingViewProps> = ({ song, onBack }) =
                 <div className="max-w-2xl mx-auto p-4 pb-8 flex items-center justify-between gap-4">
                     {/* Wake Lock Toggle */}
                     <div className="flex items-center gap-3">
-                        <button className="relative inline-flex h-6 w-11 items-center rounded-full bg-chord-cyan">
-                            <span className="translate-x-6 inline-block h-4 w-4 transform rounded-full bg-white transition" />
+                        <button
+                            onClick={() => setWakeLockEnabled(!wakeLockEnabled)}
+                            className={`relative inline-flex h-5 w-10 items-center rounded-full transition-colors ${wakeLockEnabled ? 'bg-chord-cyan' : 'bg-zinc-800'}`}
+                        >
+                            <span className={`inline-block h-3 w-3 transform rounded-full bg-white transition-transform ${wakeLockEnabled ? 'translate-x-6' : 'translate-x-1'}`} />
                         </button>
                         <div className="flex flex-col">
-                            <span className="text-[10px] font-bold text-chord-cyan leading-none tracking-widest uppercase">Wake Lock</span>
-                            <span className="text-xs font-medium">KEEP ON</span>
+                            <span className="text-[9px] font-bold text-chord-cyan leading-none tracking-widest uppercase">Wake Lock</span>
+                            <span className="text-[10px] font-medium">{wakeLockEnabled ? 'KEEP ON' : 'DISABLED'}</span>
                         </div>
                     </div>
 

@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Technique: Pedal Bass Drift</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#2eeaff",
+                        "background-light": "#ffffff",
+                        "background-dark": "#121416",
+                        "surface": "#1a1d21",
+                        "border-muted": "#30363d",
+                    },
+                    fontFamily: {
+                        "display": ["Space Grotesk", "monospace"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        .scanline {
+            background: linear-gradient(
+                to bottom,
+                transparent 50%,
+                rgba(46, 234, 255, 0.02) 50%
+            );
+            background-size: 100% 4px;
+            pointer-events: none;
+        }
+        .monospaced-grid {
+            font-variant-numeric: tabular-nums;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 min-h-screen relative selection:bg-primary/30">
+<div class="fixed inset-0 scanline z-50"></div>
+<!-- Top Navigation -->
+<header class="sticky top-0 z-40 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md border-b border-border-muted px-4 py-3 flex items-center justify-between">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary text-xl">arrow_back_ios</span>
+<div class="flex flex-col">
+<span class="text-[10px] text-primary tracking-widest uppercase font-bold">Path: /Techniques</span>
+<h1 class="text-sm font-bold tracking-tight uppercase">Pedal_Bass_Drift</h1>
+</div>
+</div>
+<button class="p-2 border border-border-muted rounded-lg bg-surface/50">
+<span class="material-symbols-outlined text-primary">info</span>
+</button>
+</header>
+<main class="p-4 pb-32 space-y-6 max-w-md mx-auto">
+<!-- Concept Definition Section -->
+<section class="space-y-2">
+<div class="flex items-center gap-2 mb-1">
+<div class="h-1 w-1 bg-primary rounded-full"></div>
+<h3 class="text-[11px] font-bold tracking-[0.2em] text-primary/70 uppercase">Concept_Definition</h3>
+</div>
+<div class="bg-surface border border-border-muted p-4 rounded-lg relative overflow-hidden">
+<div class="absolute top-0 right-0 p-1 opacity-20">
+<span class="material-symbols-outlined text-4xl">waves</span>
+</div>
+<p class="text-base font-medium leading-relaxed">
+                    Keep bass <span class="text-primary italic">static</span> while harmony moves. Creating tension through stationary low frequencies.
+                </p>
+</div>
+</section>
+<!-- Formula Ribbon -->
+<section class="space-y-2">
+<div class="flex items-center gap-2 mb-1">
+<div class="h-1 w-1 bg-primary rounded-full"></div>
+<h3 class="text-[11px] font-bold tracking-[0.2em] text-primary/70 uppercase">Formula_Example</h3>
+</div>
+<div class="grid grid-cols-1 gap-px bg-border-muted border border-border-muted rounded-lg overflow-hidden monospaced-grid">
+<div class="bg-surface p-4 flex items-center justify-between">
+<span class="text-[10px] text-primary tracking-widest uppercase">Bass_Node</span>
+<span class="text-xl font-bold bg-primary/10 text-primary px-3 py-1 rounded border border-primary/20">[ A ]</span>
+</div>
+<div class="bg-surface p-4 space-y-3">
+<span class="text-[10px] text-primary tracking-widest uppercase">Upper_Drift</span>
+<div class="flex flex-wrap items-center gap-2 font-mono text-sm tracking-tighter">
+<span class="px-2 py-1 bg-white/5 border border-white/10 rounded">Am9</span>
+<span class="text-primary/50">→</span>
+<span class="px-2 py-1 bg-white/5 border border-white/10 rounded">Fmaj7</span>
+<span class="text-primary/50">→</span>
+<span class="px-2 py-1 bg-white/5 border border-white/10 rounded">Cmaj9</span>
+<span class="text-primary/50">→</span>
+<span class="px-2 py-1 bg-white/5 border border-white/10 rounded">G6</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Detailed Note Stacks -->
+<section class="space-y-4">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<div class="h-1 w-1 bg-primary rounded-full"></div>
+<h3 class="text-[11px] font-bold tracking-[0.2em] text-primary/70 uppercase">Note_Stacks</h3>
+</div>
+<span class="text-[10px] opacity-40 uppercase tracking-widest">Vertical_Voicing</span>
+</div>
+<div class="grid grid-cols-1 gap-3">
+<!-- Stack 1 -->
+<div class="bg-surface border border-border-muted p-4 rounded-lg flex items-center justify-between group active:border-primary transition-colors">
+<div class="flex flex-col gap-1">
+<span class="text-xs font-bold text-primary">Am9/A</span>
+<div class="flex items-end gap-2 font-mono">
+<span class="text-xl font-bold">[A]</span>
+<span class="text-lg opacity-40 pb-0.5">+</span>
+<span class="text-sm font-medium tracking-widest opacity-80 uppercase">A C E G B</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-primary/30 group-active:text-primary">play_circle</span>
+</div>
+<!-- Stack 2 -->
+<div class="bg-surface border border-border-muted p-4 rounded-lg flex items-center justify-between group active:border-primary transition-colors">
+<div class="flex flex-col gap-1">
+<span class="text-xs font-bold text-primary">Fmaj7/A</span>
+<div class="flex items-end gap-2 font-mono">
+<span class="text-xl font-bold">[A]</span>
+<span class="text-lg opacity-40 pb-0.5">+</span>
+<span class="text-sm font-medium tracking-widest opacity-80 uppercase">F A C E</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-primary/30 group-active:text-primary">play_circle</span>
+</div>
+<!-- Stack 3 -->
+<div class="bg-surface border border-border-muted p-4 rounded-lg flex items-center justify-between group active:border-primary transition-colors">
+<div class="flex flex-col gap-1">
+<span class="text-xs font-bold text-primary">Cmaj9/A</span>
+<div class="flex items-end gap-2 font-mono">
+<span class="text-xl font-bold">[A]</span>
+<span class="text-lg opacity-40 pb-0.5">+</span>
+<span class="text-sm font-medium tracking-widest opacity-80 uppercase">C E G B D</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-primary/30 group-active:text-primary">play_circle</span>
+</div>
+<!-- Stack 4 -->
+<div class="bg-surface border border-border-muted p-4 rounded-lg flex items-center justify-between group active:border-primary transition-colors">
+<div class="flex flex-col gap-1">
+<span class="text-xs font-bold text-primary">G6/A</span>
+<div class="flex items-end gap-2 font-mono">
+<span class="text-xl font-bold">[A]</span>
+<span class="text-lg opacity-40 pb-0.5">+</span>
+<span class="text-sm font-medium tracking-widest opacity-80 uppercase">G B D E</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-primary/30 group-active:text-primary">play_circle</span>
+</div>
+</div>
+</section>
+</main>
+<!-- Fixed Action Bar -->
+<footer class="fixed bottom-0 left-0 right-0 bg-background-light dark:bg-background-dark/95 border-t border-border-muted backdrop-blur-lg p-4 z-40">
+<div class="max-w-md mx-auto flex gap-3">
+<div class="flex-1 flex flex-col gap-1">
+<span class="text-[9px] font-bold text-primary tracking-widest uppercase">Target_Pedal</span>
+<div class="flex items-center gap-2">
+<div class="flex-1 bg-surface border border-border-muted rounded h-10 flex items-center justify-center font-bold text-lg">A</div>
+<div class="flex flex-col gap-0.5">
+<button class="bg-surface border border-border-muted rounded-t px-2 text-[10px]">▲</button>
+<button class="bg-surface border border-border-muted rounded-b px-2 text-[10px]">▼</button>
+</div>
+</div>
+</div>
+<button class="flex-[2] bg-primary text-background-dark font-bold text-sm tracking-widest uppercase rounded-lg flex items-center justify-center gap-2 shadow-[0_0_20px_rgba(46,234,255,0.3)] active:scale-[0.98] transition-all">
+<span class="material-symbols-outlined text-base">lock</span>
+                SET_AS_PEDAL
+            </button>
+</div>
+</footer>
+<!-- Terminal Background Element (Abstract) -->
+<div class="fixed top-24 -right-12 opacity-5 pointer-events-none select-none -rotate-12">
+<span class="text-[120px] font-black tracking-tighter">DRIFT</span>
+</div>
+</body></html>
