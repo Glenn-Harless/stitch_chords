@@ -1,10 +1,17 @@
 import { useState, useEffect } from 'react';
 
+export interface Section {
+    name: string;
+    bars: string[];
+}
+
 export interface Song {
     id: string;
     title: string;
     artist: string;
     tempo: number;
+    sections: Section[];
+    key?: string;
     lastPlayed?: string;
 }
 

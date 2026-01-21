@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { getChordNotes } from '../utils/theory';
+import { getChordNotes, parseChord, SUPPORTED_QUALITIES } from '../utils/theory';
 
 interface ChordScratchpadProps {
     onBack: () => void;
@@ -9,6 +9,11 @@ interface ChordScratchpadProps {
 const ChordScratchpad: React.FC<ChordScratchpadProps> = ({ onBack, onAddProgression }) => {
     const [input, setInput] = useState('Dmaj9');
 
+    // Sync selectors with terminal input
+    const { root: currentRoot, quality: currentQuality } = parseChord(input);
+    const rootLetter = currentRoot.charAt(0);
+    const rootAccidental = currentRoot.slice(1);
+
     const chordNotes = getChordNotes(input);
 
     const handleAdd = (section: string) => {
@@ -17,16 +22,22 @@ const ChordScratchpad: React.FC<ChordScratchpadProps> = ({ onBack, onAddProgress
             name: input,
             bpm: 120,
             suggested_section: section,
-            chords: [{ root: input, quality: '' }] // Simple wrapper for now
+            chords: [{ root: currentRoot, quality: currentQuality }]
         });
     };
+
+    const updateChord = (newRoot: string, newAccidental: string, newQuality: string) => {
+        setInput(`${newRoot}${newAccidental}${newQuality}`);
+    };
+
+    const roots = ['C', 'D', 'E', 'F', 'G', 'A', 'B'];
 
     return (
         <div className="flex flex-col h-screen max-w-md mx-auto overflow-hidden border-x border-white/5 bg-chord-dark">
             <div className="scanline opacity-10" />
 
             {/* Header */}
-            <header className="flex items-center justify-between px-4 pt-12 pb-4">
+            <header className="flex items-center justify-between px-4 pt-12 pb-4 shrink-0">
                 <div className="flex items-center gap-2">
                     <span className="material-symbols-outlined text-chord-cyan text-sm">terminal</span>
                     <h1 className="text-[10px] font-bold tracking-[0.2em] uppercase text-zinc-500">Custom Scratchpad</h1>
@@ -37,9 +48,9 @@ const ChordScratchpad: React.FC<ChordScratchpadProps> = ({ onBack, onAddProgress
             </header>
 
             {/* Main Console Area */}
-            <main className="flex-1 flex flex-col gap-4 px-4 overflow-y-auto pb-48 scrollbar-hide">
+            <main className="flex-1 flex flex-col gap-6 px-4 overflow-y-auto pb-48 scrollbar-hide">
                 {/* Monospace Input Console */}
-                <section className="mt-2">
+                <section className="mt-2 shrink-0">
                     <div className="relative group">
                         <div className="absolute -inset-0.5 bg-chord-cyan/20 rounded-lg blur opacity-20 group-focus-within:opacity-40 transition duration-500"></div>
                         <div className="relative flex items-center bg-chord-card border border-chord-cyan/30 rounded-lg overflow-hidden h-16 px-4">
@@ -56,17 +67,58 @@ const ChordScratchpad: React.FC<ChordScratchpadProps> = ({ onBack, onAddProgress
                     </div>
                 </section>
 
-                {/* Quick Global Key Selector */}
-                <section className="flex items-center justify-between bg-white/5 p-2 rounded-lg border border-white/5">
-                    <span className="text-[10px] font-bold text-zinc-500 ml-2 tracking-widest uppercase">Global Key</span>
-                    <div className="flex gap-1">
-                        <button className="px-3 py-1 bg-chord-cyan text-chord-dark text-xs font-bold rounded">D MAJOR</button>
-                        <button className="px-3 py-1 hover:bg-white/5 text-zinc-500 text-xs font-bold rounded transition-colors">SET</button>
+                {/* Chord Builder Controls */}
+                <section className="space-y-4 shrink-0">
+                    <div className="space-y-2">
+                        <h3 className="text-[10px] font-bold text-zinc-500 tracking-widest uppercase">Root & Accidental</h3>
+                        <div className="flex flex-col gap-2">
+                            <div className="grid grid-cols-7 gap-1">
+                                {roots.map(r => (
+                                    <button
+                                        key={r}
+                                        onClick={() => updateChord(r, rootAccidental, currentQuality)}
+                                        className={`py-2 text-xs font-bold rounded border transition-all ${rootLetter === r ? 'bg-chord-cyan text-chord-dark border-chord-cyan' : 'bg-white/5 border-white/10 hover:border-chord-cyan/40 text-zinc-400'}`}
+                                    >
+                                        {r}
+                                    </button>
+                                ))}
+                            </div>
+                            <div className="grid grid-cols-3 gap-1">
+                                {[
+                                    { label: 'FLAT (b)', val: 'b' },
+                                    { label: 'NATURAL', val: '' },
+                                    { label: 'SHARP (#)', val: '#' }
+                                ].map(acc => (
+                                    <button
+                                        key={acc.val}
+                                        onClick={() => updateChord(rootLetter, acc.val, currentQuality)}
+                                        className={`py-2 text-[10px] font-bold rounded border transition-all ${rootAccidental === acc.val ? 'bg-chord-cyan/20 text-chord-cyan border-chord-cyan/50' : 'bg-white/5 border-white/10 hover:border-chord-cyan/40 text-zinc-500'}`}
+                                    >
+                                        {acc.label}
+                                    </button>
+                                ))}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="space-y-2">
+                        <h3 className="text-[10px] font-bold text-zinc-500 tracking-widest uppercase">Chord Quality</h3>
+                        <div className="grid grid-cols-4 gap-1 max-h-32 overflow-y-auto pr-1 scrollbar-thin scrollbar-thumb-zinc-800">
+                            {SUPPORTED_QUALITIES.map(q => (
+                                <button
+                                    key={q}
+                                    onClick={() => updateChord(rootLetter, rootAccidental, q)}
+                                    className={`py-2 text-xs font-bold rounded border transition-all ${currentQuality === q ? 'bg-chord-cyan/20 text-chord-cyan border-chord-cyan/50' : 'bg-white/5 border-white/10 hover:border-chord-cyan/40 text-zinc-500'}`}
+                                >
+                                    {q === '' ? 'Major' : q}
+                                </button>
+                            ))}
+                        </div>
                     </div>
                 </section>
 
                 {/* Note Spelling Section */}
-                <section>
+                <section className="shrink-0">
                     <h3 className="text-[10px] font-bold text-zinc-500 mb-2 tracking-widest uppercase flex items-center gap-2">
                         <span className="w-1 h-1 bg-chord-cyan rounded-full"></span> Note Spelling
                     </h3>
@@ -84,18 +136,6 @@ const ChordScratchpad: React.FC<ChordScratchpadProps> = ({ onBack, onAddProgress
                                 <span className="text-zinc-600 font-mono text-[10px] uppercase">Waiting_for_valid_input...</span>
                             </div>
                         )}
-                    </div>
-                </section>
-
-                {/* Theoretical Data Grid */}
-                <section className="grid grid-cols-2 gap-3">
-                    <div className="p-4 rounded-lg bg-chord-card border border-white/5 flex flex-col gap-1">
-                        <p className="text-[10px] font-bold text-zinc-500 tracking-widest uppercase">Roman Numeral</p>
-                        <p className="text-2xl font-bold text-chord-cyan text-glow uppercase">I Δ 9</p>
-                    </div>
-                    <div className="p-4 rounded-lg bg-chord-card border border-white/5 flex flex-col gap-1">
-                        <p className="text-[10px] font-bold text-zinc-500 tracking-widest uppercase">Function</p>
-                        <p className="text-2xl font-bold text-white uppercase">TONIC</p>
                     </div>
                 </section>
             </main>

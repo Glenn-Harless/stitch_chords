@@ -30,7 +30,10 @@ const INTERVAL_MAP: Record<string, number> = {
     '13': 21,
 };
 
-const CHORD_QUALITY_MAP: Record<string, string[]> = {
+const MAJOR_ROMAN = ['I', 'ii', 'iii', 'IV', 'V', 'vi', 'vii°'];
+const MINOR_ROMAN = ['i', 'ii°', 'III', 'iv', 'v', 'VI', 'VII'];
+
+export const CHORD_QUALITY_MAP: Record<string, string[]> = {
     '': ['1', '3', '5'],
     'm': ['1', 'b3', '5'],
     'dim': ['1', 'b3', 'b5'],
@@ -52,6 +55,8 @@ const CHORD_QUALITY_MAP: Record<string, string[]> = {
     '6': ['1', '3', '5', '6'],
     'm6': ['1', 'b3', '5', '6'],
 };
+
+export const SUPPORTED_QUALITIES = Object.keys(CHORD_QUALITY_MAP);
 
 /**
  * Normalizes a note to its index (0-11).
@@ -114,4 +119,37 @@ export function getChordNotes(chord: string): string[] {
         const useFlats = root.includes('b') || ['F', 'Bb', 'Eb', 'Ab', 'Db', 'Gb'].includes(root);
         return (useFlats ? NOTES_FLAT : NOTES_SHARP)[noteIndex];
     });
+}
+
+/**
+ * Returns the Roman Numeral for a chord in a given key.
+ * Example: getRomanNumeral("Am", "C MAJOR") -> "vi"
+ */
+export function getRomanNumeral(chord: string, keyName: string): string {
+    const { root: chordRoot } = parseChord(chord);
+    const [keyRoot, keyQuality] = keyName.toUpperCase().split(' ');
+    
+    const chordIdx = getNoteIndex(chordRoot);
+    const keyIdx = getNoteIndex(keyRoot);
+    
+    if (chordIdx === -1 || keyIdx === -1) return '?';
+    
+    const interval = (chordIdx - keyIdx + 12) % 12;
+    const isMinorKey = keyQuality === 'MINOR';
+    
+    // Simplistic mapping for common diatonic intervals
+    const intervalToDegree: Record<number, number> = {
+        0: 0, 2: 1, 4: 2, 5: 3, 7: 4, 9: 5, 11: 6 // Major scale steps
+    };
+    
+    const minorIntervalToDegree: Record<number, number> = {
+        0: 0, 2: 1, 3: 2, 5: 3, 7: 4, 8: 5, 10: 6 // Natural minor steps
+    };
+    
+    const mapping = isMinorKey ? minorIntervalToDegree : intervalToDegree;
+    const degree = mapping[interval];
+    
+    if (degree === undefined) return 'N.C.'; // Non-chromatic or pivot
+    
+    return isMinorKey ? MINOR_ROMAN[degree] : MAJOR_ROMAN[degree];
 }

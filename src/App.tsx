@@ -14,7 +14,8 @@ type ViewType = 'dashboard' | 'active' | 'library' | 'utility' | 'artists' | 'ar
 function App() {
   const [currentView, setCurrentView] = useState<ViewType>('dashboard')
   const [selectedArtistId, setSelectedArtistId] = useState<string | null>(null)
-  const { songs } = useSavedSongs()
+  const { songs, saveSong } = useSavedSongs()
+  const [editingTarget, setEditingTarget] = useState<{ sIdx: number, bIdx: number } | null>(null)
 
   // Default to first progression or null
   const [activeSong, setActiveSong] = useState<any>(chordsData.progressions[0])
@@ -29,7 +30,15 @@ function App() {
     const bars = progression.chords.map((c: any) => c.root + (c.quality || ''))
 
     setActiveSong((prev: any) => {
-      // Create a copy of the sections
+      // If we are editing a specific chord from Hot Swap
+      if (editingTarget) {
+        const newSections = [...prev.sections]
+        newSections[editingTarget.sIdx].bars[editingTarget.bIdx] = bars[0] // Assume first chord from scratchpad
+        setEditingTarget(null)
+        return { ...prev, sections: newSections }
+      }
+
+      // Normal path: append progression
       const newSections = prev.sections ? [...prev.sections] : []
       const existingSectionIdx = newSections.findIndex((s: any) => s.name === sectionName)
 
@@ -53,6 +62,11 @@ function App() {
     setCurrentView('active')
   }
 
+  const handleEditChord = (_chord: string, sIdx: number, bIdx: number) => {
+    setEditingTarget({ sIdx, bIdx })
+    setCurrentView('scratchpad')
+  }
+
   return (
     <div className="min-h-screen bg-chord-dark text-white font-display overflow-x-hidden">
       {currentView === 'dashboard' && (
@@ -67,6 +81,9 @@ function App() {
         <ActivePlayingView
           song={activeSong}
           onBack={() => setCurrentView('dashboard')}
+          onSave={saveSong}
+          onEditChord={handleEditChord}
+          onUpdateSections={(newSections) => setActiveSong({ ...activeSong, sections: newSections })}
         />
       )}
 
