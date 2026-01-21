@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Artist Selection List</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#38ff14",
+                        "background-light": "#fafafa",
+                        "background-dark": "#141415",
+                    },
+                    fontFamily: {
+                        "display": ["Space Grotesk", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+                },
+            },
+        }
+    </script>
+<style>
+        /* Custom scrollbar for that technical feel */
+        ::-webkit-scrollbar {
+            width: 2px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #141415;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #38ff14;
+        }
+        .text-kern-wide {
+            letter-spacing: 0.2em;
+        }
+        /* Selection flash simulation */
+        .artist-item:active {
+            background-color: rgba(56, 255, 20, 0.1);
+            border-left: 4px solid #38ff14;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display text-white selection:bg-primary selection:text-black">
+<div class="relative flex h-screen w-full flex-col overflow-hidden max-w-md mx-auto border-x border-white/5">
+<!-- Header -->
+<header class="pt-12 px-6 pb-4">
+<div class="flex items-center justify-between mb-8">
+<span class="text-primary text-xs font-bold tracking-widest uppercase cursor-pointer hover:opacity-80 transition-opacity">
+                    &lt; BACK
+                </span>
+<span class="text-[10px] text-zinc-500 font-mono tracking-tighter">REF_V2.0.4</span>
+</div>
+<h1 class="text-4xl font-bold text-white text-kern-wide uppercase mb-2 leading-none">
+                Artists
+            </h1>
+<div class="h-1 w-12 bg-primary"></div>
+</header>
+<!-- Search Bar: Underlined Minimalist -->
+<div class="px-6 py-6">
+<div class="relative group">
+<input class="w-full bg-transparent border-t-0 border-x-0 border-b border-zinc-800 focus:border-primary focus:ring-0 text-primary placeholder:text-zinc-700 text-lg uppercase tracking-widest py-2 px-0 transition-colors duration-300 font-medium" placeholder="SEARCH_ARTIST" type="text"/>
+</div>
+</div>
+<!-- Artist List -->
+<main class="flex-1 overflow-y-auto px-6 pb-20 scrollbar-hide">
+<div class="flex flex-col">
+<!-- Group A -->
+<div class="py-2 border-b border-zinc-900 artist-item cursor-pointer transition-all">
+<div class="flex items-baseline justify-between group">
+<span class="text-2xl font-medium tracking-tight uppercase py-4">Apparat</span>
+<span class="text-[10px] text-zinc-600 font-mono group-hover:text-primary transition-colors">12_PROG</span>
+</div>
+</div>
+<!-- Group B -->
+<div class="py-2 border-b border-zinc-900 artist-item cursor-pointer transition-all">
+<div class="flex items-baseline justify-between group">
+<span class="text-2xl font-medium tracking-tight uppercase py-4">Bon Iver</span>
+<span class="text-[10px] text-zinc-600 font-mono group-hover:text-primary transition-colors">24_PROG</span>
+</div>
+</div>
+<!-- Group F -->
+<div class="py-2 border-b border-zinc-900 artist-item cursor-pointer transition-all">
+<div class="flex items-baseline justify-between group">
+<span class="text-2xl font-medium tracking-tight uppercase py-4">FKA Twigs</span>
+<span class="text-[10px] text-zinc-600 font-mono group-hover:text-primary transition-colors">08_PROG</span>
+</div>
+</div>
+<!-- Group N -->
+<div class="py-2 border-b border-zinc-900 artist-item cursor-pointer transition-all">
+<div class="flex items-baseline justify-between group">
+<span class="text-2xl font-medium tracking-tight uppercase py-4">Nils Frahm</span>
+<span class="text-[10px] text-zinc-600 font-mono group-hover:text-primary transition-colors">31_PROG</span>
+</div>
+</div>
+<!-- Group R -->
+<div class="py-2 border-b border-zinc-900 artist-item cursor-pointer transition-all">
+<div class="flex items-baseline justify-between group">
+<span class="text-2xl font-medium tracking-tight uppercase py-4 text-primary">Radiohead</span>
+<span class="text-[10px] text-primary font-mono opacity-50">42_PROG</span>
+</div>
+</div>
+<!-- Group S -->
+<div class="py-2 border-b border-zinc-900 artist-item cursor-pointer transition-all">
+<div class="flex items-baseline justify-between group">
+<span class="text-2xl font-medium tracking-tight uppercase py-4">Sigur Rós</span>
+<span class="text-[10px] text-zinc-600 font-mono group-hover:text-primary transition-colors">15_PROG</span>
+</div>
+</div>
+<!-- Group T -->
+<div class="py-2 border-b border-zinc-900 artist-item cursor-pointer transition-all">
+<div class="flex items-baseline justify-between group">
+<span class="text-2xl font-medium tracking-tight uppercase py-4">Thom Yorke</span>
+<span class="text-[10px] text-zinc-600 font-mono group-hover:text-primary transition-colors">19_PROG</span>
+</div>
+</div>
+<!-- Spacer for scrolling comfort -->
+<div class="h-12"></div>
+</div>
+</main>
+<!-- Alphabet Quick Jump (Brutalist style) -->
+<div class="fixed right-2 top-1/2 -translate-y-1/2 flex flex-col gap-1 pointer-events-none">
+<span class="text-[8px] text-zinc-800 font-bold">A</span>
+<span class="text-[8px] text-zinc-800 font-bold">B</span>
+<span class="text-[8px] text-zinc-800 font-bold">C</span>
+<span class="text-[8px] text-zinc-800 font-bold">D</span>
+<span class="text-[8px] text-zinc-800 font-bold">E</span>
+<span class="text-[8px] text-primary font-bold">F</span>
+<span class="text-[8px] text-zinc-800 font-bold">G</span>
+<span class="text-[8px] text-zinc-800 font-bold">H</span>
+<span class="text-[8px] text-zinc-800 font-bold">I</span>
+<span class="text-[8px] text-zinc-800 font-bold">J</span>
+<span class="text-[8px] text-zinc-800 font-bold">K</span>
+<span class="text-[8px] text-zinc-800 font-bold">L</span>
+<span class="text-[8px] text-zinc-800 font-bold">M</span>
+<span class="text-[8px] text-primary font-bold">N</span>
+<span class="text-[8px] text-zinc-800 font-bold">O</span>
+<span class="text-[8px] text-zinc-800 font-bold">P</span>
+<span class="text-[8px] text-zinc-800 font-bold">Q</span>
+<span class="text-[8px] text-primary font-bold">R</span>
+<span class="text-[8px] text-primary font-bold">S</span>
+<span class="text-[8px] text-primary font-bold">T</span>
+<span class="text-[8px] text-zinc-800 font-bold">U</span>
+<span class="text-[8px] text-zinc-800 font-bold">V</span>
+<span class="text-[8px] text-zinc-800 font-bold">W</span>
+<span class="text-[8px] text-zinc-800 font-bold">X</span>
+<span class="text-[8px] text-zinc-800 font-bold">Y</span>
+<span class="text-[8px] text-zinc-800 font-bold">Z</span>
+</div>
+<!-- Footer status bar info -->
+<footer class="p-4 bg-background-dark border-t border-zinc-900 flex justify-between items-center">
+<div class="flex items-center gap-2">
+<div class="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></div>
+<span class="text-[10px] text-zinc-500 font-mono tracking-widest uppercase">Syncing_Lib</span>
+</div>
+<div class="text-[10px] text-zinc-500 font-mono">
+                78_ARTISTS_FOUND
+            </div>
+</footer>
+</div>
+</body></html>

@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Utility &amp; Data Settings</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#2eeaff",
+                        "background-light": "#f0f2f4",
+                        "background-dark": "#1c1e22",
+                        "surface-dark": "#2D313A",
+                    },
+                    fontFamily: {
+                        "display": ["Space Grotesk", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        .neo-brutalist-border {
+            border: 1px solid rgba(46, 234, 255, 0.2);
+        }
+        .mono-text {
+            font-variant-numeric: tabular-nums;
+            letter-spacing: -0.02em;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-white min-h-screen">
+<!-- Top Navigation Bar -->
+<nav class="sticky top-0 z-50 bg-background-light dark:bg-background-dark border-b border-slate-200 dark:border-slate-800">
+<div class="flex items-center p-4 h-16 max-w-lg mx-auto">
+<div class="flex-shrink-0 cursor-pointer hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[24px]">arrow_back</span>
+</div>
+<h1 class="flex-1 text-center text-sm font-bold tracking-[0.2em] uppercase mono-text pr-6">Utility &amp; Data Settings</h1>
+</div>
+</nav>
+<main class="max-w-lg mx-auto p-4 space-y-8 pb-12">
+<!-- GENERAL SECTION -->
+<section>
+<div class="flex items-center mb-4 px-1">
+<h2 class="text-xs font-bold tracking-[0.3em] text-slate-500 dark:text-slate-400 uppercase">General</h2>
+<div class="h-[1px] flex-1 bg-slate-200 dark:bg-slate-800 ml-4"></div>
+</div>
+<div class="space-y-3">
+<!-- Dark Mode -->
+<div class="bg-white dark:bg-surface-dark p-4 rounded-lg neo-brutalist-border flex items-center justify-between">
+<div>
+<p class="text-sm font-medium uppercase tracking-wider">Dark Mode</p>
+</div>
+<div class="px-3 py-1 border border-primary text-primary text-[10px] font-bold tracking-widest rounded uppercase">
+                        Always On
+                    </div>
+</div>
+<!-- Font Style -->
+<div class="bg-white dark:bg-surface-dark p-4 rounded-lg neo-brutalist-border">
+<div class="flex items-center justify-between mb-1">
+<p class="text-sm font-medium uppercase tracking-wider">Font Style</p>
+<p class="text-xs text-primary/70 mono-text">Standard</p>
+</div>
+<div class="flex gap-2 mt-4">
+<button class="flex-1 py-2 bg-primary text-background-dark text-xs font-bold uppercase tracking-widest rounded">Standard</button>
+<button class="flex-1 py-2 border border-slate-300 dark:border-slate-600 text-xs font-bold uppercase tracking-widest rounded hover:border-primary transition-colors">Condensed</button>
+</div>
+</div>
+<!-- Instrument View -->
+<div class="bg-white dark:bg-surface-dark p-4 rounded-lg neo-brutalist-border">
+<div class="flex items-center justify-between mb-1">
+<p class="text-sm font-medium uppercase tracking-wider">Instrument View</p>
+<p class="text-xs text-primary/70 mono-text">Piano</p>
+</div>
+<div class="flex gap-2 mt-4">
+<button class="flex-1 py-2 bg-primary text-background-dark text-xs font-bold uppercase tracking-widest rounded">Piano</button>
+<button class="flex-1 py-2 border border-slate-300 dark:border-slate-600 text-xs font-bold uppercase tracking-widest rounded hover:border-primary transition-colors">Guitar</button>
+</div>
+</div>
+</div>
+</section>
+<!-- ACCOUNT SECTION -->
+<section>
+<div class="flex items-center mb-4 px-1">
+<h2 class="text-xs font-bold tracking-[0.3em] text-slate-500 dark:text-slate-400 uppercase">Account</h2>
+<div class="h-[1px] flex-1 bg-slate-200 dark:bg-slate-800 ml-4"></div>
+</div>
+<div class="bg-white dark:bg-surface-dark p-4 rounded-lg neo-brutalist-border flex items-center justify-between">
+<div>
+<p class="text-sm font-medium uppercase tracking-wider">Storage Sync</p>
+<p class="text-[10px] text-slate-500 dark:text-slate-400 mt-1 uppercase tracking-tighter">No cloud connection active</p>
+</div>
+<div class="text-xs font-bold text-primary tracking-widest uppercase">
+                    Local Only
+                </div>
+</div>
+</section>
+<!-- DATA MANAGEMENT SECTION -->
+<section>
+<div class="flex items-center mb-4 px-1">
+<h2 class="text-xs font-bold tracking-[0.3em] text-slate-500 dark:text-slate-400 uppercase">Data Management</h2>
+<div class="h-[1px] flex-1 bg-slate-200 dark:bg-slate-800 ml-4"></div>
+</div>
+<div class="bg-white dark:bg-surface-dark p-6 rounded-lg neo-brutalist-border space-y-6">
+<div class="text-center">
+<p class="text-[10px] font-bold tracking-[0.2em] text-slate-400 uppercase mb-6">Manual Backup and Portability</p>
+<button class="w-full py-4 px-6 mb-4 text-primary border-2 border-primary/30 hover:border-primary transition-all rounded-lg group">
+<span class="text-sm font-bold tracking-[0.15em] uppercase">
+                            [ Export All As TXT ]
+                        </span>
+</button>
+<button class="w-full py-4 px-6 text-slate-400 border border-slate-300 dark:border-slate-700 hover:text-white hover:border-slate-500 transition-all rounded-lg">
+<span class="text-sm font-bold tracking-[0.15em] uppercase">
+                            [ Import Data ]
+                        </span>
+</button>
+</div>
+</div>
+</section>
+<!-- FOOTER -->
+<footer class="pt-8 text-center space-y-4">
+<div class="inline-block px-3 py-1 bg-slate-100 dark:bg-slate-800 rounded">
+<p class="text-[9px] font-bold tracking-[0.3em] text-slate-400 dark:text-slate-500 uppercase">
+                    Strictly Text-Only Interface v2.4.0
+                </p>
+</div>
+<p class="text-[8px] tracking-[0.4em] text-slate-400 uppercase opacity-50">
+                End of Control List
+            </p>
+</footer>
+</main>
+<!-- Bottom Indicator for iOS feel -->
+<div class="fixed bottom-1 left-1/2 -translate-x-1/2 w-32 h-1 bg-slate-800 dark:bg-slate-700 rounded-full opacity-20"></div>
+</body></html>

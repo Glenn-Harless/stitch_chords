@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Custom Chord Scratchpad</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Space+Mono&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#2eeaff",
+                        "background-light": "#f9fafb",
+                        "background-dark": "#121416",
+                        "surface-dark": "#1D2026",
+                    },
+                    fontFamily: {
+                        "display": ["Space Grotesk"],
+                        "mono": ["Space Mono", "monospace"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .console-glow {
+            box-shadow: inset 0 0 10px rgba(46, 234, 255, 0.05), 0 0 20px rgba(46, 234, 255, 0.02);
+        }
+        .text-glow {
+            text-shadow: 0 0 8px rgba(46, 234, 255, 0.4);
+        }
+        ::-webkit-scrollbar {
+            display: none;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display text-gray-900 dark:text-white antialiased">
+<div class="flex flex-col h-screen max-w-md mx-auto overflow-hidden border-x border-white/5 bg-background-light dark:bg-background-dark">
+<!-- Header -->
+<header class="flex items-center justify-between px-4 pt-6 pb-4">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">terminal</span>
+<h1 class="text-[10px] font-bold tracking-[0.2em] uppercase text-gray-500 dark:text-gray-400">Custom Scratchpad</h1>
+</div>
+<button class="text-gray-500 hover:text-primary transition-colors">
+<span class="material-symbols-outlined">settings</span>
+</button>
+</header>
+<!-- Main Console Area -->
+<main class="flex-1 flex flex-col gap-4 px-4 overflow-y-auto pb-32">
+<!-- Monospace Input Console -->
+<section class="mt-2">
+<div class="relative group">
+<div class="absolute -inset-0.5 bg-primary/20 rounded-lg blur opacity-20 group-focus-within:opacity-40 transition duration-500"></div>
+<div class="relative flex items-center bg-white dark:bg-surface-dark border border-gray-200 dark:border-primary/30 rounded-lg overflow-hidden h-16 px-4">
+<span class="font-mono text-primary mr-3 text-lg">&gt;</span>
+<input class="bg-transparent border-none focus:ring-0 w-full font-mono text-2xl text-primary uppercase tracking-wider placeholder:text-gray-600" placeholder="TYPE CHORD..." type="text" value="Dmaj9"/>
+<span class="material-symbols-outlined text-primary/40 animate-pulse">keyboard_arrow_left</span>
+</div>
+</div>
+</section>
+<!-- Quick Global Key Selector -->
+<section class="flex items-center justify-between bg-gray-100 dark:bg-white/5 p-2 rounded-lg border border-gray-200 dark:border-white/5">
+<span class="text-[10px] font-bold text-gray-500 ml-2 tracking-widest uppercase">Global Key</span>
+<div class="flex gap-1">
+<button class="px-3 py-1 bg-primary text-background-dark text-xs font-bold rounded">D MAJOR</button>
+<button class="px-3 py-1 hover:bg-white/5 text-gray-400 text-xs font-bold rounded transition-colors">SET</button>
+</div>
+</section>
+<!-- Note Spelling Section -->
+<section>
+<h3 class="text-[10px] font-bold text-gray-500 mb-2 tracking-widest uppercase flex items-center gap-2">
+<span class="w-1 h-1 bg-primary rounded-full"></span> Note Spelling
+                </h3>
+<div class="flex gap-2 flex-wrap">
+<div class="flex-1 min-w-[50px] aspect-square flex flex-col items-center justify-center rounded-lg border border-primary/40 bg-primary/5 console-glow">
+<span class="text-primary text-xl font-bold text-glow">D</span>
+<span class="text-[8px] text-primary/60 font-mono">ROOT</span>
+</div>
+<div class="flex-1 min-w-[50px] aspect-square flex flex-col items-center justify-center rounded-lg border border-white/10 bg-white/5">
+<span class="text-white text-xl font-bold">F#</span>
+<span class="text-[8px] text-gray-500 font-mono">M3</span>
+</div>
+<div class="flex-1 min-w-[50px] aspect-square flex flex-col items-center justify-center rounded-lg border border-white/10 bg-white/5">
+<span class="text-white text-xl font-bold">A</span>
+<span class="text-[8px] text-gray-500 font-mono">P5</span>
+</div>
+<div class="flex-1 min-w-[50px] aspect-square flex flex-col items-center justify-center rounded-lg border border-white/10 bg-white/5">
+<span class="text-white text-xl font-bold">C#</span>
+<span class="text-[8px] text-gray-500 font-mono">M7</span>
+</div>
+<div class="flex-1 min-w-[50px] aspect-square flex flex-col items-center justify-center rounded-lg border border-white/10 bg-white/5">
+<span class="text-white text-xl font-bold">E</span>
+<span class="text-[8px] text-gray-500 font-mono">M9</span>
+</div>
+</div>
+</section>
+<!-- Theoretical Data Grid -->
+<section class="grid grid-cols-2 gap-3">
+<div class="p-4 rounded-lg bg-surface-dark border border-white/5 flex flex-col gap-1">
+<p class="text-[10px] font-bold text-gray-500 tracking-widest uppercase">Roman Numeral</p>
+<p class="text-2xl font-bold text-primary text-glow">I Δ 9</p>
+</div>
+<div class="p-4 rounded-lg bg-surface-dark border border-white/5 flex flex-col gap-1">
+<p class="text-[10px] font-bold text-gray-500 tracking-widest uppercase">Function</p>
+<p class="text-2xl font-bold text-white">TONIC</p>
+</div>
+<div class="col-span-2 p-4 rounded-lg bg-surface-dark border border-white/5 flex flex-col gap-1">
+<p class="text-[10px] font-bold text-gray-500 tracking-widest uppercase">Interval Formula</p>
+<p class="text-xl font-mono text-white tracking-widest">1 - 3 - 5 - 7 - 9</p>
+</div>
+</section>
+<!-- Voicing Variations -->
+<section>
+<div class="flex items-center justify-between mb-2">
+<h3 class="text-[10px] font-bold text-gray-500 tracking-widest uppercase flex items-center gap-2">
+<span class="w-1 h-1 bg-gray-500 rounded-full"></span> Variations
+                    </h3>
+<span class="text-[10px] font-mono text-primary/60">VOICING_GEN_V2.0</span>
+</div>
+<div class="flex gap-3 overflow-x-auto pb-4 -mx-1 px-1">
+<div class="flex-shrink-0 w-32 p-3 rounded-lg border border-white/5 bg-white/5 hover:border-primary/40 transition-colors cursor-pointer group">
+<p class="text-[9px] text-gray-500 font-bold mb-1 uppercase">Drop 2</p>
+<div class="h-1 w-full bg-white/10 rounded-full mb-3 overflow-hidden">
+<div class="bg-primary h-full w-2/3"></div>
+</div>
+<p class="font-mono text-xs text-white group-hover:text-primary transition-colors">D A C# E F#</p>
+</div>
+<div class="flex-shrink-0 w-32 p-3 rounded-lg border border-white/5 bg-white/5 hover:border-primary/40 transition-colors cursor-pointer group">
+<p class="text-[9px] text-gray-500 font-bold mb-1 uppercase">1st Inv</p>
+<div class="h-1 w-full bg-white/10 rounded-full mb-3 overflow-hidden">
+<div class="bg-primary h-full w-1/3"></div>
+</div>
+<p class="font-mono text-xs text-white group-hover:text-primary transition-colors">F# A C# E D</p>
+</div>
+<div class="flex-shrink-0 w-32 p-3 rounded-lg border border-white/5 bg-white/5 hover:border-primary/40 transition-colors cursor-pointer group">
+<p class="text-[9px] text-gray-500 font-bold mb-1 uppercase">Shell</p>
+<div class="h-1 w-full bg-white/10 rounded-full mb-3 overflow-hidden">
+<div class="bg-primary h-full w-4/5"></div>
+</div>
+<p class="font-mono text-xs text-white group-hover:text-primary transition-colors">D F# C#</p>
+</div>
+</div>
+</section>
+</main>
+<!-- Fixed Bottom Action Dock -->
+<div class="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-md p-4 bg-gradient-to-t from-background-dark via-background-dark/95 to-transparent pt-10">
+<div class="flex gap-3">
+<button class="flex-1 bg-primary py-4 rounded-lg flex flex-col items-center justify-center shadow-[0_0_20px_rgba(46,234,255,0.2)] active:scale-95 transition-transform">
+<span class="text-[9px] font-black text-background-dark tracking-tighter uppercase opacity-60 leading-none">SEQUENCE_01</span>
+<span class="text-sm font-black text-background-dark tracking-widest">[ ADD TO VERSE ]</span>
+</button>
+<button class="flex-1 bg-surface-dark border border-primary/50 py-4 rounded-lg flex flex-col items-center justify-center active:scale-95 transition-transform">
+<span class="text-[9px] font-black text-primary/60 tracking-tighter uppercase leading-none">SEQUENCE_02</span>
+<span class="text-sm font-black text-primary tracking-widest text-glow">[ ADD TO CHORUS ]</span>
+</button>
+</div>
+<!-- Global Navigation Tab -->
+<nav class="flex justify-around items-center mt-6 pb-2">
+<button class="flex flex-col items-center gap-1 group">
+<span class="material-symbols-outlined text-primary text-glow">edit_square</span>
+<span class="text-[8px] font-bold text-primary uppercase">Pad</span>
+</button>
+<button class="flex flex-col items-center gap-1 opacity-40 group hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-white">library_music</span>
+<span class="text-[8px] font-bold text-white uppercase">Vault</span>
+</button>
+<button class="flex flex-col items-center gap-1 opacity-40 group hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-white">analytics</span>
+<span class="text-[8px] font-bold text-white uppercase">Theory</span>
+</button>
+<button class="flex flex-col items-center gap-1 opacity-40 group hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-white">person</span>
+<span class="text-[8px] font-bold text-white uppercase">Pro</span>
+</button>
+</nav>
+</div>
+</div>
+</body></html>

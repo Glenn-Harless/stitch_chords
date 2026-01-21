@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=JetBrains+Mono:wght@400;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#2eeaff",
+                        "background-light": "#ffffff",
+                        "background-dark": "#050505",
+                    },
+                    fontFamily: {
+                        "display": ["Space Grotesk", "sans-serif"],
+                        "mono": ["JetBrains Mono", "monospace"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        .mono-text {
+            font-family: 'JetBrains Mono', monospace;
+        }
+        /* Custom scrollbar for terminal feel */
+        ::-webkit-scrollbar {
+            width: 4px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #050505;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #1a1a1a;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark text-[#e5e5e5] min-h-screen">
+<!-- Terminal Header / TopAppBar -->
+<header class="sticky top-0 z-10 bg-background-dark/95 backdrop-blur-sm border-b border-white/5">
+<div class="flex items-center justify-between p-4 pt-10">
+<div class="flex flex-col">
+<span class="text-[10px] text-primary/60 font-mono tracking-widest uppercase mb-1">DIRECTORY: /ROOT/LIBRARY</span>
+<h1 class="text-white text-xl font-bold font-display tracking-tight uppercase">Saved_Songs</h1>
+</div>
+<button class="text-primary font-bold text-sm font-display tracking-wider hover:bg-primary/10 px-3 py-1 rounded transition-colors uppercase">
+                NEW SONG +
+            </button>
+</div>
+<!-- Filter Chips / Utility Bar -->
+<div class="flex gap-2 px-4 pb-4 overflow-x-auto no-scrollbar">
+<div class="flex h-6 shrink-0 items-center justify-center gap-x-1 border border-white/10 px-2">
+<span class="text-[9px] text-white/40 font-mono uppercase">SORT:</span>
+<span class="text-white text-[10px] font-medium font-mono">LAST_OPENED</span>
+</div>
+<div class="flex h-6 shrink-0 items-center justify-center gap-x-1 border border-white/10 px-2">
+<span class="text-[9px] text-white/40 font-mono uppercase">TYPE:</span>
+<span class="text-white text-[10px] font-medium font-mono">CHORDS</span>
+</div>
+<div class="flex h-6 shrink-0 items-center justify-center gap-x-1 border border-white/10 px-2">
+<span class="text-[9px] text-white/40 font-mono uppercase">VIEW:</span>
+<span class="text-white text-[10px] font-medium font-mono">DENSE</span>
+</div>
+</div>
+</header>
+<main class="flex flex-col">
+<!-- Metadata Line -->
+<div class="px-4 py-2 border-b border-white/5 bg-white/5">
+<p class="text-[10px] text-white/30 font-mono tracking-tighter">INDEX_START | TOTAL_RECORDS: 14</p>
+</div>
+<!-- Song List Items -->
+<div class="divide-y divide-white/5">
+<!-- Item 1 -->
+<div class="group flex flex-col px-4 py-3 hover:bg-primary/5 cursor-pointer transition-colors active:bg-primary/20">
+<div class="flex items-baseline justify-between mb-1">
+<h2 class="text-white font-mono font-bold text-sm tracking-tight uppercase group-hover:text-primary transition-colors">AUTUMN_LEAVES_REMAST</h2>
+<span class="text-[10px] text-white/30 font-mono shrink-0 uppercase">2m_ago</span>
+</div>
+<p class="text-[#9ab8bc] text-xs font-display leading-none line-clamp-1 tracking-wide">
+                    V: Am9-D7-Gmaj7-Cmaj7, C: F#m7b5-B7-Em
+                </p>
+</div>
+<!-- Item 2 -->
+<div class="group flex flex-col px-4 py-3 hover:bg-primary/5 cursor-pointer transition-colors">
+<div class="flex items-baseline justify-between mb-1">
+<h2 class="text-white font-mono font-bold text-sm tracking-tight uppercase group-hover:text-primary">BLUES_IN_F_JAM</h2>
+<span class="text-[10px] text-white/30 font-mono shrink-0 uppercase">1h_ago</span>
+</div>
+<p class="text-[#9ab8bc] text-xs font-display leading-none line-clamp-1 tracking-wide">
+                    V: F7-Bb7-F7-C7, C: F7-Bb7-C7
+                </p>
+</div>
+<!-- Item 3 -->
+<div class="group flex flex-col px-4 py-3 hover:bg-primary/5 cursor-pointer transition-colors">
+<div class="flex items-baseline justify-between mb-1">
+<h2 class="text-white font-mono font-bold text-sm tracking-tight uppercase group-hover:text-primary">NEO_SOUL_SKETCH_04</h2>
+<span class="text-[10px] text-white/30 font-mono shrink-0 uppercase">3h_ago</span>
+</div>
+<p class="text-[#9ab8bc] text-xs font-display leading-none line-clamp-1 tracking-wide">
+                    V: Dbmaj9-Gb13-Fm7-Bb7b13
+                </p>
+</div>
+<!-- Item 4 -->
+<div class="group flex flex-col px-4 py-3 hover:bg-primary/5 cursor-pointer transition-colors">
+<div class="flex items-baseline justify-between mb-1">
+<h2 class="text-white font-mono font-bold text-sm tracking-tight uppercase group-hover:text-primary">GIANT_STEPS_DRILLED</h2>
+<span class="text-[10px] text-white/30 font-mono shrink-0 uppercase">5h_ago</span>
+</div>
+<p class="text-[#9ab8bc] text-xs font-display leading-none line-clamp-1 tracking-wide">
+                    V: Bma7-D7-Gma7-Bb7-Ebma7, C: Am7-D7-Gma7
+                </p>
+</div>
+<!-- Item 5 -->
+<div class="group flex flex-col px-4 py-3 hover:bg-primary/5 cursor-pointer transition-colors">
+<div class="flex items-baseline justify-between mb-1">
+<h2 class="text-white font-mono font-bold text-sm tracking-tight uppercase group-hover:text-primary">LOFI_HIPHOP_CHORDS_02</h2>
+<span class="text-[10px] text-white/30 font-mono shrink-0 uppercase">12h_ago</span>
+</div>
+<p class="text-[#9ab8bc] text-xs font-display leading-none line-clamp-1 tracking-wide">
+                    V: Cm9-F13-Bbmaj9-G7alt
+                </p>
+</div>
+<!-- Item 6 -->
+<div class="group flex flex-col px-4 py-3 hover:bg-primary/5 cursor-pointer transition-colors">
+<div class="flex items-baseline justify-between mb-1">
+<h2 class="text-white font-mono font-bold text-sm tracking-tight uppercase group-hover:text-primary">MODAL_INTERCHANGE_TEST</h2>
+<span class="text-[10px] text-white/30 font-mono shrink-0 uppercase">1d_ago</span>
+</div>
+<p class="text-[#9ab8bc] text-xs font-display leading-none line-clamp-1 tracking-wide">
+                    V: Cmaj7-Fm7-Bb7-Cmaj7
+                </p>
+</div>
+<!-- Item 7 -->
+<div class="group flex flex-col px-4 py-3 hover:bg-primary/5 cursor-pointer transition-colors">
+<div class="flex items-baseline justify-between mb-1">
+<h2 class="text-white font-mono font-bold text-sm tracking-tight uppercase group-hover:text-primary">TRITONE_SUB_STUDY</h2>
+<span class="text-[10px] text-white/30 font-mono shrink-0 uppercase">2d_ago</span>
+</div>
+<p class="text-[#9ab8bc] text-xs font-display leading-none line-clamp-1 tracking-wide">
+                    V: Dm7-Db7-Cmaj7, B: F#m7-B7-Emaj7
+                </p>
+</div>
+<!-- Item 8 -->
+<div class="group flex flex-col px-4 py-3 hover:bg-primary/5 cursor-pointer transition-colors">
+<div class="flex items-baseline justify-between mb-1">
+<h2 class="text-white font-mono font-bold text-sm tracking-tight uppercase group-hover:text-primary">MISTY_ARRANGEMENT</h2>
+<span class="text-[10px] text-white/30 font-mono shrink-0 uppercase">3d_ago</span>
+</div>
+<p class="text-[#9ab8bc] text-xs font-display leading-none line-clamp-1 tracking-wide">
+                    V: Ebma7-Bbm7-Eb7-Abma7-Abm7
+                </p>
+</div>
+<!-- Item 9 -->
+<div class="group flex flex-col px-4 py-3 hover:bg-primary/5 cursor-pointer transition-colors">
+<div class="flex items-baseline justify-between mb-1">
+<h2 class="text-white font-mono font-bold text-sm tracking-tight uppercase group-hover:text-primary">FUNK_GROOVE_7_SHARP_9</h2>
+<span class="text-[10px] text-white/30 font-mono shrink-0 uppercase">4d_ago</span>
+</div>
+<p class="text-[#9ab8bc] text-xs font-display leading-none line-clamp-1 tracking-wide">
+                    V: E7#9-A13-E7#9-B7#9
+                </p>
+</div>
+<!-- Item 10 -->
+<div class="group flex flex-col px-4 py-3 hover:bg-primary/5 cursor-pointer transition-colors">
+<div class="flex items-baseline justify-between mb-1">
+<h2 class="text-white font-mono font-bold text-sm tracking-tight uppercase group-hover:text-primary">WEATHER_REPORT_VIBE</h2>
+<span class="text-[10px] text-white/30 font-mono shrink-0 uppercase">1w_ago</span>
+</div>
+<p class="text-[#9ab8bc] text-xs font-display leading-none line-clamp-1 tracking-wide">
+                    V: G/A-F/G-Eb/F-C/D, C: Amaj7/B
+                </p>
+</div>
+<!-- Item 11 -->
+<div class="group flex flex-col px-4 py-3 hover:bg-primary/5 cursor-pointer transition-colors">
+<div class="flex items-baseline justify-between mb-1">
+<h2 class="text-white font-mono font-bold text-sm tracking-tight uppercase group-hover:text-primary">DIMINISHED_RUNS_01</h2>
+<span class="text-[10px] text-white/30 font-mono shrink-0 uppercase">1w_ago</span>
+</div>
+<p class="text-[#9ab8bc] text-xs font-display leading-none line-clamp-1 tracking-wide">
+                    V: Gdim7-Bbdim7-Dbdim7-Edim7
+                </p>
+</div>
+<!-- Footer / System Status -->
+<div class="px-4 py-10 flex flex-col items-center">
+<p class="text-[10px] font-mono text-white/20 uppercase tracking-[0.2em] mb-2">END_OF_LIBRARY</p>
+<div class="h-1 w-1 bg-primary animate-pulse"></div>
+</div>
+</div>
+</main>
+<!-- Floating System Feedback -->
+<div class="fixed bottom-6 right-6 pointer-events-none">
+<div class="bg-primary/10 border border-primary/20 backdrop-blur-md px-3 py-1.5 rounded-sm">
+<span class="text-[10px] font-mono text-primary uppercase tracking-tighter italic">SYS.MONITOR: STABLE</span>
+</div>
+</div>
+</body></html>

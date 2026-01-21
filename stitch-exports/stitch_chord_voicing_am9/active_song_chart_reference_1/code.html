@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Active Song Chart Reference</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#06d0f9",
+                        "background-light": "#f7f7f7",
+                        "background-dark": "#1a1a1a",
+                        "surface-dark": "#242424",
+                        "border-dark": "#333333"
+                    },
+                    fontFamily: {
+                        "display": ["Space Grotesk", "monospace"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+        .monospace-subset {
+            font-variant-numeric: tabular-nums;
+            letter-spacing: -0.02em;
+        }
+        .grid-guide {
+            background-image: linear-gradient(to right, #333333 1px, transparent 1px);
+            background-size: 25% 100%;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen">
+<!-- TopAppBar -->
+<header class="sticky top-0 z-50 bg-background-light dark:bg-background-dark border-b border-slate-200 dark:border-border-dark">
+<div class="flex items-center justify-between px-4 h-14">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-xl">music_note</span>
+<div class="flex flex-col">
+<h1 class="text-xs font-bold uppercase tracking-widest text-slate-500 dark:text-slate-400 leading-none">Reference</h1>
+<h2 class="text-sm font-bold leading-tight">Midnight City - M83</h2>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-1.5 bg-slate-200 dark:bg-surface-dark px-2 py-1 rounded">
+<span class="text-[10px] uppercase font-bold text-slate-500">Key</span>
+<span class="text-sm font-bold text-primary">Am</span>
+</div>
+<button class="flex items-center gap-1 text-primary text-xs font-bold uppercase tracking-tighter border border-primary/30 px-2 py-1 rounded hover:bg-primary/10 transition-colors">
+<span>Transpose</span>
+<span class="material-symbols-outlined text-sm">unfold_more</span>
+</button>
+</div>
+</div>
+</header>
+<main class="flex flex-col pb-20">
+<!-- VERSE SECTION -->
+<section class="mt-4">
+<!-- SectionHeader -->
+<div class="flex items-center px-4 py-2 bg-slate-100 dark:bg-surface-dark/50 border-y border-slate-200 dark:border-border-dark">
+<h4 class="text-slate-500 dark:text-slate-400 text-[10px] font-black tracking-[0.2em] uppercase">Verse (0:15)</h4>
+<div class="ml-auto flex gap-1">
+<div class="w-1 h-1 rounded-full bg-primary"></div>
+<div class="w-1 h-1 rounded-full bg-slate-700"></div>
+</div>
+</div>
+<!-- TextGrid (High Density) -->
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-px bg-slate-200 dark:bg-border-dark border-b border-slate-200 dark:border-border-dark">
+<!-- Chord Cell Active -->
+<div class="bg-white dark:bg-background-dark p-3 flex flex-col gap-1 relative overflow-hidden group">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-primary"></div>
+<span class="text-primary text-[10px] font-bold monospace-subset">i9</span>
+<h2 class="text-lg font-bold leading-none">Am9</h2>
+<p class="text-slate-400 text-[11px] font-medium tracking-wider uppercase">A C E G B</p>
+</div>
+<!-- Chord Cell -->
+<div class="bg-white dark:bg-background-dark p-3 flex flex-col gap-1">
+<span class="text-primary/60 text-[10px] font-bold monospace-subset">iv7</span>
+<h2 class="text-lg font-bold leading-none">Dm7</h2>
+<p class="text-slate-400 text-[11px] font-medium tracking-wider uppercase">D F A C</p>
+</div>
+<!-- Chord Cell -->
+<div class="bg-white dark:bg-background-dark p-3 flex flex-col gap-1">
+<span class="text-primary/60 text-[10px] font-bold monospace-subset">v7</span>
+<h2 class="text-lg font-bold leading-none">Em7</h2>
+<p class="text-slate-400 text-[11px] font-medium tracking-wider uppercase">E G B D</p>
+</div>
+<!-- Chord Cell -->
+<div class="bg-white dark:bg-background-dark p-3 flex flex-col gap-1">
+<span class="text-primary/60 text-[10px] font-bold monospace-subset">i9</span>
+<h2 class="text-lg font-bold leading-none">Am9</h2>
+<p class="text-slate-400 text-[11px] font-medium tracking-wider uppercase">A C E G B</p>
+</div>
+</div>
+</section>
+<!-- CHORUS SECTION -->
+<section class="mt-8">
+<!-- SectionHeader -->
+<div class="flex items-center px-4 py-2 bg-slate-100 dark:bg-surface-dark/50 border-y border-slate-200 dark:border-border-dark">
+<h4 class="text-slate-500 dark:text-slate-400 text-[10px] font-black tracking-[0.2em] uppercase">Chorus (0:45)</h4>
+</div>
+<!-- TextGrid -->
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-px bg-slate-200 dark:bg-border-dark border-b border-slate-200 dark:border-border-dark">
+<div class="bg-white dark:bg-background-dark p-3 flex flex-col gap-1">
+<span class="text-primary/60 text-[10px] font-bold monospace-subset">VI maj7</span>
+<h2 class="text-lg font-bold leading-none text-white">Fmaj7</h2>
+<p class="text-slate-400 text-[11px] font-medium tracking-wider uppercase">F A C E</p>
+</div>
+<div class="bg-white dark:bg-background-dark p-3 flex flex-col gap-1">
+<span class="text-primary/60 text-[10px] font-bold monospace-subset">VII 7</span>
+<h2 class="text-lg font-bold leading-none">G7</h2>
+<p class="text-slate-400 text-[11px] font-medium tracking-wider uppercase">G B D F</p>
+</div>
+<div class="bg-white dark:bg-background-dark p-3 flex flex-col gap-1">
+<span class="text-primary/60 text-[10px] font-bold monospace-subset">i9</span>
+<h2 class="text-lg font-bold leading-none">Am9</h2>
+<p class="text-slate-400 text-[11px] font-medium tracking-wider uppercase">A C E G B</p>
+</div>
+<div class="bg-white dark:bg-background-dark p-3 flex flex-col gap-1">
+<span class="text-primary/60 text-[10px] font-bold monospace-subset">i9</span>
+<h2 class="text-lg font-bold leading-none">Am9</h2>
+<p class="text-slate-400 text-[11px] font-medium tracking-wider uppercase">A C E G B</p>
+</div>
+</div>
+<!-- Repeating Chorus Row -->
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-px bg-slate-200 dark:bg-border-dark border-b border-slate-200 dark:border-border-dark">
+<div class="bg-white dark:bg-background-dark p-3 flex flex-col gap-1">
+<span class="text-primary/60 text-[10px] font-bold monospace-subset">VI maj7</span>
+<h2 class="text-lg font-bold leading-none">Fmaj7</h2>
+<p class="text-slate-400 text-[11px] font-medium tracking-wider uppercase">F A C E</p>
+</div>
+<div class="bg-white dark:bg-background-dark p-3 flex flex-col gap-1">
+<span class="text-primary/60 text-[10px] font-bold monospace-subset">VII 7</span>
+<h2 class="text-lg font-bold leading-none">G7</h2>
+<p class="text-slate-400 text-[11px] font-medium tracking-wider uppercase">G B D F</p>
+</div>
+<div class="bg-white dark:bg-background-dark p-3 flex flex-col gap-1">
+<span class="text-primary/60 text-[10px] font-bold monospace-subset">v7</span>
+<h2 class="text-lg font-bold leading-none">Em7</h2>
+<p class="text-slate-400 text-[11px] font-medium tracking-wider uppercase">E G B D</p>
+</div>
+<div class="bg-white dark:bg-background-dark p-3 flex flex-col gap-1">
+<span class="text-primary/60 text-[10px] font-bold monospace-subset">VI maj7</span>
+<h2 class="text-lg font-bold leading-none">Fmaj7</h2>
+<p class="text-slate-400 text-[11px] font-medium tracking-wider uppercase">F A C E</p>
+</div>
+</div>
+</section>
+<!-- BRIDGE SECTION -->
+<section class="mt-8">
+<!-- SectionHeader -->
+<div class="flex items-center px-4 py-2 bg-slate-100 dark:bg-surface-dark/50 border-y border-slate-200 dark:border-border-dark">
+<h4 class="text-slate-500 dark:text-slate-400 text-[10px] font-black tracking-[0.2em] uppercase">Bridge (1:45)</h4>
+</div>
+<div class="grid grid-cols-2 gap-px bg-slate-200 dark:bg-border-dark border-b border-slate-200 dark:border-border-dark">
+<div class="bg-white dark:bg-background-dark p-4 flex flex-col gap-1">
+<span class="text-primary/60 text-[10px] font-bold monospace-subset">ii°7</span>
+<h2 class="text-lg font-bold leading-none text-white">Bø7</h2>
+<p class="text-slate-400 text-[11px] font-medium tracking-wider uppercase">B D F A</p>
+</div>
+<div class="bg-white dark:bg-background-dark p-4 flex flex-col gap-1">
+<span class="text-primary/60 text-[10px] font-bold monospace-subset">V7(b9)</span>
+<h2 class="text-lg font-bold leading-none text-white">E7b9</h2>
+<p class="text-slate-400 text-[11px] font-medium tracking-wider uppercase">E G# B D F</p>
+</div>
+</div>
+</section>
+<!-- FOOTER UTILITY -->
+<footer class="mt-12 px-4 space-y-4">
+<div class="p-4 border border-dashed border-slate-300 dark:border-border-dark rounded-xl bg-slate-50 dark:bg-surface-dark/20">
+<h5 class="text-[10px] font-bold uppercase text-slate-400 mb-2">Performance Notes</h5>
+<p class="text-xs text-slate-500 leading-relaxed italic">
+                    Focus on the 9th extension in the verse. Keep the bass steady on the root notes during the chorus for maximum energy. Transpose down 2 semitones if vocalist needs G minor.
+                </p>
+</div>
+</footer>
+</main>
+<!-- Navigation / Playback Bar (Pseudo) -->
+<div class="fixed bottom-0 left-0 right-0 h-16 bg-white dark:bg-background-dark border-t border-slate-200 dark:border-border-dark px-4 flex items-center justify-between">
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined text-3xl hover:text-primary transition-colors">skip_previous</button>
+<button class="material-symbols-outlined text-4xl text-primary">play_circle</button>
+<button class="material-symbols-outlined text-3xl hover:text-primary transition-colors">skip_next</button>
+</div>
+<div class="flex flex-col items-end">
+<span class="text-[10px] font-bold text-slate-500 uppercase tracking-tighter">Tempo</span>
+<span class="text-lg font-bold leading-none monospace-subset text-primary">120 BPM</span>
+</div>
+</div>
+</body></html>

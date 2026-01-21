@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#2eeaff",
+                        "background-light": "#ffffff",
+                        "background-dark": "#17191c",
+                        "surface-dark": "#1b1e22",
+                        "border-dark": "#32383e",
+                    },
+                    fontFamily: {
+                        "display": ["Space Grotesk", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+        .mono-ui {
+            font-variant-numeric: tabular-nums;
+            letter-spacing: -0.01em;
+        }
+        .scanline {
+            background: linear-gradient(to bottom, transparent 50%, rgba(46, 234, 255, 0.02) 50%);
+            background-size: 100% 4px;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-white min-h-screen flex items-center justify-center p-4">
+<!-- Backdrop Simulation -->
+<div class="fixed inset-0 bg-black/60 backdrop-blur-sm z-0"></div>
+<!-- Dialog Container -->
+<div class="relative z-10 w-full max-w-[380px] bg-background-light dark:bg-surface-dark border border-slate-200 dark:border-border-dark rounded-xl shadow-2xl overflow-hidden flex flex-col">
+<!-- BottomSheetHandle (Used as top accent/indicator) -->
+<div class="flex flex-col items-stretch bg-transparent pt-2">
+<div class="flex h-3 w-full items-center justify-center">
+<div class="h-1 w-10 rounded-full bg-slate-300 dark:bg-border-dark"></div>
+</div>
+</div>
+<!-- HeadlineText -->
+<div class="px-6 pt-6 pb-2">
+<h3 class="text-slate-900 dark:text-white tracking-widest text-lg font-bold leading-tight text-center uppercase border-b border-slate-100 dark:border-border-dark pb-4">
+                SAVE CURRENT STRUCTURE
+            </h3>
+</div>
+<!-- TextField -->
+<div class="px-6 py-4">
+<div class="flex flex-col w-full gap-2">
+<p class="text-slate-500 dark:text-primary/70 text-[10px] font-bold tracking-[0.2em] uppercase">Song Name</p>
+<input autofocus="" class="form-input flex w-full rounded-lg text-slate-900 dark:text-white focus:outline-0 focus:ring-1 focus:ring-primary border border-slate-200 dark:border-border-dark bg-slate-50 dark:bg-[#121417] h-12 placeholder:text-slate-400 dark:placeholder:text-slate-600 px-4 text-base font-medium transition-all" placeholder="E.G. MIDNIGHT JAZZ JAM" type="text" value=""/>
+</div>
+</div>
+<!-- SectionHeader -->
+<div class="px-6 pt-2">
+<h3 class="text-slate-400 dark:text-slate-500 text-[10px] font-bold leading-tight tracking-[0.2em] uppercase">
+                STRUCTURE SUMMARY
+            </h3>
+</div>
+<!-- DescriptionList (High Density Structure Info) -->
+<div class="px-6 pb-6">
+<div class="mt-3 bg-slate-50 dark:bg-[#121417] rounded-lg border border-slate-100 dark:border-border-dark p-4 space-y-3 mono-ui">
+<div class="flex justify-between items-center">
+<div class="flex items-center gap-2">
+<span class="w-1.5 h-1.5 rounded-full bg-primary shadow-[0_0_8px_rgba(46,234,255,0.6)]"></span>
+<p class="text-slate-600 dark:text-slate-400 text-xs font-medium uppercase">Verse</p>
+</div>
+<p class="text-slate-900 dark:text-white text-xs font-bold">16 BARS</p>
+</div>
+<div class="flex justify-between items-center">
+<div class="flex items-center gap-2">
+<span class="w-1.5 h-1.5 rounded-full bg-primary/40"></span>
+<p class="text-slate-600 dark:text-slate-400 text-xs font-medium uppercase">Chorus</p>
+</div>
+<p class="text-slate-900 dark:text-white text-xs font-bold">08 BARS</p>
+</div>
+<div class="flex justify-between items-center">
+<div class="flex items-center gap-2">
+<span class="w-1.5 h-1.5 rounded-full bg-primary/40"></span>
+<p class="text-slate-600 dark:text-slate-400 text-xs font-medium uppercase">Bridge</p>
+</div>
+<p class="text-slate-900 dark:text-white text-xs font-bold">04 BARS</p>
+</div>
+</div>
+</div>
+<!-- Action Links (Minimalist Text Buttons) -->
+<div class="flex border-t border-slate-100 dark:border-border-dark">
+<button class="flex-1 py-5 text-slate-400 dark:text-slate-500 text-xs font-bold tracking-widest hover:text-slate-600 dark:hover:text-slate-300 transition-colors">
+                [ CANCEL ]
+            </button>
+<div class="w-px bg-slate-100 dark:bg-border-dark"></div>
+<button class="flex-1 py-5 text-primary text-xs font-bold tracking-widest hover:bg-primary/5 transition-all">
+                [ CONFIRM ]
+            </button>
+</div>
+</div>
+<!-- UI Background Decoration (Non-interactive) -->
+<div class="fixed top-10 left-10 opacity-10 pointer-events-none select-none">
+<p class="text-primary text-[10px] font-mono leading-relaxed">
+            SYSTEM.CHORD_REF.v2.4.0<br/>
+            BUFFER_INIT... OK<br/>
+            ASSET_LOAD... OK<br/>
+            STRUCT_SYNC... ACTIVE
+        </p>
+</div>
+</body></html>

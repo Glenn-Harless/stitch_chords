@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Progressions &amp; Voicing Options</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#2eeaff",
+                        "background-light": "#f2f2f3",
+                        "background-dark": "#121416",
+                    },
+                    fontFamily: {
+                        "display": ["Space Grotesk", "sans-serif"],
+                        "mono": ["JetBrains Mono", "monospace"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style type="text/tailwindcss">
+        @layer utilities {
+            .no-scrollbar::-webkit-scrollbar { display: none; }
+            .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+            .border-utility { border-color: rgba(46, 234, 255, 0.1); }
+            .text-muted { color: #77818e; }
+            .bg-surface { background-color: #1a1d21; }
+        }
+        details > summary { list-style: none; }
+        details > summary::-webkit-details-marker { display: none; }
+        body {
+            min-height: max(884px, 100dvh);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-dark font-mono text-white selection:bg-primary/30">
+<div class="sticky top-0 z-50 bg-background-dark/95 backdrop-blur-md border-b border-primary/10">
+<div class="flex items-center justify-between px-4 h-16">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary cursor-pointer hover:bg-primary/10 p-2 rounded-full transition-colors">arrow_back_ios_new</span>
+<div class="flex flex-col">
+<h1 class="text-[10px] uppercase tracking-[0.2em] text-muted font-bold">Artist Library</h1>
+<h2 class="text-lg font-bold leading-none tracking-tight text-white uppercase italic font-display">Apparat</h2>
+</div>
+</div>
+<div class="flex items-center gap-1">
+<button class="p-2 text-primary hover:bg-primary/10 rounded-lg transition-colors">
+<span class="material-symbols-outlined">filter_list</span>
+</button>
+<button class="p-2 text-primary hover:bg-primary/10 rounded-lg transition-colors">
+<span class="material-symbols-outlined">search</span>
+</button>
+</div>
+</div>
+</div>
+<main class="flex flex-col w-full pb-32">
+<div class="flex items-center justify-between px-4 py-3 bg-primary/5 border-b border-primary/10">
+<span class="text-[9px] uppercase tracking-widest text-primary/70 font-bold">14 Progressions Found</span>
+<span class="text-[9px] uppercase tracking-widest text-primary/70 font-bold">Key: Amin / 112 BPM</span>
+</div>
+<div class="group border-b border-white/5 bg-background-dark">
+<div class="flex items-start justify-between px-4 pt-5 pb-3">
+<div class="flex flex-col gap-2 flex-1 min-w-0 pr-2">
+<p class="text-primary text-base font-bold tracking-wider uppercase leading-none">i - VI - III - VII</p>
+<div class="flex flex-wrap gap-x-4 gap-y-2">
+<div class="flex flex-col">
+<span class="text-white text-[11px] leading-tight font-medium">Am9</span>
+<span class="text-muted/60 text-[10px] uppercase">(A C E G B)</span>
+</div>
+<div class="flex flex-col">
+<span class="text-white text-[11px] leading-tight font-medium">Fmaj7</span>
+<span class="text-muted/60 text-[10px] uppercase">(F A C E)</span>
+</div>
+<div class="flex flex-col">
+<span class="text-white text-[11px] leading-tight font-medium">Cmaj7</span>
+<span class="text-muted/60 text-[10px] uppercase">(C E G B)</span>
+</div>
+<div class="flex flex-col">
+<span class="text-white text-[11px] leading-tight font-medium">Gsus4</span>
+<span class="text-muted/60 text-[10px] uppercase">(G C D)</span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-1 shrink-0">
+<button class="flex flex-col items-center justify-center w-8 h-10 border border-primary/20 rounded hover:bg-primary hover:text-black transition-all">
+<span class="text-[9px] font-bold">V</span>
+<span class="material-symbols-outlined text-xs mt-[-2px]">add</span>
+</button>
+<button class="flex flex-col items-center justify-center w-8 h-10 border border-primary/20 rounded hover:bg-primary hover:text-black transition-all">
+<span class="text-[9px] font-bold">B</span>
+<span class="material-symbols-outlined text-xs mt-[-2px]">add</span>
+</button>
+<button class="flex flex-col items-center justify-center w-8 h-10 border border-primary/20 rounded hover:bg-primary hover:text-black transition-all">
+<span class="text-[9px] font-bold">C</span>
+<span class="material-symbols-outlined text-xs mt-[-2px]">add</span>
+</button>
+</div>
+</div>
+<details class="px-4 pb-4">
+<summary class="inline-flex items-center gap-1 text-[10px] text-primary/60 font-bold uppercase tracking-widest cursor-pointer hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-sm">unfold_more</span> Voicings
+            </summary>
+<div class="mt-2 grid grid-cols-2 gap-x-4 gap-y-2 py-2 border-t border-white/5">
+<p class="text-[10px] text-muted leading-tight">Am <span class="opacity-50">(A C E)</span></p>
+<p class="text-[10px] text-muted leading-tight">Am7 <span class="opacity-50">(A C E G)</span></p>
+<p class="text-[10px] text-muted leading-tight">Amadd9 <span class="opacity-50">(A C E B)</span></p>
+<p class="text-[10px] text-muted leading-tight">Fmaj9 <span class="opacity-50">(F A C E G)</span></p>
+</div>
+</details>
+</div>
+<div class="group border-b border-white/5 bg-background-dark">
+<div class="flex items-start justify-between px-4 pt-5 pb-3">
+<div class="flex flex-col gap-2 flex-1 min-w-0 pr-2">
+<p class="text-primary text-base font-bold tracking-wider uppercase leading-none">iv - i - V - i</p>
+<div class="flex flex-wrap gap-x-4 gap-y-2">
+<div class="flex flex-col">
+<span class="text-white text-[11px] leading-tight font-medium">Dm7</span>
+<span class="text-muted/60 text-[10px] uppercase">(D F A C)</span>
+</div>
+<div class="flex flex-col">
+<span class="text-white text-[11px] leading-tight font-medium">Am9</span>
+<span class="text-muted/60 text-[10px] uppercase">(A C E G B)</span>
+</div>
+<div class="flex flex-col">
+<span class="text-white text-[11px] leading-tight font-medium">E7alt</span>
+<span class="text-muted/60 text-[10px] uppercase">(E G# C D)</span>
+</div>
+<div class="flex flex-col">
+<span class="text-white text-[11px] leading-tight font-medium">Am</span>
+<span class="text-muted/60 text-[10px] uppercase">(A C E)</span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-1 shrink-0">
+<button class="flex flex-col items-center justify-center w-8 h-10 border border-primary/20 rounded hover:bg-primary hover:text-black transition-all">
+<span class="text-[9px] font-bold">V</span>
+<span class="material-symbols-outlined text-xs mt-[-2px]">add</span>
+</button>
+<button class="flex flex-col items-center justify-center w-8 h-10 border border-primary/20 rounded bg-primary/20 border-primary text-primary transition-all">
+<span class="text-[9px] font-bold">B</span>
+<span class="material-symbols-outlined text-xs mt-[-2px]">check</span>
+</button>
+<button class="flex flex-col items-center justify-center w-8 h-10 border border-primary/20 rounded hover:bg-primary hover:text-black transition-all">
+<span class="text-[9px] font-bold">C</span>
+<span class="material-symbols-outlined text-xs mt-[-2px]">add</span>
+</button>
+</div>
+</div>
+<details class="px-4 pb-4">
+<summary class="inline-flex items-center gap-1 text-[10px] text-primary/60 font-bold uppercase tracking-widest cursor-pointer hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-sm">unfold_more</span> Voicings
+            </summary>
+<div class="mt-2 grid grid-cols-2 gap-x-4 gap-y-2 py-2 border-t border-white/5">
+<p class="text-[10px] text-muted leading-tight">Dm9 <span class="opacity-50">(D F A C E)</span></p>
+<p class="text-[10px] text-muted leading-tight">Am11 <span class="opacity-50">(A C E G B D)</span></p>
+<p class="text-[10px] text-muted leading-tight">E7#9 <span class="opacity-50">(E G# D G)</span></p>
+<p class="text-[10px] text-muted leading-tight">Am(add2) <span class="opacity-50">(A B C E)</span></p>
+</div>
+</details>
+</div>
+<div class="group border-b border-white/5 bg-background-dark">
+<div class="flex items-start justify-between px-4 pt-5 pb-3">
+<div class="flex flex-col gap-2 flex-1 min-w-0 pr-2">
+<p class="text-primary text-base font-bold tracking-wider uppercase leading-none">VI - VII - i - v</p>
+<div class="flex flex-wrap gap-x-4 gap-y-2">
+<div class="flex flex-col">
+<span class="text-white text-[11px] leading-tight font-medium">Fmaj13</span>
+<span class="text-muted/60 text-[10px] uppercase">(F A C E G D)</span>
+</div>
+<div class="flex flex-col">
+<span class="text-white text-[11px] leading-tight font-medium">G11</span>
+<span class="text-muted/60 text-[10px] uppercase">(G B D F A C)</span>
+</div>
+<div class="flex flex-col">
+<span class="text-white text-[11px] leading-tight font-medium">Am7</span>
+<span class="text-muted/60 text-[10px] uppercase">(A C E G)</span>
+</div>
+<div class="flex flex-col">
+<span class="text-white text-[11px] leading-tight font-medium">Em9</span>
+<span class="text-muted/60 text-[10px] uppercase">(E G B D F#)</span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-1 shrink-0">
+<button class="flex flex-col items-center justify-center w-8 h-10 border border-primary/20 rounded hover:bg-primary hover:text-black transition-all">
+<span class="text-[9px] font-bold">V</span>
+<span class="material-symbols-outlined text-xs mt-[-2px]">add</span>
+</button>
+<button class="flex flex-col items-center justify-center w-8 h-10 border border-primary/20 rounded hover:bg-primary hover:text-black transition-all">
+<span class="text-[9px] font-bold">B</span>
+<span class="material-symbols-outlined text-xs mt-[-2px]">add</span>
+</button>
+<button class="flex flex-col items-center justify-center w-8 h-10 border border-primary/20 rounded hover:bg-primary hover:text-black transition-all">
+<span class="text-[9px] font-bold">C</span>
+<span class="material-symbols-outlined text-xs mt-[-2px]">add</span>
+</button>
+</div>
+</div>
+<details class="px-4 pb-4">
+<summary class="inline-flex items-center gap-1 text-[10px] text-primary/60 font-bold uppercase tracking-widest cursor-pointer hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-sm">unfold_more</span> Voicings
+            </summary>
+<div class="mt-2 grid grid-cols-2 gap-x-4 gap-y-2 py-2 border-t border-white/5">
+<p class="text-[10px] text-muted leading-tight">Fmaj7 <span class="opacity-50">(F A C E)</span></p>
+<p class="text-[10px] text-muted leading-tight">G7 <span class="opacity-50">(G B D F)</span></p>
+<p class="text-[10px] text-muted leading-tight">Am9 <span class="opacity-50">(A C E G B)</span></p>
+<p class="text-[10px] text-muted leading-tight">Em7 <span class="opacity-50">(E G B D)</span></p>
+</div>
+</details>
+</div>
+<div class="group border-b border-white/5 bg-background-dark">
+<div class="flex items-start justify-between px-4 pt-5 pb-3">
+<div class="flex flex-col gap-2 flex-1 min-w-0 pr-2">
+<p class="text-primary text-base font-bold tracking-wider uppercase leading-none">i - iv - VII - III</p>
+<div class="flex flex-wrap gap-x-4 gap-y-2">
+<div class="flex flex-col">
+<span class="text-white text-[11px] leading-tight font-medium">Amadd9</span>
+<span class="text-muted/60 text-[10px] uppercase">(A C E B)</span>
+</div>
+<div class="flex flex-col">
+<span class="text-white text-[11px] leading-tight font-medium">Dm9</span>
+<span class="text-muted/60 text-[10px] uppercase">(D F A C E)</span>
+</div>
+<div class="flex flex-col">
+<span class="text-white text-[11px] leading-tight font-medium">G7</span>
+<span class="text-muted/60 text-[10px] uppercase">(G B D F)</span>
+</div>
+<div class="flex flex-col">
+<span class="text-white text-[11px] leading-tight font-medium">Cmaj9</span>
+<span class="text-muted/60 text-[10px] uppercase">(C E G B D)</span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-1 shrink-0">
+<button class="flex flex-col items-center justify-center w-8 h-10 border border-primary/20 rounded hover:bg-primary hover:text-black transition-all">
+<span class="text-[9px] font-bold">V</span>
+<span class="material-symbols-outlined text-xs mt-[-2px]">add</span>
+</button>
+<button class="flex flex-col items-center justify-center w-8 h-10 border border-primary/20 rounded hover:bg-primary hover:text-black transition-all">
+<span class="text-[9px] font-bold">B</span>
+<span class="material-symbols-outlined text-xs mt-[-2px]">add</span>
+</button>
+<button class="flex flex-col items-center justify-center w-8 h-10 border border-primary/20 rounded hover:bg-primary hover:text-black transition-all">
+<span class="text-[9px] font-bold">C</span>
+<span class="material-symbols-outlined text-xs mt-[-2px]">add</span>
+</button>
+</div>
+</div>
+<details class="px-4 pb-4">
+<summary class="inline-flex items-center gap-1 text-[10px] text-primary/60 font-bold uppercase tracking-widest cursor-pointer hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-sm">unfold_more</span> Voicings
+            </summary>
+<div class="mt-2 grid grid-cols-2 gap-x-4 gap-y-2 py-2 border-t border-white/5">
+<p class="text-[10px] text-muted leading-tight">Am <span class="opacity-50">(A C E)</span></p>
+<p class="text-[10px] text-muted leading-tight">Dm7 <span class="opacity-50">(D F A C)</span></p>
+<p class="text-[10px] text-muted leading-tight">G13 <span class="opacity-50">(G B D F A E)</span></p>
+<p class="text-[10px] text-muted leading-tight">Cmaj7 <span class="opacity-50">(C E G B)</span></p>
+</div>
+</details>
+</div>
+</main>
+<nav class="fixed bottom-0 left-0 right-0 bg-background-dark/95 backdrop-blur-md border-t border-primary/10 px-6 pb-6 pt-3 z-50">
+<div class="flex items-center justify-between max-w-md mx-auto">
+<button class="flex flex-col items-center gap-1 text-primary">
+<span class="material-symbols-outlined">library_music</span>
+<span class="text-[9px] font-bold uppercase tracking-tighter">Artists</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-muted hover:text-white transition-colors">
+<span class="material-symbols-outlined">favorite</span>
+<span class="text-[9px] font-bold uppercase tracking-tighter">Favorites</span>
+</button>
+<div class="relative -top-6">
+<button class="flex items-center justify-center w-14 h-14 bg-primary text-black rounded-full shadow-[0_0_20px_rgba(46,234,255,0.4)]">
+<span class="material-symbols-outlined text-3xl font-bold">add</span>
+</button>
+</div>
+<button class="flex flex-col items-center gap-1 text-muted hover:text-white transition-colors">
+<span class="material-symbols-outlined">queue_music</span>
+<span class="text-[9px] font-bold uppercase tracking-tighter">Builder</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-muted hover:text-white transition-colors">
+<span class="material-symbols-outlined">settings_input_component</span>
+<span class="text-[9px] font-bold uppercase tracking-tighter">Settings</span>
+</button>
+</div>
+</nav>
+
+</body></html>

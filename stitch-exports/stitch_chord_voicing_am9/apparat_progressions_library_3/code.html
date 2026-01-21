@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Expanded Chord Voicings List</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#2eeaff",
+                        "background-light": "#f2f2f3",
+                        "background-dark": "#0a0b0c",
+                        "surface": "#121416",
+                    },
+                    fontFamily: {
+                        "mono": ["JetBrains Mono", "monospace"]
+                    },
+                },
+            },
+        }
+    </script>
+<style type="text/tailwindcss">
+        @layer utilities {
+            .no-scrollbar::-webkit-scrollbar { display: none; }
+            .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+            .text-muted { color: #6b7280; }
+            .border-utility { border-color: rgba(46, 234, 255, 0.1); }
+        }
+        details > summary { list-style: none; }
+        details > summary::-webkit-details-marker { display: none; }
+        body {
+            min-height: 100dvh;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-dark font-mono text-white selection:bg-primary/30">
+<div class="sticky top-0 z-50 bg-background-dark/95 backdrop-blur-md border-b border-primary/10">
+<div class="flex items-center justify-between px-4 h-14">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary text-sm cursor-pointer">arrow_back_ios</span>
+<div class="flex flex-col">
+<h1 class="text-[10px] uppercase tracking-widest text-muted">Library</h1>
+<h2 class="text-xs font-bold tracking-tight text-white uppercase">Progressions &amp; Voicing Options</h2>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-primary text-sm">search</span>
+<span class="material-symbols-outlined text-primary text-sm">more_vert</span>
+</div>
+</div>
+</div>
+<main class="flex flex-col w-full pb-20">
+<div class="flex items-center justify-between px-4 py-2 bg-primary/5 border-b border-primary/10">
+<span class="text-[9px] uppercase tracking-widest text-primary/70">A Minor / 112 BPM</span>
+<span class="text-[9px] uppercase tracking-widest text-primary/70">Grid: 1/16</span>
+</div>
+<div class="group border-b border-white/10 bg-surface">
+<div class="flex items-start justify-between px-4 py-4">
+<div class="flex flex-col gap-1 flex-1">
+<p class="text-primary text-sm font-bold tracking-wider uppercase">i - VI - III - VII</p>
+<div class="flex flex-wrap gap-x-3 gap-y-1">
+<span class="text-white text-[10px]">Am9 <span class="text-muted">(A C E G B)</span></span>
+<span class="text-white text-[10px]">Fmaj7 <span class="text-muted">(F A C E)</span></span>
+<span class="text-white text-[10px]">Cmaj7 <span class="text-muted">(C E G B)</span></span>
+<span class="text-white text-[10px]">G7 <span class="text-muted">(G B D F)</span></span>
+</div>
+</div>
+</div>
+<div class="px-4 pb-4 space-y-4">
+<div class="inline-flex items-center gap-1 text-[9px] text-primary font-bold uppercase tracking-widest border-b border-primary/20 pb-1 w-full">
+<span class="material-symbols-outlined text-xs">unfold_less</span> Variations
+            </div>
+<div class="grid grid-cols-1 gap-4 pt-1">
+<div class="space-y-1">
+<p class="text-[10px] font-bold text-white/50 uppercase tracking-tighter">Am Variations</p>
+<div class="flex flex-col gap-1 pl-2 border-l border-primary/20">
+<p class="text-[10px] text-muted">Am <span class="text-muted/40">(A C E)</span></p>
+<p class="text-[10px] text-primary">Am7 <span class="text-primary/40">(A C E G)</span> <span class="text-[8px] bg-primary/10 px-1 ml-1">ACTIVE</span></p>
+<p class="text-[10px] text-muted">Am9 <span class="text-muted/40">(A C E G B)</span></p>
+<p class="text-[10px] text-muted">Am11 <span class="text-muted/40">(A C E G B D)</span></p>
+</div>
+</div>
+<div class="space-y-1">
+<p class="text-[10px] font-bold text-white/50 uppercase tracking-tighter">Fmaj Variations</p>
+<div class="flex flex-col gap-1 pl-2 border-l border-white/5">
+<p class="text-[10px] text-muted">F <span class="text-muted/40">(F A C)</span></p>
+<p class="text-[10px] text-muted">Fmaj7 <span class="text-muted/40">(F A C E)</span></p>
+<p class="text-[10px] text-muted">Fmaj9 <span class="text-muted/40">(F A C E G)</span></p>
+<p class="text-[10px] text-muted">F6 <span class="text-muted/40">(F A C D)</span></p>
+</div>
+</div>
+<div class="space-y-1">
+<p class="text-[10px] font-bold text-white/50 uppercase tracking-tighter">Cmaj Variations</p>
+<div class="flex flex-col gap-1 pl-2 border-l border-white/5">
+<p class="text-[10px] text-muted">C <span class="text-muted/40">(C E G)</span></p>
+<p class="text-[10px] text-muted">Cmaj7 <span class="text-muted/40">(C E G B)</span></p>
+<p class="text-[10px] text-muted">Cadd9 <span class="text-muted/40">(C E G D)</span></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="group border-b border-white/5 bg-background-dark">
+<div class="flex items-start justify-between px-4 py-4">
+<div class="flex flex-col gap-1 flex-1">
+<p class="text-white/60 text-sm font-bold tracking-wider uppercase">iv - i - V - i</p>
+<div class="flex flex-wrap gap-x-3 gap-y-1">
+<span class="text-muted text-[10px]">Dm7 <span class="opacity-40">(D F A C)</span></span>
+<span class="text-muted text-[10px]">Am9 <span class="opacity-40">(A C E G B)</span></span>
+<span class="text-muted text-[10px]">E7alt <span class="opacity-40">(E G# C D)</span></span>
+<span class="text-muted text-[10px]">Am <span class="opacity-40">(A C E)</span></span>
+</div>
+</div>
+</div>
+<div class="px-4 pb-4">
+<button class="flex items-center gap-1 text-[9px] text-muted font-bold uppercase tracking-widest hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-xs">unfold_more</span> View Voicings
+            </button>
+</div>
+</div>
+<div class="group border-b border-white/5 bg-background-dark">
+<div class="flex items-start justify-between px-4 py-4">
+<div class="flex flex-col gap-1 flex-1">
+<p class="text-white/60 text-sm font-bold tracking-wider uppercase">VI - VII - i - v</p>
+<div class="flex flex-wrap gap-x-3 gap-y-1">
+<span class="text-muted text-[10px]">Fmaj13 <span class="opacity-40">(F A C E G D)</span></span>
+<span class="text-muted text-[10px]">G11 <span class="opacity-40">(G B D F A C)</span></span>
+<span class="text-muted text-[10px]">Am7 <span class="opacity-40">(A C E G)</span></span>
+</div>
+</div>
+</div>
+<div class="px-4 pb-4">
+<button class="flex items-center gap-1 text-[9px] text-muted font-bold uppercase tracking-widest hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-xs">unfold_more</span> View Voicings
+            </button>
+</div>
+</div>
+</main>
+<nav class="fixed bottom-0 left-0 right-0 bg-background-dark border-t border-white/10 px-6 py-4 z-50">
+<div class="flex items-center justify-between max-w-md mx-auto">
+<button class="text-[10px] font-bold uppercase tracking-widest text-muted hover:text-primary transition-colors">
+            Artists
+        </button>
+<button class="text-[10px] font-bold uppercase tracking-widest text-primary">
+            Active Song
+        </button>
+<button class="text-[10px] font-bold uppercase tracking-widest text-muted hover:text-primary transition-colors">
+            Library
+        </button>
+</div>
+</nav>
+
+</body></html>

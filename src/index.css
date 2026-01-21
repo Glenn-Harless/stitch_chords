@@ -1,0 +1,96 @@
+@import "tailwindcss";
+
+@theme {
+  --color-chord-cyan: #00d4ff;
+  --color-chord-dark: #081020;
+  --color-chord-card: #121b2e;
+  --color-chord-light: #ffffff;
+
+  --font-display: "Space Grotesk", "sans-serif";
+  --font-mono: "JetBrains Mono", "monospace";
+
+  --radius-lg: 0.25rem;
+  --radius-xl: 0.5rem;
+
+  /* Aliases */
+  --color-primary: var(--color-chord-cyan);
+  --color-background-dark: var(--color-chord-dark);
+  --color-card-dark: var(--color-chord-card);
+}
+
+@layer base {
+  body {
+    background-color: var(--color-chord-dark);
+    color: white;
+    font-family: var(--font-display);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    min-height: 100dvh;
+    margin: 0;
+  }
+}
+
+@layer components {
+  .terminal-border {
+    border: 1px solid color-mix(in srgb, var(--color-chord-cyan) 30%, transparent);
+  }
+
+  .terminal-border-active {
+    border: 1px solid var(--color-chord-cyan);
+  }
+
+  .scanline {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: color-mix(in srgb, var(--color-chord-cyan) 5%, transparent);
+    pointer-events: none;
+    z-index: 50;
+    animation: scanline 8s linear infinite;
+  }
+}
+
+@keyframes scanline {
+  0% {
+    transform: translateY(0);
+  }
+
+  100% {
+    transform: translateY(100vh);
+  }
+}
+
+/* Material Symbols Integration */
+.material-symbols-outlined {
+  font-family: 'Material Symbols Outlined';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-chord-dark);
+}
+
+::-webkit-scrollbar-thumb {
+  background: color-mix(in srgb, var(--color-chord-cyan) 20%, transparent);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: color-mix(in srgb, var(--color-chord-cyan) 40%, transparent);
+}

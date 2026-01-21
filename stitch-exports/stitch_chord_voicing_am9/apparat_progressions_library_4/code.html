@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Apparat Progressions Library</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#2eeaff",
+                        "background-light": "#f2f2f3",
+                        "background-dark": "#121416",
+                    },
+                    fontFamily: {
+                        "display": ["Space Grotesk", "monospace"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        .border-utility { border-color: rgba(46, 234, 255, 0.1); }
+        .text-muted { color: #77818e; }
+        .bg-surface { background-color: #1a1d21; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display text-white selection:bg-primary/30">
+<!-- Top Navigation Bar -->
+<div class="sticky top-0 z-50 bg-background-light dark:bg-background-dark border-b border-primary/10">
+<div class="flex items-center justify-between px-4 h-16">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary cursor-pointer hover:bg-primary/10 p-2 rounded-full transition-colors">arrow_back_ios_new</span>
+<div class="flex flex-col">
+<h1 class="text-xs uppercase tracking-[0.2em] text-muted font-bold">Artist Library</h1>
+<h2 class="text-xl font-bold leading-none tracking-tight text-white uppercase italic">Apparat</h2>
+</div>
+</div>
+<div class="flex items-center gap-1">
+<button class="p-2 text-primary hover:bg-primary/10 rounded-lg transition-colors">
+<span class="material-symbols-outlined">filter_list</span>
+</button>
+<button class="p-2 text-primary hover:bg-primary/10 rounded-lg transition-colors">
+<span class="material-symbols-outlined">search</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Main Scrollable Area -->
+<main class="flex flex-col w-full pb-24">
+<!-- Utility Stats Row -->
+<div class="flex items-center justify-between px-4 py-3 bg-primary/5 border-b border-primary/10">
+<span class="text-[10px] uppercase tracking-widest text-primary/70 font-bold">14 Progressions Found</span>
+<span class="text-[10px] uppercase tracking-widest text-primary/70 font-bold">Key: Amin / 112 BPM</span>
+</div>
+<!-- Progression Item -->
+<div class="group flex items-center justify-between px-4 py-5 border-b border-white/5 hover:bg-primary/[0.02] transition-colors">
+<div class="flex flex-col gap-1 overflow-hidden">
+<p class="text-primary text-lg font-bold tracking-wider uppercase leading-none">i - VI - III - VII</p>
+<p class="text-muted text-sm font-medium tracking-tight truncate opacity-80">Am9 - Fmaj7 - Cmaj7 - Gsus4</p>
+</div>
+<div class="flex items-center gap-1 shrink-0 ml-4">
+<button class="flex flex-col items-center justify-center w-10 h-10 border border-primary/20 rounded hover:bg-primary hover:text-black transition-all group/btn">
+<span class="text-[10px] font-bold">V</span>
+<span class="material-symbols-outlined text-sm leading-none mt-[-2px]">add</span>
+</button>
+<button class="flex flex-col items-center justify-center w-10 h-10 border border-primary/20 rounded hover:bg-primary hover:text-black transition-all group/btn">
+<span class="text-[10px] font-bold">B</span>
+<span class="material-symbols-outlined text-sm leading-none mt-[-2px]">add</span>
+</button>
+<button class="flex flex-col items-center justify-center w-10 h-10 border border-primary/20 rounded hover:bg-primary hover:text-black transition-all group/btn">
+<span class="text-[10px] font-bold">C</span>
+<span class="material-symbols-outlined text-sm leading-none mt-[-2px]">add</span>
+</button>
+</div>
+</div>
+<!-- Progression Item -->
+<div class="group flex items-center justify-between px-4 py-5 border-b border-white/5 hover:bg-primary/[0.02] transition-colors">
+<div class="flex flex-col gap-1 overflow-hidden">
+<p class="text-primary text-lg font-bold tracking-wider uppercase leading-none">iv - i - V - i</p>
+<p class="text-muted text-sm font-medium tracking-tight truncate opacity-80">Dm7 - Am9 - E7alt - Am</p>
+</div>
+<div class="flex items-center gap-1 shrink-0 ml-4">
+<button class="flex flex-col items-center justify-center w-10 h-10 border border-primary/20 rounded hover:bg-primary hover:text-black transition-all">
+<span class="text-[10px] font-bold">V</span>
+<span class="material-symbols-outlined text-sm leading-none mt-[-2px]">add</span>
+</button>
+<button class="flex flex-col items-center justify-center w-10 h-10 border border-primary/20 rounded bg-primary/20 border-primary text-primary transition-all">
+<span class="text-[10px] font-bold">B</span>
+<span class="material-symbols-outlined text-sm leading-none mt-[-2px]">check</span>
+</button>
+<button class="flex flex-col items-center justify-center w-10 h-10 border border-primary/20 rounded hover:bg-primary hover:text-black transition-all">
+<span class="text-[10px] font-bold">C</span>
+<span class="material-symbols-outlined text-sm leading-none mt-[-2px]">add</span>
+</button>
+</div>
+</div>
+<!-- Progression Item -->
+<div class="group flex items-center justify-between px-4 py-5 border-b border-white/5 hover:bg-primary/[0.02] transition-colors">
+<div class="flex flex-col gap-1 overflow-hidden">
+<p class="text-primary text-lg font-bold tracking-wider uppercase leading-none">VI - VII - i - v</p>
+<p class="text-muted text-sm font-medium tracking-tight truncate opacity-80">Fmaj13 - G11 - Am7 - Em9</p>
+</div>
+<div class="flex items-center gap-1 shrink-0 ml-4">
+<button class="flex flex-col items-center justify-center w-10 h-10 border border-primary/20 rounded hover:bg-primary hover:text-black transition-all">
+<span class="text-[10px] font-bold">V</span>
+<span class="material-symbols-outlined text-sm leading-none mt-[-2px]">add</span>
+</button>
+<button class="flex flex-col items-center justify-center w-10 h-10 border border-primary/20 rounded hover:bg-primary hover:text-black transition-all">
+<span class="text-[10px] font-bold">B</span>
+<span class="material-symbols-outlined text-sm leading-none mt-[-2px]">add</span>
+</button>
+<button class="flex flex-col items-center justify-center w-10 h-10 border border-primary/20 rounded hover:bg-primary hover:text-black transition-all">
+<span class="text-[10px] font-bold">C</span>
+<span class="material-symbols-outlined text-sm leading-none mt-[-2px]">add</span>
+</button>
+</div>
+</div>
+<!-- Progression Item -->
+<div class="group flex items-center justify-between px-4 py-5 border-b border-white/5 hover:bg-primary/[0.02] transition-colors">
+<div class="flex flex-col gap-1 overflow-hidden">
+<p class="text-primary text-lg font-bold tracking-wider uppercase leading-none">i - iv - VII - III</p>
+<p class="text-muted text-sm font-medium tracking-tight truncate opacity-80">Amadd9 - Dm9 - G7 - Cmaj9</p>
+</div>
+<div class="flex items-center gap-1 shrink-0 ml-4">
+<button class="flex flex-col items-center justify-center w-10 h-10 border border-primary/20 rounded hover:bg-primary hover:text-black transition-all">
+<span class="text-[10px] font-bold">V</span>
+<span class="material-symbols-outlined text-sm leading-none mt-[-2px]">add</span>
+</button>
+<button class="flex flex-col items-center justify-center w-10 h-10 border border-primary/20 rounded hover:bg-primary hover:text-black transition-all">
+<span class="text-[10px] font-bold">B</span>
+<span class="material-symbols-outlined text-sm leading-none mt-[-2px]">add</span>
+</button>
+<button class="flex flex-col items-center justify-center w-10 h-10 border border-primary/20 rounded hover:bg-primary hover:text-black transition-all">
+<span class="text-[10px] font-bold">C</span>
+<span class="material-symbols-outlined text-sm leading-none mt-[-2px]">add</span>
+</button>
+</div>
+</div>
+<!-- Progression Item -->
+<div class="group flex items-center justify-between px-4 py-5 border-b border-white/5 hover:bg-primary/[0.02] transition-colors">
+<div class="flex flex-col gap-1 overflow-hidden">
+<p class="text-primary text-lg font-bold tracking-wider uppercase leading-none">II - V - i - VI</p>
+<p class="text-muted text-sm font-medium tracking-tight truncate opacity-80">Bdim7 - E7alt - Am11 - Fmaj7</p>
+</div>
+<div class="flex items-center gap-1 shrink-0 ml-4">
+<button class="flex flex-col items-center justify-center w-10 h-10 border border-primary/20 rounded hover:bg-primary hover:text-black transition-all">
+<span class="text-[10px] font-bold">V</span>
+<span class="material-symbols-outlined text-sm leading-none mt-[-2px]">add</span>
+</button>
+<button class="flex flex-col items-center justify-center w-10 h-10 border border-primary/20 rounded hover:bg-primary hover:text-black transition-all">
+<span class="text-[10px] font-bold">B</span>
+<span class="material-symbols-outlined text-sm leading-none mt-[-2px]">add</span>
+</button>
+<button class="flex flex-col items-center justify-center w-10 h-10 border border-primary/20 rounded hover:bg-primary hover:text-black transition-all">
+<span class="text-[10px] font-bold">C</span>
+<span class="material-symbols-outlined text-sm leading-none mt-[-2px]">add</span>
+</button>
+</div>
+</div>
+<!-- Progression Item -->
+<div class="group flex items-center justify-between px-4 py-5 border-b border-white/5 hover:bg-primary/[0.02] transition-colors">
+<div class="flex flex-col gap-1 overflow-hidden">
+<p class="text-primary text-lg font-bold tracking-wider uppercase leading-none">i - iv - V - VI</p>
+<p class="text-muted text-sm font-medium tracking-tight truncate opacity-80">Am - Dm6 - E7 - Fmaj9</p>
+</div>
+<div class="flex items-center gap-1 shrink-0 ml-4">
+<button class="flex flex-col items-center justify-center w-10 h-10 border border-primary/20 rounded bg-primary/20 border-primary text-primary transition-all">
+<span class="text-[10px] font-bold">V</span>
+<span class="material-symbols-outlined text-sm leading-none mt-[-2px]">check</span>
+</button>
+<button class="flex flex-col items-center justify-center w-10 h-10 border border-primary/20 rounded hover:bg-primary hover:text-black transition-all">
+<span class="text-[10px] font-bold">B</span>
+<span class="material-symbols-outlined text-sm leading-none mt-[-2px]">add</span>
+</button>
+<button class="flex flex-col items-center justify-center w-10 h-10 border border-primary/20 rounded hover:bg-primary hover:text-black transition-all">
+<span class="text-[10px] font-bold">C</span>
+<span class="material-symbols-outlined text-sm leading-none mt-[-2px]">add</span>
+</button>
+</div>
+</div>
+<!-- Progression Item -->
+<div class="group flex items-center justify-between px-4 py-5 border-b border-white/5 hover:bg-primary/[0.02] transition-colors">
+<div class="flex flex-col gap-1 overflow-hidden">
+<p class="text-primary text-lg font-bold tracking-wider uppercase leading-none">iv - VII - III - VI</p>
+<p class="text-muted text-sm font-medium tracking-tight truncate opacity-80">Dm9 - G13 - Cmaj7#11 - Fmaj7</p>
+</div>
+<div class="flex items-center gap-1 shrink-0 ml-4">
+<button class="flex flex-col items-center justify-center w-10 h-10 border border-primary/20 rounded hover:bg-primary hover:text-black transition-all">
+<span class="text-[10px] font-bold">V</span>
+<span class="material-symbols-outlined text-sm leading-none mt-[-2px]">add</span>
+</button>
+<button class="flex flex-col items-center justify-center w-10 h-10 border border-primary/20 rounded hover:bg-primary hover:text-black transition-all">
+<span class="text-[10px] font-bold">B</span>
+<span class="material-symbols-outlined text-sm leading-none mt-[-2px]">add</span>
+</button>
+<button class="flex flex-col items-center justify-center w-10 h-10 border border-primary/20 rounded hover:bg-primary hover:text-black transition-all">
+<span class="text-[10px] font-bold">C</span>
+<span class="material-symbols-outlined text-sm leading-none mt-[-2px]">add</span>
+</button>
+</div>
+</div>
+</main>
+<!-- Bottom Navigation Bar -->
+<nav class="fixed bottom-0 left-0 right-0 bg-background-light dark:bg-background-dark/95 backdrop-blur-md border-t border-primary/10 px-6 pb-6 pt-3">
+<div class="flex items-center justify-between max-w-md mx-auto">
+<button class="flex flex-col items-center gap-1 text-primary">
+<span class="material-symbols-outlined">library_music</span>
+<span class="text-[10px] font-bold uppercase tracking-tighter">Artists</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-muted hover:text-white transition-colors">
+<span class="material-symbols-outlined">favorite</span>
+<span class="text-[10px] font-bold uppercase tracking-tighter">Favorites</span>
+</button>
+<div class="relative -top-6">
+<button class="flex items-center justify-center w-14 h-14 bg-primary text-black rounded-full shadow-[0_0_20px_rgba(46,234,255,0.4)]">
+<span class="material-symbols-outlined text-3xl font-bold">add</span>
+</button>
+</div>
+<button class="flex flex-col items-center gap-1 text-muted hover:text-white transition-colors">
+<span class="material-symbols-outlined">queue_music</span>
+<span class="text-[10px] font-bold uppercase tracking-tighter">Builder</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-muted hover:text-white transition-colors">
+<span class="material-symbols-outlined">settings_input_component</span>
+<span class="text-[10px] font-bold uppercase tracking-tighter">Settings</span>
+</button>
+</div>
+</nav>
+</body></html>

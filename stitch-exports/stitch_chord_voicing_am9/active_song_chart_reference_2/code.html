@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Active Song Chart Reference</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#06d0f9",
+                        "background-light": "#f7f7f7",
+                        "background-dark": "#0a0a0a",
+                        "surface-dark": "#161616",
+                        "border-dark": "#2a2a2a"
+                    },
+                    fontFamily: {
+                        "mono": ["ui-monospace", "SFMono-Regular", "Menlo", "Monaco", "Consolas", "Liberation Mono", "Courier New", "monospace"],
+                        "display": ["Space Grotesk", "sans-serif"]
+                    },
+                },
+            },
+        }
+    </script>
+<style type="text/tailwindcss">
+        @layer base {
+            body {
+                @apply font-mono bg-background-dark text-slate-100 antialiased;
+            }
+        }
+        .monospace-subset {
+            font-variant-numeric: tabular-nums;
+            letter-spacing: -0.02em;
+        }
+        .text-glanceable {
+            letter-spacing: 0.1em;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="min-h-screen flex flex-col">
+<header class="sticky top-0 z-50 bg-background-dark border-b border-border-dark">
+<div class="flex items-center justify-between px-4 h-14">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-xl">terminal</span>
+<div class="flex flex-col">
+<h1 class="text-[10px] font-bold uppercase tracking-widest text-slate-500 leading-none">RT-CHART_V1</h1>
+<h2 class="text-sm font-bold leading-tight">MIDNIGHT_CITY.txt</h2>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-1.5 bg-surface-dark px-2 py-1 border border-border-dark">
+<span class="text-[10px] uppercase font-bold text-slate-500">KEY</span>
+<span class="text-sm font-bold text-primary">Am</span>
+</div>
+<button class="flex items-center gap-1 text-primary text-[10px] font-bold uppercase border border-primary/30 px-2 py-1 hover:bg-primary/10 transition-colors">
+<span>TRANSPOSE</span>
+<span class="material-symbols-outlined text-sm">unfold_more</span>
+</button>
+</div>
+</div>
+</header>
+<main class="flex-grow pb-32">
+<section class="mt-2">
+<div class="px-4 py-1.5 bg-surface-dark border-y border-border-dark">
+<h4 class="text-slate-500 text-[10px] font-black tracking-[0.2em] uppercase">SECTION: VERSE (0:15)</h4>
+</div>
+<div class="divide-y divide-border-dark">
+<div class="flex items-center px-4 py-3 bg-primary/5 border-l-4 border-primary">
+<div class="w-10 shrink-0">
+<span class="text-primary text-[10px] font-bold opacity-70">i9</span>
+</div>
+<div class="flex flex-1 items-baseline gap-4">
+<h2 class="text-xl font-bold text-primary w-16">Am9</h2>
+<p class="text-slate-300 text-xs font-medium tracking-widest uppercase">A C E G B</p>
+</div>
+<span class="material-symbols-outlined text-primary text-sm">keyboard_arrow_right</span>
+</div>
+<div class="flex items-center px-4 py-3">
+<div class="w-10 shrink-0">
+<span class="text-slate-500 text-[10px] font-bold">iv7</span>
+</div>
+<div class="flex flex-1 items-baseline gap-4">
+<h2 class="text-xl font-bold text-slate-200 w-16">Dm7</h2>
+<p class="text-slate-500 text-xs font-medium tracking-widest uppercase">D F A C</p>
+</div>
+</div>
+<div class="flex items-center px-4 py-3">
+<div class="w-10 shrink-0">
+<span class="text-slate-500 text-[10px] font-bold">v7</span>
+</div>
+<div class="flex flex-1 items-baseline gap-4">
+<h2 class="text-xl font-bold text-slate-200 w-16">Em7</h2>
+<p class="text-slate-500 text-xs font-medium tracking-widest uppercase">E G B D</p>
+</div>
+</div>
+</div>
+</section>
+<section class="mt-6">
+<div class="px-4 py-1.5 bg-surface-dark border-y border-border-dark">
+<h4 class="text-slate-500 text-[10px] font-black tracking-[0.2em] uppercase">SECTION: CHORUS (0:45)</h4>
+</div>
+<div class="divide-y divide-border-dark">
+<div class="flex items-center px-4 py-3">
+<div class="w-10 shrink-0"><span class="text-slate-500 text-[10px] font-bold">VI</span></div>
+<div class="flex flex-1 items-baseline gap-4">
+<h2 class="text-xl font-bold text-slate-200 w-16 text-glanceable">Fmaj7</h2>
+<p class="text-slate-500 text-xs font-medium tracking-widest uppercase">F A C E</p>
+</div>
+</div>
+<div class="flex items-center px-4 py-3">
+<div class="w-10 shrink-0"><span class="text-slate-500 text-[10px] font-bold">VII</span></div>
+<div class="flex flex-1 items-baseline gap-4">
+<h2 class="text-xl font-bold text-slate-200 w-16">G7</h2>
+<p class="text-slate-500 text-xs font-medium tracking-widest uppercase">G B D F</p>
+</div>
+</div>
+<div class="flex items-center px-4 py-3">
+<div class="w-10 shrink-0"><span class="text-slate-500 text-[10px] font-bold">i9</span></div>
+<div class="flex flex-1 items-baseline gap-4">
+<h2 class="text-xl font-bold text-slate-200 w-16">Am9</h2>
+<p class="text-slate-500 text-xs font-medium tracking-widest uppercase">A C E G B</p>
+</div>
+</div>
+</div>
+</section>
+</main>
+<div class="fixed bottom-0 left-0 right-0 z-[60] flex flex-col pointer-events-none">
+<div class="bg-surface-dark border-t border-border-dark p-3 pointer-events-auto">
+<div class="flex items-center justify-between mb-2 px-1">
+<h5 class="text-[10px] font-black uppercase text-primary tracking-tighter flex items-center gap-1">
+<span class="material-symbols-outlined text-xs">layers</span> SWAP VOICING: Am9
+                </h5>
+<span class="text-[9px] text-slate-600 uppercase">Current: Root Pos.</span>
+</div>
+<div class="flex flex-wrap gap-2">
+<button class="px-3 py-2 bg-background-dark border border-border-dark text-[11px] font-bold text-slate-400 hover:text-primary hover:border-primary transition-all uppercase">Am</button>
+<button class="px-3 py-2 bg-background-dark border border-border-dark text-[11px] font-bold text-slate-400 hover:text-primary hover:border-primary transition-all uppercase">Am7</button>
+<button class="px-3 py-2 bg-primary/10 border border-primary/40 text-[11px] font-bold text-primary uppercase">Am9</button>
+<button class="px-3 py-2 bg-background-dark border border-border-dark text-[11px] font-bold text-slate-400 hover:text-primary hover:border-primary transition-all uppercase">Am11</button>
+<button class="px-3 py-2 bg-background-dark border border-border-dark text-[11px] font-bold text-slate-400 hover:text-primary hover:border-primary transition-all uppercase">Am(add9)</button>
+</div>
+</div>
+<div class="h-16 bg-background-dark border-t border-border-dark px-4 flex items-center justify-between pointer-events-auto">
+<div class="flex items-center gap-5">
+<button class="material-symbols-outlined text-2xl text-slate-400 hover:text-primary transition-colors">fast_rewind</button>
+<button class="material-symbols-outlined text-4xl text-primary">play_arrow</button>
+<button class="material-symbols-outlined text-2xl text-slate-400 hover:text-primary transition-colors">fast_forward</button>
+</div>
+<div class="flex flex-col items-end">
+<span class="text-[9px] font-bold text-slate-500 uppercase tracking-widest">TEMPO</span>
+<span class="text-xl font-bold leading-none monospace-subset text-primary">120<span class="text-xs ml-0.5 opacity-50">BPM</span></span>
+</div>
+</div>
+</div>
+<div class="fixed bottom-16 left-0 h-0.5 bg-primary/20 w-full z-[70]">
+<div class="h-full bg-primary shadow-[0_0_8px_rgba(6,208,249,0.5)]" style="width: 35%"></div>
+</div>
+
+</body></html>
