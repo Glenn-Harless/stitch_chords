@@ -1,13 +1,23 @@
 import React from 'react';
 import chordsData from '../data/chords.json';
 
+interface Progression {
+    id: string;
+    title: string;
+    artist: string;
+    tempo: number;
+    sections: { name: string; bars: string[] }[];
+}
+
 interface DashboardProps {
     onSelect: () => void;
+    onSelectProgression: (prog: Progression) => void;
+    onNewSong: () => void;
     songsCount: number;
     onNavigate: (view: 'dashboard' | 'library' | 'utility' | 'artists' | 'scratchpad' | 'expansion') => void;
 }
 
-const Dashboard: React.FC<DashboardProps> = ({ onSelect, songsCount, onNavigate }) => {
+const Dashboard: React.FC<DashboardProps> = ({ onSelect, onSelectProgression, onNewSong, songsCount, onNavigate }) => {
     return (
         <main className="max-w-2xl mx-auto p-4 pb-32 relative min-h-screen">
             <div className="scanline" />
@@ -25,20 +35,31 @@ const Dashboard: React.FC<DashboardProps> = ({ onSelect, songsCount, onNavigate 
                 </div>
 
                 <div className="grid gap-4">
-                    <div
-                        onClick={onSelect}
-                        className="rounded border border-chord-cyan/20 bg-chord-card p-6 flex justify-between items-center group hover:border-chord-cyan transition-all cursor-pointer shadow-lg hover:shadow-[0_0_20px_rgba(0,212,255,0.1)]"
-                    >
-                        <div className="flex items-center gap-4">
+                    <div className="grid grid-cols-2 gap-4">
+                        <div
+                            onClick={onSelect}
+                            className="rounded border border-chord-cyan/20 bg-chord-card p-4 flex flex-col gap-3 group hover:border-chord-cyan transition-all cursor-pointer shadow-lg hover:shadow-[0_0_20px_rgba(0,212,255,0.1)]"
+                        >
                             <div className="size-10 rounded-full border border-chord-cyan/30 flex items-center justify-center group-hover:border-chord-cyan transition-colors">
                                 <span className="material-symbols-outlined text-chord-cyan">play_arrow</span>
                             </div>
                             <div>
-                                <h3 className="font-mono font-bold text-sm tracking-tight uppercase group-hover:text-chord-cyan transition-colors">RESUME_LAST_SESSION</h3>
-                                <p className="text-[10px] opacity-40 uppercase tracking-widest mt-0.5">CONTINUE_ACTIVE_MAP</p>
+                                <h3 className="font-mono font-bold text-[11px] tracking-tight uppercase group-hover:text-chord-cyan transition-colors">RESUME_SESSION</h3>
+                                <p className="text-[9px] opacity-40 uppercase tracking-widest mt-0.5">CONTINUE</p>
                             </div>
                         </div>
-                        <span className="material-symbols-outlined text-chord-cyan/40 group-hover:text-chord-cyan">chevron_right</span>
+                        <div
+                            onClick={onNewSong}
+                            className="rounded border border-chord-cyan/20 bg-chord-card p-4 flex flex-col gap-3 group hover:border-chord-cyan transition-all cursor-pointer shadow-lg hover:shadow-[0_0_20px_rgba(0,212,255,0.1)]"
+                        >
+                            <div className="size-10 rounded-full border border-chord-cyan/30 flex items-center justify-center group-hover:border-chord-cyan transition-colors">
+                                <span className="material-symbols-outlined text-chord-cyan">add</span>
+                            </div>
+                            <div>
+                                <h3 className="font-mono font-bold text-[11px] tracking-tight uppercase group-hover:text-chord-cyan transition-colors">NEW_SONG</h3>
+                                <p className="text-[9px] opacity-40 uppercase tracking-widest mt-0.5">START_FRESH</p>
+                            </div>
+                        </div>
                     </div>
 
                     <div className="grid grid-cols-2 gap-4">
@@ -88,7 +109,7 @@ const Dashboard: React.FC<DashboardProps> = ({ onSelect, songsCount, onNavigate 
                     {chordsData.progressions.map(prog => (
                         <div
                             key={prog.id}
-                            onClick={onSelect}
+                            onClick={() => onSelectProgression(prog)}
                             className="p-4 rounded border border-chord-cyan/10 bg-chord-cyan/5 hover:border-chord-cyan/40 cursor-pointer transition-all group flex justify-between items-center"
                         >
                             <div>

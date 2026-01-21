@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { transposeChord, getChordNotes, getRomanNumeral } from '../utils/theory';
 import HotSwapMenu from './HotSwapMenu';
+import SaveOverlay from './SaveOverlay';
 
 interface Section {
     name: string;
@@ -36,15 +37,25 @@ const ActivePlayingView: React.FC<ActivePlayingViewProps> = ({ song, onBack, onS
     const [wakeLockEnabled, setWakeLockEnabled] = useState(true);
     const [songKey, setSongKey] = useState(song.key || 'C MAJOR');
     const [hotSwapTarget, setHotSwapTarget] = useState<{ sIdx: number; bIdx: number } | null>(null);
+    const [showSaveOverlay, setShowSaveOverlay] = useState(false);
+
+    // Reset state when a different song is loaded
+    useEffect(() => {
+        setSongKey(song.key || 'C MAJOR');
+        setTranspose(0);
+        setSelectedChord({ sIdx: 0, bIdx: 0 });
+        setHotSwapTarget(null);
+    }, [song.id]);
 
     const currentChordName = song.sections[selectedChord.sIdx]?.bars[selectedChord.bIdx] || '';
     const transposedChordName = transposeChord(currentChordName, transpose);
     const chordNotes = getChordNotes(transposedChordName);
 
-    const handleSave = () => {
+    const handleSaveWithTitle = (newTitle: string) => {
         if (onSave) {
-            onSave({ ...song, key: songKey });
+            onSave({ ...song, title: newTitle, key: songKey });
         }
+        setShowSaveOverlay(false);
     };
 
     const swapChord = (newChord: string, sIdx: number, bIdx: number) => {
@@ -98,7 +109,7 @@ const ActivePlayingView: React.FC<ActivePlayingViewProps> = ({ song, onBack, onS
                             </select>
                         </div>
                         <button
-                            onClick={handleSave}
+                            onClick={() => setShowSaveOverlay(true)}
                             className="flex items-center justify-center rounded border border-chord-cyan/30 px-3 py-1.5 hover:bg-chord-cyan/10 transition-colors"
                         >
                             <span className="text-[10px] font-black text-chord-cyan tracking-widest uppercase">SAVE</span>
@@ -243,6 +254,16 @@ const ActivePlayingView: React.FC<ActivePlayingViewProps> = ({ song, onBack, onS
                         }
                         setHotSwapTarget(null);
                     }}
+                />
+            )}
+
+            {/* Save Overlay Modal */}
+            {showSaveOverlay && (
+                <SaveOverlay
+                    title={song.title}
+                    sections={song.sections}
+                    onSave={handleSaveWithTitle}
+                    onCancel={() => setShowSaveOverlay(false)}
                 />
             )}
 

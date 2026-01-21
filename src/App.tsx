@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import { useSavedSongs } from './hooks/useSavedSongs'
-import chordsData from './data/chords.json'
 import Dashboard from './components/Dashboard'
 import ActivePlayingView from './components/ActivePlayingView'
 import SavedSongs from './components/SavedSongs'
@@ -11,22 +10,32 @@ import ChordScratchpad from './components/ChordScratchpad'
 
 type ViewType = 'dashboard' | 'active' | 'library' | 'utility' | 'artists' | 'artist-detail' | 'expansion' | 'scratchpad'
 
+// Generate a new empty song with unique id
+const createNewSong = () => ({
+  id: `song_${Date.now()}_${Math.random().toString(36).slice(2, 9)}`,
+  title: 'Untitled',
+  artist: 'Unknown',
+  tempo: 120,
+  sections: [],
+})
+
 function App() {
   const [currentView, setCurrentView] = useState<ViewType>('dashboard')
   const [selectedArtistId, setSelectedArtistId] = useState<string | null>(null)
-  const { songs, saveSong } = useSavedSongs()
+  const { songs, saveSong, updateLastOpened } = useSavedSongs()
   const [editingTarget, setEditingTarget] = useState<{ sIdx: number, bIdx: number } | null>(null)
 
-  // Default to first progression or null
-  const [activeSong, setActiveSong] = useState<any>(chordsData.progressions[0])
+  // Start with a fresh empty song, not a pre-loaded one
+  const [activeSong, setActiveSong] = useState<any>(createNewSong)
 
   const handleArtistSelect = (id: string) => {
     setSelectedArtistId(id)
     setCurrentView('artist-detail')
   }
 
-  const handleAddProgression = (progression: any) => {
-    const sectionName = progression.suggested_section || 'VERSE'
+  const handleAddProgression = (progression: any, targetSection?: string) => {
+    // Use explicit targetSection if provided, otherwise fall back to progression's suggestion or VERSE
+    const sectionName = targetSection || progression.suggested_section || 'VERSE'
     const bars = progression.chords.map((c: any) => c.root + (c.quality || ''))
 
     setActiveSong((prev: any) => {
@@ -72,6 +81,14 @@ function App() {
       {currentView === 'dashboard' && (
         <Dashboard
           onSelect={() => setCurrentView('active')}
+          onSelectProgression={(prog) => {
+            setActiveSong(prog)
+            setCurrentView('active')
+          }}
+          onNewSong={() => {
+            setActiveSong(createNewSong())
+            setCurrentView('artists')
+          }}
           songsCount={songs.length}
           onNavigate={(view) => setCurrentView(view)}
         />
@@ -81,7 +98,10 @@ function App() {
         <ActivePlayingView
           song={activeSong}
           onBack={() => setCurrentView('dashboard')}
-          onSave={saveSong}
+          onSave={(song) => {
+            saveSong(song)
+            setActiveSong(song)
+          }}
           onEditChord={handleEditChord}
           onUpdateSections={(newSections) => setActiveSong({ ...activeSong, sections: newSections })}
         />
@@ -90,8 +110,15 @@ function App() {
       {currentView === 'library' && (
         <SavedSongs
           songs={songs}
-          onSelect={() => setCurrentView('active')}
-          onNew={() => setCurrentView('dashboard')}
+          onSelect={(song) => {
+            updateLastOpened(song.id)
+            setActiveSong(song)
+            setCurrentView('active')
+          }}
+          onNew={() => {
+            setActiveSong(createNewSong())
+            setCurrentView('artists')
+          }}
         />
       )}
 
@@ -118,7 +145,11 @@ function App() {
 
       {currentView === 'scratchpad' && (
         <ChordScratchpad
-          onBack={() => setCurrentView('dashboard')}
+          onBack={() => {
+            const returnToActive = editingTarget !== null
+            setEditingTarget(null)
+            setCurrentView(returnToActive ? 'active' : 'dashboard')
+          }}
           onAddProgression={handleAddProgression}
         />
       )}

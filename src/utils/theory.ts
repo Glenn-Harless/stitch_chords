@@ -127,7 +127,10 @@ export function getChordNotes(chord: string): string[] {
  */
 export function getRomanNumeral(chord: string, keyName: string): string {
     const { root: chordRoot } = parseChord(chord);
-    const [keyRoot, keyQuality] = keyName.toUpperCase().split(' ');
+    const parts = keyName.split(' ');
+    // Normalize key root: uppercase first char, preserve accidental case (e.g., "Bb" not "BB")
+    const keyRoot = parts[0].charAt(0).toUpperCase() + parts[0].slice(1).toLowerCase();
+    const keyQuality = (parts[1] || '').toUpperCase();
     
     const chordIdx = getNoteIndex(chordRoot);
     const keyIdx = getNoteIndex(keyRoot);

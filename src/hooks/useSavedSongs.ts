@@ -12,7 +12,8 @@ export interface Song {
     tempo: number;
     sections: Section[];
     key?: string;
-    lastPlayed?: string;
+    lastOpened?: number; // Unix timestamp
+    createdAt?: number;  // Unix timestamp
 }
 
 export const useSavedSongs = () => {
@@ -30,9 +31,27 @@ export const useSavedSongs = () => {
     }, []);
 
     const saveSong = (song: Song) => {
-        const updated = [...songs.filter(s => s.id !== song.id), song];
+        const existing = songs.find(s => s.id === song.id);
+        const now = Date.now();
+        const songToSave: Song = {
+            ...song,
+            createdAt: existing?.createdAt || song.createdAt || now,
+            lastOpened: now,
+        };
+        const updated = [...songs.filter(s => s.id !== song.id), songToSave];
         setSongs(updated);
         localStorage.setItem('stitch_chords_saved_songs', JSON.stringify(updated));
+    };
+
+    const updateLastOpened = (id: string) => {
+        const song = songs.find(s => s.id === id);
+        if (song) {
+            const updated = songs.map(s =>
+                s.id === id ? { ...s, lastOpened: Date.now() } : s
+            );
+            setSongs(updated);
+            localStorage.setItem('stitch_chords_saved_songs', JSON.stringify(updated));
+        }
     };
 
     const removeSong = (id: string) => {
@@ -41,5 +60,5 @@ export const useSavedSongs = () => {
         localStorage.setItem('stitch_chords_saved_songs', JSON.stringify(updated));
     };
 
-    return { songs, saveSong, removeSong };
+    return { songs, saveSong, updateLastOpened, removeSong };
 };

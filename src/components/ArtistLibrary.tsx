@@ -4,7 +4,7 @@ import artistsData from '../data/artists.json';
 interface ArtistLibraryProps {
     artistId: string;
     onBack: () => void;
-    onAddProgression: (progression: any) => void;
+    onAddProgression: (progression: any, targetSection: string) => void;
 }
 
 const ArtistLibrary: React.FC<ArtistLibraryProps> = ({ artistId, onBack, onAddProgression }) => {
@@ -78,18 +78,26 @@ const ArtistLibrary: React.FC<ArtistLibraryProps> = ({ artistId, onBack, onAddPr
                             </div>
                             <div className="flex items-center gap-1 shrink-0 ml-4">
                                 <button
-                                    onClick={() => onAddProgression(prog)}
+                                    onClick={() => onAddProgression(prog, 'VERSE')}
                                     className="flex flex-col items-center justify-center w-10 h-10 border border-chord-cyan/20 rounded hover:bg-chord-cyan hover:text-black transition-all group/btn"
                                     title="Add to Verse"
                                 >
                                     <span className="text-[10px] font-bold">V</span>
                                     <span className="material-symbols-outlined text-sm leading-none mt-[-2px]">add</span>
                                 </button>
-                                <button className="flex flex-col items-center justify-center w-10 h-10 border border-chord-cyan/20 rounded hover:bg-chord-cyan hover:text-black transition-all group/btn opacity-40">
+                                <button
+                                    onClick={() => onAddProgression(prog, 'BRIDGE')}
+                                    className="flex flex-col items-center justify-center w-10 h-10 border border-chord-cyan/20 rounded hover:bg-chord-cyan hover:text-black transition-all group/btn"
+                                    title="Add to Bridge"
+                                >
                                     <span className="text-[10px] font-bold">B</span>
                                     <span className="material-symbols-outlined text-sm leading-none mt-[-2px]">add</span>
                                 </button>
-                                <button className="flex flex-col items-center justify-center w-10 h-10 border border-chord-cyan/20 rounded hover:bg-chord-cyan hover:text-black transition-all group/btn opacity-40">
+                                <button
+                                    onClick={() => onAddProgression(prog, 'CHORUS')}
+                                    className="flex flex-col items-center justify-center w-10 h-10 border border-chord-cyan/20 rounded hover:bg-chord-cyan hover:text-black transition-all group/btn"
+                                    title="Add to Chorus"
+                                >
                                     <span className="text-[10px] font-bold">C</span>
                                     <span className="material-symbols-outlined text-sm leading-none mt-[-2px]">add</span>
                                 </button>

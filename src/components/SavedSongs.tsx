@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useMemo } from 'react';
 import type { Song as SavedSong } from '../hooks/useSavedSongs';
 
 interface SavedSongsProps {
@@ -7,7 +7,82 @@ interface SavedSongsProps {
     onNew: () => void;
 }
 
+type SortMode = 'lastOpened' | 'alphabetical' | 'created';
+type SectionFilter = 'VERSE' | 'CHORUS' | 'BRIDGE';
+
+const SORT_OPTIONS: { value: SortMode; label: string }[] = [
+    { value: 'lastOpened', label: 'LAST_OPENED' },
+    { value: 'alphabetical', label: 'A-Z' },
+    { value: 'created', label: 'CREATED' },
+];
+
+const SECTION_FILTERS: SectionFilter[] = ['VERSE', 'CHORUS', 'BRIDGE'];
+
+const formatRelativeTime = (timestamp?: number): string => {
+    if (!timestamp) return 'never';
+    const now = Date.now();
+    const diff = now - timestamp;
+    const minutes = Math.floor(diff / 60000);
+    const hours = Math.floor(diff / 3600000);
+    const days = Math.floor(diff / 86400000);
+
+    if (minutes < 1) return 'just_now';
+    if (minutes < 60) return `${minutes}m_ago`;
+    if (hours < 24) return `${hours}h_ago`;
+    if (days < 7) return `${days}d_ago`;
+    return `${Math.floor(days / 7)}w_ago`;
+};
+
 const SavedSongs: React.FC<SavedSongsProps> = ({ songs, onSelect, onNew }) => {
+    const [sortMode, setSortMode] = useState<SortMode>('lastOpened');
+    const [activeFilters, setActiveFilters] = useState<Set<SectionFilter>>(new Set());
+
+    const toggleFilter = (filter: SectionFilter) => {
+        setActiveFilters(prev => {
+            const next = new Set(prev);
+            if (next.has(filter)) {
+                next.delete(filter);
+            } else {
+                next.add(filter);
+            }
+            return next;
+        });
+    };
+
+    const cycleSortMode = () => {
+        const currentIndex = SORT_OPTIONS.findIndex(o => o.value === sortMode);
+        const nextIndex = (currentIndex + 1) % SORT_OPTIONS.length;
+        setSortMode(SORT_OPTIONS[nextIndex].value);
+    };
+
+    const filteredAndSortedSongs = useMemo(() => {
+        // Filter
+        let result = songs;
+        if (activeFilters.size > 0) {
+            result = songs.filter(song =>
+                Array.from(activeFilters).every(filter =>
+                    song.sections?.some(s => s.name.toUpperCase().startsWith(filter))
+                )
+            );
+        }
+
+        // Sort
+        return [...result].sort((a, b) => {
+            switch (sortMode) {
+                case 'lastOpened':
+                    return (b.lastOpened || 0) - (a.lastOpened || 0);
+                case 'alphabetical':
+                    return a.title.localeCompare(b.title);
+                case 'created':
+                    return (b.createdAt || 0) - (a.createdAt || 0);
+                default:
+                    return 0;
+            }
+        });
+    }, [songs, sortMode, activeFilters]);
+
+    const currentSortLabel = SORT_OPTIONS.find(o => o.value === sortMode)?.label || 'LAST_OPENED';
+
     return (
         <div className="min-h-screen bg-chord-dark text-[#e5e5e5] flex flex-col font-display relative">
             <div className="scanline" />
@@ -29,18 +104,33 @@ const SavedSongs: React.FC<SavedSongsProps> = ({ songs, onSelect, onNew }) => {
 
                 {/* Filter Chips / Utility Bar */}
                 <div className="flex gap-2 px-4 pb-4 overflow-x-auto no-scrollbar max-w-2xl mx-auto w-full">
-                    <div className="flex h-6 shrink-0 items-center justify-center gap-x-1 border border-white/10 px-2 bg-white/5">
-                        <span className="text-[9px] text-white/40 font-mono uppercase">SORT:</span>
-                        <span className="text-white text-[10px] font-medium font-mono">LAST_OPENED</span>
-                    </div>
-                    <div className="flex h-6 shrink-0 items-center justify-center gap-x-1 border border-white/10 px-2 bg-white/5">
-                        <span className="text-[9px] text-white/40 font-mono uppercase">TYPE:</span>
-                        <span className="text-white text-[10px] font-medium font-mono">CHORDS</span>
-                    </div>
-                    <div className="flex h-6 shrink-0 items-center justify-center gap-x-1 border border-white/10 px-2 bg-white/5">
-                        <span className="text-[9px] text-white/40 font-mono uppercase">VIEW:</span>
-                        <span className="text-white text-[10px] font-medium font-mono">DENSE</span>
-                    </div>
+                    {/* Sort Chip */}
+                    <button
+                        onClick={cycleSortMode}
+                        className="flex h-6 shrink-0 items-center justify-center gap-x-1 border border-chord-cyan/30 px-2 bg-chord-cyan/10 hover:bg-chord-cyan/20 transition-colors cursor-pointer"
+                    >
+                        <span className="text-[9px] text-chord-cyan/60 font-mono uppercase">SORT:</span>
+                        <span className="text-chord-cyan text-[10px] font-medium font-mono">{currentSortLabel}</span>
+                    </button>
+
+                    {/* Section Filter Chips */}
+                    {SECTION_FILTERS.map(filter => {
+                        const isActive = activeFilters.has(filter);
+                        return (
+                            <button
+                                key={filter}
+                                onClick={() => toggleFilter(filter)}
+                                className={`flex h-6 shrink-0 items-center justify-center gap-x-1 border px-2 transition-colors cursor-pointer ${
+                                    isActive
+                                        ? 'border-chord-cyan bg-chord-cyan/20 text-chord-cyan'
+                                        : 'border-white/10 bg-white/5 text-white/60 hover:border-white/30'
+                                }`}
+                            >
+                                <span className="text-[10px] font-medium font-mono">{filter}</span>
+                                {isActive && <span className="text-[8px]">✓</span>}
+                            </button>
+                        );
+                    })}
                 </div>
             </header>
 
@@ -48,19 +138,31 @@ const SavedSongs: React.FC<SavedSongsProps> = ({ songs, onSelect, onNew }) => {
                 {/* Metadata Line */}
                 <div className="px-4 py-2 border-b border-white/5 bg-white/5">
                     <p className="text-[10px] text-white/30 font-mono tracking-tighter uppercase">
-                        INDEX_START | TOTAL_RECORDS: {songs.length.toString().padStart(2, '0')}
+                        INDEX_START | SHOWING: {filteredAndSortedSongs.length.toString().padStart(2, '0')} / {songs.length.toString().padStart(2, '0')}
                     </p>
                 </div>
 
                 {/* Song List Items */}
                 <div className="divide-y divide-white/5">
-                    {songs.length === 0 ? (
+                    {filteredAndSortedSongs.length === 0 ? (
                         <div className="px-4 py-20 text-center opacity-40">
-                            <span className="material-symbols-outlined text-4xl mb-4 block">folder_open</span>
-                            <p className="text-xs font-mono uppercase tracking-[0.2em]">Library_Empty</p>
+                            <span className="material-symbols-outlined text-4xl mb-4 block">
+                                {songs.length === 0 ? 'folder_open' : 'filter_alt_off'}
+                            </span>
+                            <p className="text-xs font-mono uppercase tracking-[0.2em]">
+                                {songs.length === 0 ? 'Library_Empty' : 'No_Matches_Found'}
+                            </p>
+                            {activeFilters.size > 0 && (
+                                <button
+                                    onClick={() => setActiveFilters(new Set())}
+                                    className="mt-4 text-chord-cyan text-[10px] font-mono uppercase hover:underline"
+                                >
+                                    Clear_Filters
+                                </button>
+                            )}
                         </div>
                     ) : (
-                        songs.map((song, idx) => (
+                        filteredAndSortedSongs.map((song) => (
                             <div
                                 key={song.id}
                                 onClick={() => onSelect(song)}
@@ -71,13 +173,13 @@ const SavedSongs: React.FC<SavedSongsProps> = ({ songs, onSelect, onNew }) => {
                                         {song.title.replace(/\s+/g, '_')}
                                     </h2>
                                     <span className="text-[10px] text-white/30 font-mono shrink-0 uppercase">
-                                        {idx === 0 ? '2m_ago' : `${idx + 1}h_ago`}
+                                        {formatRelativeTime(song.lastOpened)}
                                     </span>
                                 </div>
                                 <div className="flex items-center gap-2">
                                     <span className="text-[10px] font-mono text-chord-cyan/40 bg-chord-cyan/5 px-1 uppercase">{song.tempo} BPM</span>
                                     <p className="text-[#9ab8bc] text-xs leading-none line-clamp-1 tracking-wide uppercase">
-                                        {song.artist} • v0.1.2
+                                        {song.sections?.map(s => s.name).join(' • ') || 'No sections'}
                                     </p>
                                 </div>
                             </div>

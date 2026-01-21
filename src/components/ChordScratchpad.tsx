@@ -3,7 +3,7 @@ import { getChordNotes, parseChord, SUPPORTED_QUALITIES } from '../utils/theory'
 
 interface ChordScratchpadProps {
     onBack: () => void;
-    onAddProgression: (progression: any) => void;
+    onAddProgression: (progression: any, targetSection?: string) => void;
 }
 
 const ChordScratchpad: React.FC<ChordScratchpadProps> = ({ onBack, onAddProgression }) => {
@@ -21,9 +21,8 @@ const ChordScratchpad: React.FC<ChordScratchpadProps> = ({ onBack, onAddProgress
             id: `custom-${Date.now()}`,
             name: input,
             bpm: 120,
-            suggested_section: section,
             chords: [{ root: currentRoot, quality: currentQuality }]
-        });
+        }, section);
     };
 
     const updateChord = (newRoot: string, newAccidental: string, newQuality: string) => {
