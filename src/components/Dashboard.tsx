@@ -1,23 +1,28 @@
 import React from 'react';
-import chordsData from '../data/chords.json';
 
-interface Progression {
+interface Song {
     id: string;
     title: string;
     artist: string;
     tempo: number;
+    key?: string;
     sections: { name: string; bars: string[] }[];
+    lastOpened?: number;
 }
 
 interface DashboardProps {
     onSelect: () => void;
-    onSelectProgression: (prog: Progression) => void;
+    onSelectSong: (song: Song) => void;
     onNewSong: () => void;
-    songsCount: number;
+    songs: Song[];
     onNavigate: (view: 'dashboard' | 'library' | 'utility' | 'artists' | 'scratchpad' | 'expansion') => void;
 }
 
-const Dashboard: React.FC<DashboardProps> = ({ onSelect, onSelectProgression, onNewSong, songsCount, onNavigate }) => {
+const Dashboard: React.FC<DashboardProps> = ({ onSelect, onSelectSong, onNewSong, songs, onNavigate }) => {
+    // Show most recent 5 songs, sorted by lastOpened
+    const recentSongs = [...songs]
+        .sort((a, b) => (b.lastOpened || 0) - (a.lastOpened || 0))
+        .slice(0, 5);
     return (
         <main className="max-w-2xl mx-auto p-4 pb-32 relative min-h-screen">
             <div className="scanline" />
@@ -31,7 +36,7 @@ const Dashboard: React.FC<DashboardProps> = ({ onSelect, onSelectProgression, on
             <section className="mt-8">
                 <div className="flex items-center justify-between mb-4">
                     <h2 className="text-chord-cyan text-xs font-bold tracking-[0.3em] uppercase bg-chord-cyan/10 px-2 py-1 rounded">Quick_Access</h2>
-                    <span className="text-[10px] opacity-40 font-mono tracking-tighter">STORED_RECORDS: {songsCount.toString().padStart(2, '0')}</span>
+                    <span className="text-[10px] opacity-40 font-mono tracking-tighter">STORED_RECORDS: {songs.length.toString().padStart(2, '0')}</span>
                 </div>
 
                 <div className="grid gap-4">
@@ -104,24 +109,50 @@ const Dashboard: React.FC<DashboardProps> = ({ onSelect, onSelectProgression, on
             </section>
 
             <section className="mt-12">
-                <h2 className="text-chord-cyan text-[10px] font-bold tracking-[0.3em] uppercase mb-4 opacity-60">System_Library</h2>
-                <div className="grid gap-2">
-                    {chordsData.progressions.map(prog => (
-                        <div
-                            key={prog.id}
-                            onClick={() => onSelectProgression(prog)}
-                            className="p-4 rounded border border-chord-cyan/10 bg-chord-cyan/5 hover:border-chord-cyan/40 cursor-pointer transition-all group flex justify-between items-center"
+                <div className="flex items-center justify-between mb-4">
+                    <h2 className="text-chord-cyan text-[10px] font-bold tracking-[0.3em] uppercase opacity-60">Recent_Songs</h2>
+                    {songs.length > 5 && (
+                        <button
+                            onClick={() => onNavigate('library')}
+                            className="text-[9px] text-chord-cyan/60 hover:text-chord-cyan uppercase tracking-wider"
                         >
-                            <div>
-                                <div className="flex items-baseline gap-3">
-                                    <h3 className="font-mono font-bold text-sm tracking-tight uppercase group-hover:text-chord-cyan">{prog.title.replace(/\s+/g, '_')}</h3>
-                                    <span className="text-[9px] font-mono text-chord-cyan/40 uppercase tracking-tighter">{prog.tempo}_BPM</span>
-                                </div>
-                                <p className="text-[10px] opacity-40 uppercase tracking-widest mt-1 font-display">{prog.artist}</p>
-                            </div>
-                            <span className="material-symbols-outlined text-chord-cyan opacity-20 group-hover:opacity-100 transition-opacity">arrow_forward</span>
+                            View All →
+                        </button>
+                    )}
+                </div>
+                <div className="grid gap-2">
+                    {recentSongs.length === 0 ? (
+                        <div className="p-6 rounded border border-dashed border-chord-cyan/20 text-center">
+                            <p className="text-[10px] opacity-40 uppercase tracking-widest font-mono">No_Saved_Songs</p>
+                            <button
+                                onClick={onNewSong}
+                                className="mt-3 text-chord-cyan text-[10px] uppercase tracking-wider hover:underline"
+                            >
+                                Create_First_Song →
+                            </button>
                         </div>
-                    ))}
+                    ) : (
+                        recentSongs.map(song => (
+                            <div
+                                key={song.id}
+                                onClick={() => onSelectSong(song)}
+                                className="p-4 rounded border border-chord-cyan/10 bg-chord-cyan/5 hover:border-chord-cyan/40 cursor-pointer transition-all group flex justify-between items-center"
+                            >
+                                <div>
+                                    <div className="flex items-baseline gap-3">
+                                        <h3 className="font-mono font-bold text-sm tracking-tight uppercase group-hover:text-chord-cyan">{song.title.replace(/\s+/g, '_')}</h3>
+                                        {song.key && (
+                                            <span className="text-[9px] font-mono text-chord-cyan/40 uppercase tracking-tighter">{song.key}</span>
+                                        )}
+                                    </div>
+                                    <p className="text-[10px] opacity-40 uppercase tracking-widest mt-1 font-display">
+                                        {song.sections.length} section{song.sections.length !== 1 ? 's' : ''} • {song.sections.reduce((acc, s) => acc + s.bars.length, 0)} chords
+                                    </p>
+                                </div>
+                                <span className="material-symbols-outlined text-chord-cyan opacity-20 group-hover:opacity-100 transition-opacity">arrow_forward</span>
+                            </div>
+                        ))
+                    )}
                 </div>
             </section>
 

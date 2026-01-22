@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { useRef, useState } from 'react';
 import artistsData from '../data/artists.json';
+import { getChordNotes, getRomanNumeral } from '../utils/theory';
+import { playProgression, stopPlayback } from '../utils/audio';
 
 interface ArtistLibraryProps {
     artistId: string;
@@ -7,8 +9,46 @@ interface ArtistLibraryProps {
     onAddProgression: (progression: any, targetSection: string) => void;
 }
 
+// Convert compact key format to analysis format: "Am" → "A MINOR", "C" → "C MAJOR"
+const keyToAnalysis = (key: string): string => {
+    if (key.endsWith('m')) {
+        return key.slice(0, -1) + ' MINOR';
+    }
+    return key + ' MAJOR';
+};
+
 const ArtistLibrary: React.FC<ArtistLibraryProps> = ({ artistId, onBack, onAddProgression }) => {
     const artist = artistsData.artists.find(a => a.id === artistId);
+    const [previewingId, setPreviewingId] = useState<string | null>(null);
+    const longPressTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+    const startPreview = (prog: any) => {
+        // Get chord notes for each chord in progression
+        const chordNotesList = prog.chords.map((c: any) =>
+            getChordNotes(c.root + (c.quality || ''))
+        );
+        setPreviewingId(prog.id);
+        playProgression(chordNotesList, prog.bpm || 120);
+    };
+
+    const endPreview = () => {
+        if (longPressTimer.current) {
+            clearTimeout(longPressTimer.current);
+            longPressTimer.current = null;
+        }
+        setPreviewingId(null);
+        stopPlayback();
+    };
+
+    const handlePressStart = (prog: any) => {
+        longPressTimer.current = setTimeout(() => {
+            startPreview(prog);
+        }, 300); // 300ms to trigger long press
+    };
+
+    const handlePressEnd = () => {
+        endPreview();
+    };
 
     if (!artist) {
         return (
@@ -68,12 +108,28 @@ const ArtistLibrary: React.FC<ArtistLibraryProps> = ({ artistId, onBack, onAddPr
                     {artist.progressions.map((prog) => (
                         <div
                             key={prog.id}
-                            className="group flex items-center justify-between px-4 py-5 border-b border-white/5 hover:bg-chord-cyan/[0.02] transition-colors"
+                            className={`group flex items-center justify-between px-4 py-5 border-b border-white/5 transition-colors select-none ${
+                                previewingId === prog.id
+                                    ? 'bg-chord-cyan/20 border-l-2 border-l-chord-cyan'
+                                    : 'hover:bg-chord-cyan/[0.02]'
+                            }`}
+                            onMouseDown={() => handlePressStart(prog)}
+                            onMouseUp={handlePressEnd}
+                            onMouseLeave={handlePressEnd}
+                            onTouchStart={() => handlePressStart(prog)}
+                            onTouchEnd={handlePressEnd}
                         >
                             <div className="flex flex-col gap-1 overflow-hidden">
-                                <p className="text-chord-cyan text-lg font-bold tracking-wider uppercase leading-none">{prog.name}</p>
-                                <p className="text-zinc-500 text-sm font-medium tracking-tight truncate opacity-80 uppercase">
-                                    {prog.chords.map(c => c.root + (c.quality !== 'm' ? c.quality : '')).join(' - ')}
+                                <div className="flex items-center gap-2">
+                                    <p className="text-chord-cyan text-lg font-bold tracking-wider uppercase leading-none">
+                                        {prog.chords.map((c: any) => getRomanNumeral(c.root + (c.quality || ''), keyToAnalysis(prog.key))).join(' - ')}
+                                    </p>
+                                    {previewingId === prog.id && (
+                                        <span className="material-symbols-outlined text-chord-cyan text-sm animate-pulse">volume_up</span>
+                                    )}
+                                </div>
+                                <p className="text-zinc-500 text-xs font-medium tracking-tight opacity-80 uppercase">
+                                    {prog.chords.map((c: any) => c.root + (c.quality || '')).join(' - ')}
                                 </p>
                             </div>
                             <div className="flex items-center gap-1 shrink-0 ml-4">

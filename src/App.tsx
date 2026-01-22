@@ -64,6 +64,7 @@ function App() {
         ...prev,
         title: progression.name || prev.title,
         artist: selectedArtistId?.toUpperCase() || prev.artist,
+        key: progression.key || prev.key,
         sections: newSections
       }
     })
@@ -81,15 +82,16 @@ function App() {
       {currentView === 'dashboard' && (
         <Dashboard
           onSelect={() => setCurrentView('active')}
-          onSelectProgression={(prog) => {
-            setActiveSong(prog)
+          onSelectSong={(song) => {
+            updateLastOpened(song.id)
+            setActiveSong(song)
             setCurrentView('active')
           }}
           onNewSong={() => {
             setActiveSong(createNewSong())
             setCurrentView('artists')
           }}
-          songsCount={songs.length}
+          songs={songs}
           onNavigate={(view) => setCurrentView(view)}
         />
       )}
@@ -104,6 +106,7 @@ function App() {
           }}
           onEditChord={handleEditChord}
           onUpdateSections={(newSections) => setActiveSong({ ...activeSong, sections: newSections })}
+          onClear={() => setActiveSong(createNewSong())}
         />
       )}
 
