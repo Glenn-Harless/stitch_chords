@@ -31,23 +31,29 @@ const ArtistLibrary: React.FC<ArtistLibraryProps> = ({ artistId, onBack, onAddPr
         playProgression(chordNotesList, prog.bpm || 120);
     };
 
-    const endPreview = () => {
+    const isLongPress = useRef(false);
+
+    const handlePressStart = (prog: any) => {
+        isLongPress.current = false;
+        longPressTimer.current = setTimeout(() => {
+            isLongPress.current = true;
+            startPreview(prog);
+        }, 300);
+    };
+
+    const handlePressEnd = (prog?: any) => {
         if (longPressTimer.current) {
             clearTimeout(longPressTimer.current);
             longPressTimer.current = null;
         }
-        setPreviewingId(null);
-        stopPlayback();
-    };
-
-    const handlePressStart = (prog: any) => {
-        longPressTimer.current = setTimeout(() => {
-            startPreview(prog);
-        }, 300); // 300ms to trigger long press
-    };
-
-    const handlePressEnd = () => {
-        endPreview();
+        if (previewingId) {
+            setPreviewingId(null);
+            stopPlayback();
+        }
+        // Short tap: add to suggested section
+        if (!isLongPress.current && prog) {
+            onAddProgression(prog, prog.suggested_section || 'VERSE');
+        }
     };
 
     if (!artist) {
@@ -80,14 +86,9 @@ const ArtistLibrary: React.FC<ArtistLibraryProps> = ({ artistId, onBack, onAddPr
                             <h2 className="text-xl font-bold leading-none tracking-tight text-white uppercase italic">{artist.name}</h2>
                         </div>
                     </div>
-                    <div className="flex items-center gap-1">
-                        <button className="p-2 text-chord-cyan hover:bg-chord-cyan/10 rounded-lg transition-colors">
-                            <span className="material-symbols-outlined">filter_list</span>
-                        </button>
-                        <button className="p-2 text-chord-cyan hover:bg-chord-cyan/10 rounded-lg transition-colors">
-                            <span className="material-symbols-outlined">search</span>
-                        </button>
-                    </div>
+                    <span className="text-[10px] text-chord-cyan/40 font-mono uppercase tracking-tighter">
+                        TAP TO ADD
+                    </span>
                 </div>
             </div>
 
@@ -114,10 +115,10 @@ const ArtistLibrary: React.FC<ArtistLibraryProps> = ({ artistId, onBack, onAddPr
                                     : 'hover:bg-chord-cyan/[0.02]'
                             }`}
                             onMouseDown={() => handlePressStart(prog)}
-                            onMouseUp={handlePressEnd}
-                            onMouseLeave={handlePressEnd}
-                            onTouchStart={() => handlePressStart(prog)}
-                            onTouchEnd={handlePressEnd}
+                            onMouseUp={() => handlePressEnd(prog)}
+                            onMouseLeave={() => handlePressEnd()}
+                            onTouchStart={(e) => { e.preventDefault(); handlePressStart(prog); }}
+                            onTouchEnd={(e) => { e.preventDefault(); handlePressEnd(prog); }}
                         >
                             <div className="flex flex-col gap-1 overflow-hidden">
                                 <div className="flex items-center gap-2">
@@ -134,7 +135,9 @@ const ArtistLibrary: React.FC<ArtistLibraryProps> = ({ artistId, onBack, onAddPr
                             </div>
                             <div className="flex items-center gap-1 shrink-0 ml-4">
                                 <button
-                                    onClick={() => onAddProgression(prog, 'VERSE')}
+                                    onClick={(e) => { e.stopPropagation(); onAddProgression(prog, 'VERSE'); }}
+                                    onMouseDown={(e) => e.stopPropagation()}
+                                    onTouchStart={(e) => e.stopPropagation()}
                                     className="flex flex-col items-center justify-center w-10 h-10 border border-chord-cyan/20 rounded hover:bg-chord-cyan hover:text-black transition-all group/btn"
                                     title="Add to Verse"
                                 >
@@ -142,7 +145,9 @@ const ArtistLibrary: React.FC<ArtistLibraryProps> = ({ artistId, onBack, onAddPr
                                     <span className="material-symbols-outlined text-sm leading-none mt-[-2px]">add</span>
                                 </button>
                                 <button
-                                    onClick={() => onAddProgression(prog, 'BRIDGE')}
+                                    onClick={(e) => { e.stopPropagation(); onAddProgression(prog, 'BRIDGE'); }}
+                                    onMouseDown={(e) => e.stopPropagation()}
+                                    onTouchStart={(e) => e.stopPropagation()}
                                     className="flex flex-col items-center justify-center w-10 h-10 border border-chord-cyan/20 rounded hover:bg-chord-cyan hover:text-black transition-all group/btn"
                                     title="Add to Bridge"
                                 >
@@ -150,7 +155,9 @@ const ArtistLibrary: React.FC<ArtistLibraryProps> = ({ artistId, onBack, onAddPr
                                     <span className="material-symbols-outlined text-sm leading-none mt-[-2px]">add</span>
                                 </button>
                                 <button
-                                    onClick={() => onAddProgression(prog, 'CHORUS')}
+                                    onClick={(e) => { e.stopPropagation(); onAddProgression(prog, 'CHORUS'); }}
+                                    onMouseDown={(e) => e.stopPropagation()}
+                                    onTouchStart={(e) => e.stopPropagation()}
                                     className="flex flex-col items-center justify-center w-10 h-10 border border-chord-cyan/20 rounded hover:bg-chord-cyan hover:text-black transition-all group/btn"
                                     title="Add to Chorus"
                                 >

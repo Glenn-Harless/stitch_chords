@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import artistsData from '../data/artists.json';
 
 interface ArtistListProps {
@@ -7,6 +7,11 @@ interface ArtistListProps {
 }
 
 const ArtistList: React.FC<ArtistListProps> = ({ onBack, onSelectArtist }) => {
+    const [searchTerm, setSearchTerm] = useState('');
+    const filteredArtists = artistsData.artists.filter(artist =>
+        artist.name.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+
     return (
         <div className="relative flex h-screen w-full flex-col overflow-hidden max-w-md mx-auto border-x border-white/5 bg-chord-dark">
             <div className="scanline" />
@@ -35,6 +40,8 @@ const ArtistList: React.FC<ArtistListProps> = ({ onBack, onSelectArtist }) => {
                         className="w-full bg-transparent border-t-0 border-x-0 border-b border-zinc-800 focus:border-chord-cyan focus:ring-0 text-chord-cyan placeholder:text-zinc-700 text-lg uppercase tracking-widest py-2 px-0 transition-colors duration-300 font-medium"
                         placeholder="SEARCH_ARTIST"
                         type="text"
+                        value={searchTerm}
+                        onChange={(e) => setSearchTerm(e.target.value)}
                     />
                 </div>
             </div>
@@ -42,7 +49,7 @@ const ArtistList: React.FC<ArtistListProps> = ({ onBack, onSelectArtist }) => {
             {/* Artist List */}
             <main className="flex-1 overflow-y-auto px-6 pb-20 scrollbar-hide">
                 <div className="flex flex-col">
-                    {artistsData.artists.map(artist => (
+                    {filteredArtists.map(artist => (
                         <div
                             key={artist.id}
                             onClick={() => onSelectArtist(artist.id)}
@@ -64,13 +71,6 @@ const ArtistList: React.FC<ArtistListProps> = ({ onBack, onSelectArtist }) => {
                 </div>
             </main>
 
-            {/* Alphabet Quick Jump (Visual only) */}
-            <div className="fixed right-2 top-1/2 -translate-y-1/2 flex flex-col gap-1 pointer-events-none opacity-20">
-                {Array.from("ABCDEFGHIJKLMNOPQRSTUVWXYZ").map(char => (
-                    <span key={char} className="text-[8px] text-zinc-500 font-bold">{char}</span>
-                ))}
-            </div>
-
             {/* Footer status bar info */}
             <footer className="p-4 bg-chord-dark border-t border-zinc-900 flex justify-between items-center">
                 <div className="flex items-center gap-2">
@@ -78,7 +78,7 @@ const ArtistList: React.FC<ArtistListProps> = ({ onBack, onSelectArtist }) => {
                     <span className="text-[10px] text-zinc-500 font-mono tracking-widest uppercase">Syncing_Lib</span>
                 </div>
                 <div className="text-[10px] text-zinc-500 font-mono">
-                    {artistsData.artists.length.toString().padStart(2, '0')}_ARTISTS_FOUND
+                    {filteredArtists.length.toString().padStart(2, '0')}_ARTISTS_FOUND
                 </div>
             </footer>
         </div>

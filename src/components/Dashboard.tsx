@@ -15,7 +15,7 @@ interface DashboardProps {
     onSelectSong: (song: Song) => void;
     onNewSong: () => void;
     songs: Song[];
-    onNavigate: (view: 'dashboard' | 'library' | 'utility' | 'artists' | 'scratchpad' | 'expansion') => void;
+    onNavigate: (view: 'dashboard' | 'library' | 'utility' | 'artists' | 'scratchpad' | 'expansion' | 'vibe-browse') => void;
 }
 
 const Dashboard: React.FC<DashboardProps> = ({ onSelect, onSelectSong, onNewSong, songs, onNavigate }) => {
@@ -67,43 +67,48 @@ const Dashboard: React.FC<DashboardProps> = ({ onSelect, onSelectSong, onNewSong
                         </div>
                     </div>
 
-                    <div className="grid grid-cols-2 gap-4">
+                    <div className="grid grid-cols-3 gap-4">
                         <div
                             onClick={() => onNavigate('artists')}
-                            className="rounded border border-chord-cyan/20 bg-chord-cyan/5 p-4 flex flex-col gap-4 group hover:border-chord-cyan transition-all cursor-pointer"
+                            className="rounded border border-chord-cyan/20 bg-chord-cyan/5 p-4 flex flex-col gap-3 group hover:border-chord-cyan transition-all cursor-pointer"
                         >
                             <span className="material-symbols-outlined text-chord-cyan group-hover:text-glow transition-all">library_music</span>
                             <div>
-                                <h3 className="font-mono font-bold text-[11px] tracking-tight uppercase">ARTIST_INSPIRATION</h3>
-                                <p className="text-[9px] opacity-40 uppercase tracking-widest mt-0.5">DISCOVER</p>
+                                <h3 className="font-mono font-bold text-[10px] tracking-tight uppercase">ARTISTS</h3>
+                                <p className="text-[8px] opacity-40 uppercase tracking-widest mt-0.5">BROWSE</p>
+                            </div>
+                        </div>
+                        <div
+                            onClick={() => onNavigate('vibe-browse')}
+                            className="rounded border border-chord-cyan/20 bg-chord-cyan/5 p-4 flex flex-col gap-3 group hover:border-chord-cyan transition-all cursor-pointer"
+                        >
+                            <span className="material-symbols-outlined text-chord-cyan group-hover:text-glow transition-all">graphic_eq</span>
+                            <div>
+                                <h3 className="font-mono font-bold text-[10px] tracking-tight uppercase">VIBES</h3>
+                                <p className="text-[8px] opacity-40 uppercase tracking-widest mt-0.5">EXPLORE</p>
                             </div>
                         </div>
                         <div
                             onClick={() => onNavigate('scratchpad')}
-                            className="rounded border border-chord-cyan/20 bg-chord-cyan/5 p-4 flex flex-col gap-4 group hover:border-chord-cyan transition-all cursor-pointer"
+                            className="rounded border border-chord-cyan/20 bg-chord-cyan/5 p-4 flex flex-col gap-3 group hover:border-chord-cyan transition-all cursor-pointer"
                         >
                             <span className="material-symbols-outlined text-chord-cyan group-hover:text-glow transition-all">edit_square</span>
                             <div>
-                                <h3 className="font-mono font-bold text-[11px] tracking-tight uppercase">CUSTOM_SCRATCHPAD</h3>
-                                <p className="text-[9px] opacity-40 uppercase tracking-widest mt-0.5">PARSE_CHORDS</p>
+                                <h3 className="font-mono font-bold text-[10px] tracking-tight uppercase">SCRATCH</h3>
+                                <p className="text-[8px] opacity-40 uppercase tracking-widest mt-0.5">CUSTOM</p>
                             </div>
                         </div>
                     </div>
 
                     <div
                         onClick={() => onNavigate('expansion')}
-                        className="rounded border border-chord-cyan/20 bg-chord-card p-6 flex justify-between items-center group hover:border-chord-cyan transition-all cursor-pointer shadow-lg hover:shadow-[0_0_20px_rgba(0,212,255,0.05)] border-dashed"
+                        className="rounded border border-chord-cyan/10 bg-chord-card/50 p-3 flex justify-between items-center group hover:border-chord-cyan/30 transition-all cursor-pointer opacity-50 hover:opacity-80"
                     >
-                        <div className="flex items-center gap-4">
-                            <div className="size-10 rounded-full border border-chord-cyan/30 flex items-center justify-center group-hover:border-chord-cyan transition-colors">
-                                <span className="material-symbols-outlined text-chord-cyan">analytics</span>
-                            </div>
-                            <div>
-                                <h3 className="font-mono font-bold text-sm tracking-tight uppercase group-hover:text-chord-cyan transition-colors">EXPANSION_TECHNIQUES</h3>
-                                <p className="text-[10px] opacity-40 uppercase tracking-widest mt-0.5">CREATIVE_ENGINE_V4.0</p>
-                            </div>
+                        <div className="flex items-center gap-3">
+                            <span className="material-symbols-outlined text-chord-cyan/40 text-sm">analytics</span>
+                            <span className="font-mono text-[10px] tracking-tight uppercase text-zinc-500">Expansion Techniques</span>
                         </div>
-                        <span className="material-symbols-outlined text-chord-cyan/40 group-hover:text-chord-cyan">bolt</span>
+                        <span className="material-symbols-outlined text-chord-cyan/20 text-sm">chevron_right</span>
                     </div>
                 </div>
             </section>
@@ -180,11 +185,11 @@ const Dashboard: React.FC<DashboardProps> = ({ onSelect, onSelectSong, onNewSong
                         <span className="text-[9px] font-bold uppercase tracking-widest">Library</span>
                     </button>
                     <button
-                        onClick={() => onNavigate('utility')}
+                        onClick={() => onNavigate('artists')}
                         className="flex flex-col items-center gap-1 opacity-40 hover:opacity-80 transition-opacity"
                     >
-                        <span className="material-symbols-outlined text-xl">tune</span>
-                        <span className="text-[9px] font-bold uppercase tracking-widest">Utility</span>
+                        <span className="material-symbols-outlined text-xl">library_music</span>
+                        <span className="text-[9px] font-bold uppercase tracking-widest">Artists</span>
                     </button>
                 </div>
             </footer>

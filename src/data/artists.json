@@ -28,7 +28,7 @@
                         },
                         {
                             "root": "F",
-                            "quality": "maj7(add6)",
+                            "quality": "maj7add6",
                             "notes": "F A C E D"
                         },
                         {
@@ -53,7 +53,8 @@
                         }
                     ],
                     "suggested_section": "VERSE",
-                    "vibe": "Emotional drift, floating sadness"
+                    "vibe": "Emotional drift, floating sadness",
+                    "mood_tags": ["melancholy", "dreamy", "ethereal"]
                 },
                 {
                     "id": "apparat_02",
@@ -93,7 +94,8 @@
                         }
                     ],
                     "suggested_section": "CHORUS",
-                    "vibe": "Building tension, slow release"
+                    "vibe": "Building tension, slow release",
+                    "mood_tags": ["building", "tense", "atmospheric"]
                 },
                 {
                     "id": "apparat_03",
@@ -138,7 +140,49 @@
                         }
                     ],
                     "suggested_section": "VERSE",
-                    "vibe": "Goodbye, floating away"
+                    "vibe": "Goodbye, floating away",
+                    "mood_tags": ["melancholy", "dreamy", "ethereal"]
+                },
+                {
+                    "id": "apparat_04",
+                    "name": "i - III - VII - iv",
+                    "bpm": 108,
+                    "key": "Dm",
+                    "chords": [
+                        {
+                            "root": "D",
+                            "quality": "m7",
+                            "notes": "D F A C"
+                        },
+                        {
+                            "root": "D",
+                            "quality": "m9",
+                            "notes": "D F A C E"
+                        },
+                        {
+                            "root": "F",
+                            "quality": "maj7",
+                            "notes": "F A C E"
+                        },
+                        {
+                            "root": "C",
+                            "quality": "sus2",
+                            "notes": "C D G"
+                        },
+                        {
+                            "root": "C",
+                            "quality": "add9",
+                            "notes": "C E G D"
+                        },
+                        {
+                            "root": "G",
+                            "quality": "m7",
+                            "notes": "G Bb D F"
+                        }
+                    ],
+                    "suggested_section": "BRIDGE",
+                    "vibe": "Fractured memory, dissolving outward",
+                    "mood_tags": ["melancholy", "atmospheric", "ethereal"]
                 }
             ]
         },
@@ -175,7 +219,7 @@
                         },
                         {
                             "root": "G",
-                            "quality": "maj7(#11)",
+                            "quality": "maj7#11",
                             "notes": "G B D F# C#"
                         },
                         {
@@ -185,7 +229,8 @@
                         }
                     ],
                     "suggested_section": "BUILD",
-                    "vibe": "Open Eye Signal energy"
+                    "vibe": "Open Eye Signal energy",
+                    "mood_tags": ["driving", "electronic", "building", "hypnotic"]
                 },
                 {
                     "id": "hopkins_02",
@@ -200,12 +245,13 @@
                         },
                         {
                             "root": "G",
-                            "quality": "maj7(#11)",
+                            "quality": "maj7#11",
                             "notes": "G B D F# C#"
                         }
                     ],
                     "suggested_section": "DROP",
-                    "vibe": "Hypnotic two-chord loop"
+                    "vibe": "Hypnotic two-chord loop",
+                    "mood_tags": ["hypnotic", "electronic", "driving"]
                 },
                 {
                     "id": "hopkins_03",
@@ -230,7 +276,7 @@
                         },
                         {
                             "root": "F",
-                            "quality": "maj7(#11)",
+                            "quality": "maj7#11",
                             "notes": "F A C E B"
                         },
                         {
@@ -250,7 +296,8 @@
                         }
                     ],
                     "suggested_section": "AMBIENT",
-                    "vibe": "Immunity calm, patient drift"
+                    "vibe": "Immunity calm, patient drift",
+                    "mood_tags": ["ambient", "dreamy", "contemplative"]
                 },
                 {
                     "id": "hopkins_04",
@@ -290,7 +337,131 @@
                         }
                     ],
                     "suggested_section": "DROP",
-                    "vibe": "Everything Connected drive"
+                    "vibe": "Everything Connected drive",
+                    "mood_tags": ["driving", "electronic", "building"]
+                },
+                {
+                    "id": "hopkins_05",
+                    "name": "i - VII - VI - iv",
+                    "bpm": 80,
+                    "key": "Am",
+                    "chords": [
+                        {
+                            "root": "A",
+                            "quality": "m7",
+                            "notes": "A C E G"
+                        },
+                        {
+                            "root": "A",
+                            "quality": "m9",
+                            "notes": "A C E G B"
+                        },
+                        {
+                            "root": "G",
+                            "quality": "add9",
+                            "notes": "G B D A"
+                        },
+                        {
+                            "root": "F",
+                            "quality": "maj7",
+                            "notes": "F A C E"
+                        },
+                        {
+                            "root": "F",
+                            "quality": "maj9",
+                            "notes": "F A C E G"
+                        },
+                        {
+                            "root": "D",
+                            "quality": "m9",
+                            "notes": "D F A C E"
+                        }
+                    ],
+                    "suggested_section": "VERSE",
+                    "vibe": "Immunity patience, slow unfolding",
+                    "mood_tags": ["contemplative", "ambient", "atmospheric"]
+                },
+                {
+                    "id": "hopkins_06",
+                    "name": "i - VII - bVI - VII",
+                    "bpm": 130,
+                    "key": "Cm",
+                    "chords": [
+                        {
+                            "root": "C",
+                            "quality": "m7",
+                            "notes": "C Eb G Bb"
+                        },
+                        {
+                            "root": "C",
+                            "quality": "m9",
+                            "notes": "C Eb G Bb D"
+                        },
+                        {
+                            "root": "Bb",
+                            "quality": "add9",
+                            "notes": "Bb D F C"
+                        },
+                        {
+                            "root": "Ab",
+                            "quality": "maj7",
+                            "notes": "Ab C Eb G"
+                        },
+                        {
+                            "root": "Bb",
+                            "quality": "sus4",
+                            "notes": "Bb Eb F"
+                        },
+                        {
+                            "root": "Bb",
+                            "quality": "sus2",
+                            "notes": "Bb C F"
+                        }
+                    ],
+                    "suggested_section": "CHORUS",
+                    "vibe": "Luminous Beings release, euphoric peak",
+                    "mood_tags": ["euphoria", "driving", "electronic"]
+                },
+                {
+                    "id": "hopkins_07",
+                    "name": "i - iv - VI - III",
+                    "bpm": 68,
+                    "key": "Em",
+                    "chords": [
+                        {
+                            "root": "E",
+                            "quality": "m9",
+                            "notes": "E G B D F#"
+                        },
+                        {
+                            "root": "E",
+                            "quality": "m11",
+                            "notes": "E G B D F# A"
+                        },
+                        {
+                            "root": "A",
+                            "quality": "m7",
+                            "notes": "A C E G"
+                        },
+                        {
+                            "root": "C",
+                            "quality": "maj9",
+                            "notes": "C E G B D"
+                        },
+                        {
+                            "root": "G",
+                            "quality": "maj7",
+                            "notes": "G B D F#"
+                        },
+                        {
+                            "root": "G",
+                            "quality": "6",
+                            "notes": "G B D E"
+                        }
+                    ],
+                    "suggested_section": "BRIDGE",
+                    "vibe": "Sit Around The Fire stillness, suspended time",
+                    "mood_tags": ["ambient", "ethereal", "contemplative"]
                 }
             ]
         },
@@ -312,7 +483,7 @@
                         },
                         {
                             "root": "G",
-                            "quality": "m(add11)",
+                            "quality": "madd11",
                             "notes": "G Bb D C"
                         },
                         {
@@ -322,7 +493,7 @@
                         },
                         {
                             "root": "Bb",
-                            "quality": "maj7/D",
+                            "quality": "maj7",
                             "notes": "D F Bb A"
                         },
                         {
@@ -332,12 +503,13 @@
                         },
                         {
                             "root": "C",
-                            "quality": "m(add9)",
+                            "quality": "madd9",
                             "notes": "C Eb G D"
                         }
                     ],
                     "suggested_section": "VERSE",
-                    "vibe": "Suspirium sadness, stepwise bass"
+                    "vibe": "Suspirium sadness, stepwise bass",
+                    "mood_tags": ["melancholy", "dark", "cinematic"]
                 },
                 {
                     "id": "yorke_02",
@@ -377,7 +549,8 @@
                         }
                     ],
                     "suggested_section": "CHORUS",
-                    "vibe": "Bittersweet resolve, major-minor shift"
+                    "vibe": "Bittersweet resolve, major-minor shift",
+                    "mood_tags": ["melancholy", "warm", "contemplative"]
                 },
                 {
                     "id": "yorke_03",
@@ -422,7 +595,8 @@
                         }
                     ],
                     "suggested_section": "BRIDGE",
-                    "vibe": "Dawn Chorus ache, unresolved"
+                    "vibe": "Dawn Chorus ache, unresolved",
+                    "mood_tags": ["melancholy", "contemplative", "tense"]
                 }
             ]
         },
@@ -474,7 +648,8 @@
                         }
                     ],
                     "suggested_section": "VERSE",
-                    "vibe": "Exit Music gravity, slow descent"
+                    "vibe": "Exit Music gravity, slow descent",
+                    "mood_tags": ["dark", "cinematic", "melancholy", "atmospheric"]
                 },
                 {
                     "id": "radiohead_02",
@@ -519,7 +694,8 @@
                         }
                     ],
                     "suggested_section": "CHORUS",
-                    "vibe": "Weird Fishes shimmer, arpeggiated"
+                    "vibe": "Weird Fishes shimmer, arpeggiated",
+                    "mood_tags": ["dreamy", "ethereal", "hypnotic"]
                 },
                 {
                     "id": "radiohead_03",
@@ -539,7 +715,7 @@
                         },
                         {
                             "root": "Eb",
-                            "quality": "maj7(#11)",
+                            "quality": "maj7#11",
                             "notes": "Eb G Bb D A"
                         },
                         {
@@ -559,7 +735,54 @@
                         }
                     ],
                     "suggested_section": "VERSE",
-                    "vibe": "Pyramid Song mystery, suspended loop"
+                    "vibe": "Pyramid Song mystery, suspended loop",
+                    "mood_tags": ["hypnotic", "dark", "contemplative", "atmospheric"]
+                },
+                {
+                    "id": "radiohead_04",
+                    "name": "i - bVI - bIII - bVII",
+                    "bpm": 92,
+                    "key": "Am",
+                    "chords": [
+                        {
+                            "root": "A",
+                            "quality": "m7",
+                            "notes": "A C E G"
+                        },
+                        {
+                            "root": "A",
+                            "quality": "madd9",
+                            "notes": "A C E B"
+                        },
+                        {
+                            "root": "F",
+                            "quality": "maj7#11",
+                            "notes": "F A C E B"
+                        },
+                        {
+                            "root": "C",
+                            "quality": "maj7",
+                            "notes": "C E G B"
+                        },
+                        {
+                            "root": "C",
+                            "quality": "add9",
+                            "notes": "C E G D"
+                        },
+                        {
+                            "root": "G",
+                            "quality": "sus4",
+                            "notes": "G C D"
+                        },
+                        {
+                            "root": "G",
+                            "quality": "sus2",
+                            "notes": "G A D"
+                        }
+                    ],
+                    "suggested_section": "BRIDGE",
+                    "vibe": "How To Disappear fracture, unresolved drift",
+                    "mood_tags": ["dark", "tense", "atmospheric", "contemplative"]
                 }
             ]
         },
@@ -611,7 +834,8 @@
                         }
                     ],
                     "suggested_section": "VERSE",
-                    "vibe": "Kerala warmth, no tension just flow"
+                    "vibe": "Kerala warmth, no tension just flow",
+                    "mood_tags": ["warm", "groovy", "organic"]
                 },
                 {
                     "id": "bonobo_02",
@@ -656,7 +880,54 @@
                         }
                     ],
                     "suggested_section": "CHORUS",
-                    "vibe": "Cirrus lift, jazz-adjacent warmth"
+                    "vibe": "Cirrus lift, jazz-adjacent warmth",
+                    "mood_tags": ["warm", "euphoria", "groovy"]
+                },
+                {
+                    "id": "bonobo_03",
+                    "name": "i - VI - III - v",
+                    "bpm": 100,
+                    "key": "Gm",
+                    "chords": [
+                        {
+                            "root": "G",
+                            "quality": "m9",
+                            "notes": "G Bb D F A"
+                        },
+                        {
+                            "root": "G",
+                            "quality": "m7",
+                            "notes": "G Bb D F"
+                        },
+                        {
+                            "root": "Eb",
+                            "quality": "maj9",
+                            "notes": "Eb G Bb D F"
+                        },
+                        {
+                            "root": "Bb",
+                            "quality": "maj7",
+                            "notes": "Bb D F A"
+                        },
+                        {
+                            "root": "Bb",
+                            "quality": "6",
+                            "notes": "Bb D F G"
+                        },
+                        {
+                            "root": "D",
+                            "quality": "m7",
+                            "notes": "D F A C"
+                        },
+                        {
+                            "root": "D",
+                            "quality": "m9",
+                            "notes": "D F A C E"
+                        }
+                    ],
+                    "suggested_section": "BRIDGE",
+                    "vibe": "Linked warmth, gentle detour",
+                    "mood_tags": ["warm", "organic", "dreamy"]
                 }
             ]
         },
@@ -703,7 +974,8 @@
                         }
                     ],
                     "suggested_section": "VERSE",
-                    "vibe": "Says slow burn, drop notes don't add"
+                    "vibe": "Says slow burn, drop notes don't add",
+                    "mood_tags": ["contemplative", "ambient", "organic"]
                 },
                 {
                     "id": "frahm_02",
@@ -718,7 +990,7 @@
                         },
                         {
                             "root": "A",
-                            "quality": "m(add9)",
+                            "quality": "madd9",
                             "notes": "A C E B"
                         },
                         {
@@ -733,7 +1005,7 @@
                         },
                         {
                             "root": "D",
-                            "quality": "m(add9)",
+                            "quality": "madd9",
                             "notes": "D F A E"
                         },
                         {
@@ -743,7 +1015,8 @@
                         }
                     ],
                     "suggested_section": "AMBIENT",
-                    "vibe": "Re minimal, patient evolution"
+                    "vibe": "Re minimal, patient evolution",
+                    "mood_tags": ["ambient", "contemplative", "organic"]
                 },
                 {
                     "id": "frahm_03",
@@ -783,7 +1056,90 @@
                         }
                     ],
                     "suggested_section": "BUILD",
-                    "vibe": "All Melody pulse, rhythmic minimalism"
+                    "vibe": "All Melody pulse, rhythmic minimalism",
+                    "mood_tags": ["driving", "hypnotic", "organic"]
+                },
+                {
+                    "id": "frahm_04",
+                    "name": "I - V - vi - IV",
+                    "bpm": 76,
+                    "key": "G",
+                    "chords": [
+                        {
+                            "root": "G",
+                            "quality": "maj7",
+                            "notes": "G B D F#"
+                        },
+                        {
+                            "root": "G",
+                            "quality": "6",
+                            "notes": "G B D E"
+                        },
+                        {
+                            "root": "D",
+                            "quality": "sus2",
+                            "notes": "D E A"
+                        },
+                        {
+                            "root": "D",
+                            "quality": "add9",
+                            "notes": "D F# A E"
+                        },
+                        {
+                            "root": "E",
+                            "quality": "m7",
+                            "notes": "E G B D"
+                        },
+                        {
+                            "root": "C",
+                            "quality": "maj9",
+                            "notes": "C E G B D"
+                        }
+                    ],
+                    "suggested_section": "CHORUS",
+                    "vibe": "My Friend The Forest opening, patient bloom",
+                    "mood_tags": ["warm", "contemplative", "organic"]
+                },
+                {
+                    "id": "frahm_05",
+                    "name": "i - VI - III - VII",
+                    "bpm": 66,
+                    "key": "Dm",
+                    "chords": [
+                        {
+                            "root": "D",
+                            "quality": "m7",
+                            "notes": "D F A C"
+                        },
+                        {
+                            "root": "D",
+                            "quality": "madd9",
+                            "notes": "D F A E"
+                        },
+                        {
+                            "root": "Bb",
+                            "quality": "maj7",
+                            "notes": "Bb D F A"
+                        },
+                        {
+                            "root": "F",
+                            "quality": "maj9(no3)",
+                            "notes": "F C E G"
+                        },
+                        {
+                            "root": "C",
+                            "quality": "sus4",
+                            "notes": "C F G"
+                        },
+                        {
+                            "root": "C",
+                            "quality": "sus2",
+                            "notes": "C D G"
+                        }
+                    ],
+                    "suggested_section": "BRIDGE",
+                    "vibe": "Ambre stillness, barely there",
+                    "mood_tags": ["ambient", "contemplative", "ethereal"]
                 }
             ]
         },
@@ -825,7 +1181,8 @@
                         }
                     ],
                     "suggested_section": "LOOP",
-                    "vibe": "Parallel hypnotic, stop before resolving"
+                    "vibe": "Parallel hypnotic, stop before resolving",
+                    "mood_tags": ["hypnotic", "electronic", "atmospheric"]
                 },
                 {
                     "id": "fourtet_02",
@@ -870,13 +1227,127 @@
                         }
                     ],
                     "suggested_section": "DROP",
-                    "vibe": "Baby euphoria, let rhythm do the work"
+                    "vibe": "Baby euphoria, let rhythm do the work",
+                    "mood_tags": ["euphoria", "driving", "electronic", "groovy"]
+                },
+                {
+                    "id": "fourtet_03",
+                    "name": "I - vi - IV - I",
+                    "bpm": 126,
+                    "key": "Bb",
+                    "chords": [
+                        {
+                            "root": "Bb",
+                            "quality": "maj7",
+                            "notes": "Bb D F A"
+                        },
+                        {
+                            "root": "Bb",
+                            "quality": "add9",
+                            "notes": "Bb D F C"
+                        },
+                        {
+                            "root": "G",
+                            "quality": "m7",
+                            "notes": "G Bb D F"
+                        },
+                        {
+                            "root": "Eb",
+                            "quality": "maj9",
+                            "notes": "Eb G Bb D F"
+                        },
+                        {
+                            "root": "Bb",
+                            "quality": "6",
+                            "notes": "Bb D F G"
+                        }
+                    ],
+                    "suggested_section": "VERSE",
+                    "vibe": "Two Thousand And Seventeen patience, looping warmth",
+                    "mood_tags": ["hypnotic", "warm", "atmospheric"]
+                },
+                {
+                    "id": "fourtet_04",
+                    "name": "vi - IV - I - V",
+                    "bpm": 124,
+                    "key": "D",
+                    "chords": [
+                        {
+                            "root": "B",
+                            "quality": "m9",
+                            "notes": "B D F# A C#"
+                        },
+                        {
+                            "root": "G",
+                            "quality": "maj7",
+                            "notes": "G B D F#"
+                        },
+                        {
+                            "root": "G",
+                            "quality": "6/9",
+                            "notes": "G B D E A"
+                        },
+                        {
+                            "root": "D",
+                            "quality": "add9",
+                            "notes": "D F# A E"
+                        },
+                        {
+                            "root": "A",
+                            "quality": "sus4",
+                            "notes": "A D E"
+                        },
+                        {
+                            "root": "A",
+                            "quality": "add9",
+                            "notes": "A C# E B"
+                        }
+                    ],
+                    "suggested_section": "CHORUS",
+                    "vibe": "Hands lifted, textured euphoria",
+                    "mood_tags": ["euphoria", "electronic", "driving"]
+                },
+                {
+                    "id": "fourtet_05",
+                    "name": "I - IV - iv - I",
+                    "bpm": 118,
+                    "key": "Eb",
+                    "chords": [
+                        {
+                            "root": "Eb",
+                            "quality": "maj7",
+                            "notes": "Eb G Bb D"
+                        },
+                        {
+                            "root": "Eb",
+                            "quality": "maj9",
+                            "notes": "Eb G Bb D F"
+                        },
+                        {
+                            "root": "Ab",
+                            "quality": "maj7",
+                            "notes": "Ab C Eb G"
+                        },
+                        {
+                            "root": "Ab",
+                            "quality": "m7",
+                            "notes": "Ab Cb Eb Gb"
+                        },
+                        {
+                            "root": "Eb",
+                            "quality": "add9",
+                            "notes": "Eb G Bb F"
+                        }
+                    ],
+                    "suggested_section": "BRIDGE",
+                    "vibe": "Planet suspended, major-minor shimmer",
+                    "mood_tags": ["dreamy", "atmospheric", "electronic"]
                 }
             ]
         },
         {
             "id": "olafur_arnalds",
-            "name": "ÓLAFUR ARNALDS",
+            "name": "\u00d3LAFUR ARNALDS",
             "genre": "NEO-CLASSICAL / AMBIENT",
             "progressions": [
                 {
@@ -892,7 +1363,7 @@
                         },
                         {
                             "root": "E",
-                            "quality": "m(add11)",
+                            "quality": "madd11",
                             "notes": "E G B A"
                         },
                         {
@@ -902,7 +1373,7 @@
                         },
                         {
                             "root": "G",
-                            "quality": "maj7/B",
+                            "quality": "maj7",
                             "notes": "B D G F#"
                         },
                         {
@@ -912,7 +1383,8 @@
                         }
                     ],
                     "suggested_section": "VERSE",
-                    "vibe": "Near Light delicate, voice-led patience"
+                    "vibe": "Near Light delicate, voice-led patience",
+                    "mood_tags": ["ethereal", "contemplative", "ambient"]
                 },
                 {
                     "id": "arnalds_02",
@@ -957,7 +1429,90 @@
                         }
                     ],
                     "suggested_section": "AMBIENT",
-                    "vibe": "Saman stillness, diatonic tenderness"
+                    "vibe": "Saman stillness, diatonic tenderness",
+                    "mood_tags": ["ambient", "warm", "contemplative"]
+                },
+                {
+                    "id": "arnalds_03",
+                    "name": "i - VI - iv - VII",
+                    "bpm": 70,
+                    "key": "Am",
+                    "chords": [
+                        {
+                            "root": "A",
+                            "quality": "m7",
+                            "notes": "A C E G"
+                        },
+                        {
+                            "root": "A",
+                            "quality": "madd9",
+                            "notes": "A C E B"
+                        },
+                        {
+                            "root": "F",
+                            "quality": "maj7",
+                            "notes": "F A C E"
+                        },
+                        {
+                            "root": "D",
+                            "quality": "m7",
+                            "notes": "D F A C"
+                        },
+                        {
+                            "root": "D",
+                            "quality": "m9",
+                            "notes": "D F A C E"
+                        },
+                        {
+                            "root": "G",
+                            "quality": "add9",
+                            "notes": "G B D A"
+                        }
+                    ],
+                    "suggested_section": "CHORUS",
+                    "vibe": "Near Light arriving, quiet climax",
+                    "mood_tags": ["ethereal", "warm", "cinematic"]
+                },
+                {
+                    "id": "arnalds_04",
+                    "name": "i - III - VII - VI",
+                    "bpm": 62,
+                    "key": "Em",
+                    "chords": [
+                        {
+                            "root": "E",
+                            "quality": "m7",
+                            "notes": "E G B D"
+                        },
+                        {
+                            "root": "E",
+                            "quality": "m9",
+                            "notes": "E G B D F#"
+                        },
+                        {
+                            "root": "G",
+                            "quality": "maj7",
+                            "notes": "G B D F#"
+                        },
+                        {
+                            "root": "D",
+                            "quality": "sus2",
+                            "notes": "D E A"
+                        },
+                        {
+                            "root": "D",
+                            "quality": "add9",
+                            "notes": "D F# A E"
+                        },
+                        {
+                            "root": "C",
+                            "quality": "maj9",
+                            "notes": "C E G B D"
+                        }
+                    ],
+                    "suggested_section": "BRIDGE",
+                    "vibe": "Particles dissolving, weightless passage",
+                    "mood_tags": ["ambient", "contemplative", "ethereal"]
                 }
             ]
         },
@@ -999,12 +1554,13 @@
                         },
                         {
                             "root": "A",
-                            "quality": "add6",
+                            "quality": "6",
                             "notes": "A C# E F#"
                         }
                     ],
                     "suggested_section": "VERSE",
-                    "vibe": "Awake golden hour, bright and safe"
+                    "vibe": "Awake golden hour, bright and safe",
+                    "mood_tags": ["warm", "dreamy", "euphoria"]
                 },
                 {
                     "id": "tycho_02",
@@ -1044,7 +1600,54 @@
                         }
                     ],
                     "suggested_section": "CHORUS",
-                    "vibe": "Dive warmth, elevated classic"
+                    "vibe": "Dive warmth, elevated classic",
+                    "mood_tags": ["warm", "dreamy", "euphoria"]
+                },
+                {
+                    "id": "tycho_03",
+                    "name": "I - IV - vi - V",
+                    "bpm": 110,
+                    "key": "A",
+                    "chords": [
+                        {
+                            "root": "A",
+                            "quality": "maj7",
+                            "notes": "A C# E G#"
+                        },
+                        {
+                            "root": "A",
+                            "quality": "add9",
+                            "notes": "A C# E B"
+                        },
+                        {
+                            "root": "D",
+                            "quality": "maj9",
+                            "notes": "D F# A C# E"
+                        },
+                        {
+                            "root": "D",
+                            "quality": "6",
+                            "notes": "D F# A B"
+                        },
+                        {
+                            "root": "F#",
+                            "quality": "m7",
+                            "notes": "F# A C# E"
+                        },
+                        {
+                            "root": "E",
+                            "quality": "sus4",
+                            "notes": "E A B"
+                        },
+                        {
+                            "root": "E",
+                            "quality": "sus2",
+                            "notes": "E F# B"
+                        }
+                    ],
+                    "suggested_section": "BRIDGE",
+                    "vibe": "Past Is Prologue golden haze, suspended sun",
+                    "mood_tags": ["warm", "dreamy", "atmospheric"]
                 }
             ]
         },
@@ -1086,7 +1689,8 @@
                         }
                     ],
                     "suggested_section": "VERSE",
-                    "vibe": "Teardrop darkness, avoid resolution"
+                    "vibe": "Teardrop darkness, avoid resolution",
+                    "mood_tags": ["dark", "atmospheric", "hazy", "tense"]
                 },
                 {
                     "id": "massive_02",
@@ -1126,7 +1730,8 @@
                         }
                     ],
                     "suggested_section": "CHORUS",
-                    "vibe": "Angel weight, suspended gravity"
+                    "vibe": "Angel weight, suspended gravity",
+                    "mood_tags": ["dark", "ethereal", "atmospheric"]
                 },
                 {
                     "id": "massive_03",
@@ -1166,7 +1771,8 @@
                         }
                     ],
                     "suggested_section": "VERSE",
-                    "vibe": "Unfinished Sympathy longing"
+                    "vibe": "Unfinished Sympathy longing",
+                    "mood_tags": ["melancholy", "cinematic", "warm"]
                 },
                 {
                     "id": "massive_04",
@@ -1206,7 +1812,8 @@
                         }
                     ],
                     "suggested_section": "BRIDGE",
-                    "vibe": "Safe From Harm, building tension"
+                    "vibe": "Safe From Harm, building tension",
+                    "mood_tags": ["building", "tense", "dark"]
                 },
                 {
                     "id": "massive_05",
@@ -1246,7 +1853,8 @@
                         }
                     ],
                     "suggested_section": "AMBIENT",
-                    "vibe": "Dissolved Girl haze, no resolution"
+                    "vibe": "Dissolved Girl haze, no resolution",
+                    "mood_tags": ["hazy", "dark", "atmospheric"]
                 }
             ]
         },
@@ -1288,7 +1896,8 @@
                         }
                     ],
                     "suggested_section": "DROP",
-                    "vibe": "Faded midnight drive, bass does the rest"
+                    "vibe": "Faded midnight drive, bass does the rest",
+                    "mood_tags": ["driving", "dark", "hazy", "electronic"]
                 },
                 {
                     "id": "zhu_02",
@@ -1328,7 +1937,8 @@
                         }
                     ],
                     "suggested_section": "VERSE",
-                    "vibe": "In The Morning haze, building"
+                    "vibe": "In The Morning haze, building",
+                    "mood_tags": ["hazy", "building", "electronic"]
                 },
                 {
                     "id": "zhu_03",
@@ -1368,7 +1978,8 @@
                         }
                     ],
                     "suggested_section": "BUILD",
-                    "vibe": "Working For It grind, club-functional"
+                    "vibe": "Working For It grind, club-functional",
+                    "mood_tags": ["driving", "groovy", "electronic"]
                 },
                 {
                     "id": "zhu_04",
@@ -1408,7 +2019,49 @@
                         }
                     ],
                     "suggested_section": "CHORUS",
-                    "vibe": "My Life neon pulse"
+                    "vibe": "My Life neon pulse",
+                    "mood_tags": ["electronic", "driving", "euphoria"]
+                },
+                {
+                    "id": "zhu_05",
+                    "name": "i - bVI - VII - iv",
+                    "bpm": 120,
+                    "key": "Gm",
+                    "chords": [
+                        {
+                            "root": "G",
+                            "quality": "m7",
+                            "notes": "G Bb D F"
+                        },
+                        {
+                            "root": "G",
+                            "quality": "m9",
+                            "notes": "G Bb D F A"
+                        },
+                        {
+                            "root": "Eb",
+                            "quality": "maj7",
+                            "notes": "Eb G Bb D"
+                        },
+                        {
+                            "root": "F",
+                            "quality": "7sus4",
+                            "notes": "F Bb C Eb"
+                        },
+                        {
+                            "root": "C",
+                            "quality": "m7",
+                            "notes": "C Eb G Bb"
+                        },
+                        {
+                            "root": "C",
+                            "quality": "m9",
+                            "notes": "C Eb G Bb D"
+                        }
+                    ],
+                    "suggested_section": "BRIDGE",
+                    "vibe": "Nightcrawler tension, suspended dark corridor",
+                    "mood_tags": ["dark", "tense", "electronic", "atmospheric"]
                 }
             ]
         },
@@ -1445,12 +2098,13 @@
                         },
                         {
                             "root": "F",
-                            "quality": "m(add9)",
+                            "quality": "madd9",
                             "notes": "F Ab C G"
                         }
                     ],
                     "suggested_section": "VERSE",
-                    "vibe": "Skinny Love ache, major-minor collapse"
+                    "vibe": "Skinny Love ache, major-minor collapse",
+                    "mood_tags": ["melancholy", "warm", "contemplative"]
                 },
                 {
                     "id": "boniver_02",
@@ -1495,7 +2149,8 @@
                         }
                     ],
                     "suggested_section": "CHORUS",
-                    "vibe": "Holocene vastness, wide open"
+                    "vibe": "Holocene vastness, wide open",
+                    "mood_tags": ["cinematic", "ethereal", "dreamy"]
                 },
                 {
                     "id": "boniver_03",
@@ -1540,7 +2195,8 @@
                         }
                     ],
                     "suggested_section": "BRIDGE",
-                    "vibe": "Calgary shimmer, suspended resolve"
+                    "vibe": "Calgary shimmer, suspended resolve",
+                    "mood_tags": ["dreamy", "ethereal", "contemplative"]
                 },
                 {
                     "id": "boniver_04",
@@ -1580,7 +2236,8 @@
                         }
                     ],
                     "suggested_section": "VERSE",
-                    "vibe": "Re:Stacks quiet, fingerpicked"
+                    "vibe": "Re:Stacks quiet, fingerpicked",
+                    "mood_tags": ["contemplative", "warm", "organic"]
                 },
                 {
                     "id": "boniver_05",
@@ -1620,7 +2277,8 @@
                         }
                     ],
                     "suggested_section": "CHORUS",
-                    "vibe": "33 GOD strange beauty, modal shift"
+                    "vibe": "33 GOD strange beauty, modal shift",
+                    "mood_tags": ["ethereal", "dreamy", "atmospheric"]
                 },
                 {
                     "id": "boniver_06",
@@ -1665,7 +2323,8 @@
                         }
                     ],
                     "suggested_section": "AMBIENT",
-                    "vibe": "Woods layered voices, stacked harmonies"
+                    "vibe": "Woods layered voices, stacked harmonies",
+                    "mood_tags": ["ambient", "ethereal", "warm", "organic"]
                 }
             ]
         },
@@ -1717,7 +2376,8 @@
                         }
                     ],
                     "suggested_section": "VERSE",
-                    "vibe": "Gold lazy groove, laid back"
+                    "vibe": "Gold lazy groove, laid back",
+                    "mood_tags": ["groovy", "warm", "hazy"]
                 },
                 {
                     "id": "faker_02",
@@ -1762,7 +2422,8 @@
                         }
                     ],
                     "suggested_section": "CHORUS",
-                    "vibe": "Talk Is Cheap soul, singable"
+                    "vibe": "Talk Is Cheap soul, singable",
+                    "mood_tags": ["warm", "groovy", "organic"]
                 },
                 {
                     "id": "faker_03",
@@ -1812,7 +2473,8 @@
                         }
                     ],
                     "suggested_section": "VERSE",
-                    "vibe": "I'm Into You jazzy, ii-V-I turnaround"
+                    "vibe": "I'm Into You jazzy, ii-V-I turnaround",
+                    "mood_tags": ["groovy", "warm", "organic"]
                 },
                 {
                     "id": "faker_04",
@@ -1857,7 +2519,8 @@
                         }
                     ],
                     "suggested_section": "BRIDGE",
-                    "vibe": "No Diggity tension, dominant pull"
+                    "vibe": "No Diggity tension, dominant pull",
+                    "mood_tags": ["tense", "groovy", "dark", "driving"]
                 },
                 {
                     "id": "faker_05",
@@ -1902,7 +2565,8 @@
                         }
                     ],
                     "suggested_section": "OUTRO",
-                    "vibe": "Cigarettes & Loneliness warm, jazzy fade"
+                    "vibe": "Cigarettes & Loneliness warm, jazzy fade",
+                    "mood_tags": ["warm", "melancholy", "hazy", "groovy"]
                 }
             ]
         }

@@ -7,8 +7,9 @@ import ArtistList from './components/ArtistList'
 import ArtistLibrary from './components/ArtistLibrary'
 import ExpansionMenu from './components/ExpansionMenu'
 import ChordScratchpad from './components/ChordScratchpad'
+import VibeBrowser from './components/VibeBrowser'
 
-type ViewType = 'dashboard' | 'active' | 'library' | 'utility' | 'artists' | 'artist-detail' | 'expansion' | 'scratchpad'
+type ViewType = 'dashboard' | 'active' | 'library' | 'utility' | 'artists' | 'artist-detail' | 'expansion' | 'scratchpad' | 'vibe-browse'
 
 // Generate a new empty song with unique id
 const createNewSong = () => ({
@@ -107,6 +108,7 @@ function App() {
           onEditChord={handleEditChord}
           onUpdateSections={(newSections) => setActiveSong({ ...activeSong, sections: newSections })}
           onClear={() => setActiveSong(createNewSong())}
+          artistId={selectedArtistId}
         />
       )}
 
@@ -153,6 +155,13 @@ function App() {
             setEditingTarget(null)
             setCurrentView(returnToActive ? 'active' : 'dashboard')
           }}
+          onAddProgression={handleAddProgression}
+        />
+      )}
+
+      {currentView === 'vibe-browse' && (
+        <VibeBrowser
+          onBack={() => setCurrentView('dashboard')}
           onAddProgression={handleAddProgression}
         />
       )}

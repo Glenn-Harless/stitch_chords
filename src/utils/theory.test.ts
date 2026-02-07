@@ -6,6 +6,7 @@ import {
   transposeChord,
   getChordNotes,
   getRomanNumeral,
+  getDiatonicChords,
   CHORD_QUALITY_MAP,
 } from './theory'
 
@@ -77,6 +78,11 @@ describe('parseChord', () => {
   it('parses chord with flat', () => {
     expect(parseChord('Bbmaj7')).toEqual({ root: 'Bb', quality: 'maj7' })
   })
+
+  it('strips slash bass note', () => {
+    expect(parseChord('Gmaj7/B')).toEqual({ root: 'G', quality: 'maj7' })
+    expect(parseChord('Bbmaj7/D')).toEqual({ root: 'Bb', quality: 'maj7' })
+  })
 })
 
 describe('transposeChord', () => {
@@ -114,9 +120,48 @@ describe('getChordNotes', () => {
     expect(getChordNotes('Xm7')).toEqual([])
   })
 
-  it('falls back to major triad for unsupported quality', () => {
-    // Known behavior: unsupported qualities use major triad
-    expect(getChordNotes('Cm11')).toEqual(['C', 'E', 'G'])
+  it('returns 6 notes for m11', () => {
+    expect(getChordNotes('Cm11')).toEqual(['C', 'D#', 'G', 'A#', 'D', 'F'])
+  })
+
+  it('returns correct notes for sus2', () => {
+    expect(getChordNotes('Csus2')).toEqual(['C', 'D', 'G'])
+  })
+
+  it('returns correct notes for sus4', () => {
+    expect(getChordNotes('Csus4')).toEqual(['C', 'F', 'G'])
+  })
+
+  it('returns correct notes for 6/9', () => {
+    expect(getChordNotes('C6/9')).toEqual(['C', 'E', 'G', 'A', 'D'])
+  })
+
+  it('returns correct notes for 7#9', () => {
+    expect(getChordNotes('C7#9')).toEqual(['C', 'E', 'G', 'A#', 'D#'])
+  })
+
+  it('returns correct notes for 9sus4', () => {
+    expect(getChordNotes('C9sus4')).toEqual(['C', 'F', 'G', 'A#', 'D'])
+  })
+
+  it('returns correct notes for add11', () => {
+    expect(getChordNotes('Cadd11')).toEqual(['C', 'E', 'G', 'F'])
+  })
+
+  it('returns correct notes for add9(no3)', () => {
+    expect(getChordNotes('Cadd9(no3)')).toEqual(['C', 'G', 'D'])
+  })
+
+  it('returns correct notes for maj7#11', () => {
+    expect(getChordNotes('Cmaj7#11')).toEqual(['C', 'E', 'G', 'B', 'F#'])
+  })
+
+  it('returns correct notes for madd11', () => {
+    expect(getChordNotes('Cmadd11')).toEqual(['C', 'D#', 'G', 'F'])
+  })
+
+  it('returns correct notes for maj7add6', () => {
+    expect(getChordNotes('Cmaj7add6')).toEqual(['C', 'E', 'G', 'A', 'B'])
   })
 })
 
@@ -176,8 +221,8 @@ describe('getRomanNumeral', () => {
 })
 
 describe('CHORD_QUALITY_MAP', () => {
-  it('has 20 supported qualities', () => {
-    expect(Object.keys(CHORD_QUALITY_MAP)).toHaveLength(20)
+  it('has 31 supported qualities', () => {
+    expect(Object.keys(CHORD_QUALITY_MAP)).toHaveLength(31)
   })
 
   it('includes common qualities', () => {
@@ -186,5 +231,46 @@ describe('CHORD_QUALITY_MAP', () => {
     expect(CHORD_QUALITY_MAP['7']).toBeDefined()
     expect(CHORD_QUALITY_MAP['maj7']).toBeDefined()
     expect(CHORD_QUALITY_MAP['m7']).toBeDefined()
+  })
+})
+
+describe('getDiatonicChords', () => {
+  it('returns 7 diatonic chords for C major', () => {
+    const chords = getDiatonicChords('C')
+    expect(chords).toHaveLength(7)
+    expect(chords.map(c => c.chord)).toEqual([
+      'Cmaj7', 'Dm7', 'Em7', 'Fmaj7', 'G7', 'Am7', 'Bm7b5'
+    ])
+  })
+
+  it('returns correct roman numerals for major key', () => {
+    const chords = getDiatonicChords('C')
+    expect(chords.map(c => c.roman)).toEqual([
+      'I', 'ii', 'iii', 'IV', 'V', 'vi', 'vii°'
+    ])
+  })
+
+  it('returns 7 diatonic chords for A minor', () => {
+    const chords = getDiatonicChords('Am')
+    expect(chords).toHaveLength(7)
+    expect(chords.map(c => c.chord)).toEqual([
+      'Am7', 'Bm7b5', 'Cmaj7', 'Dm7', 'Em7', 'Fmaj7', 'G7'
+    ])
+  })
+
+  it('handles flat keys', () => {
+    const chords = getDiatonicChords('Bb')
+    expect(chords[0].chord).toBe('Bbmaj7')
+    expect(chords[3].chord).toBe('Ebmaj7')
+  })
+
+  it('returns empty array for invalid key', () => {
+    expect(getDiatonicChords('X')).toEqual([])
+  })
+
+  it('includes note arrays for each chord', () => {
+    const chords = getDiatonicChords('C')
+    expect(chords[0].notes).toEqual(['C', 'E', 'G', 'B']) // Cmaj7
+    expect(chords[1].notes).toEqual(['D', 'F', 'A', 'C']) // Dm7
   })
 })

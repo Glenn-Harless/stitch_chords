@@ -3,6 +3,8 @@ import { transposeChord, getChordNotes, getRomanNumeral, getNoteIndex } from '..
 import { playChord, stopPlayback } from '../utils/audio';
 import HotSwapMenu from './HotSwapMenu';
 import SaveOverlay from './SaveOverlay';
+import InlineChordPicker from './InlineChordPicker';
+import SuggestionPanel from './SuggestionPanel';
 
 interface Section {
     name: string;
@@ -25,6 +27,7 @@ interface ActivePlayingViewProps {
     onEditChord?: (chord: string, sIdx: number, bIdx: number) => void;
     onUpdateSections?: (sections: Section[]) => void;
     onClear?: () => void;
+    artistId?: string | null;
 }
 
 // Compact key format: "C", "Am", "F#m", etc.
@@ -59,7 +62,7 @@ const getSemitonesBetweenKeys = (fromKey: string, toKey: string): number => {
     return (toIdx - fromIdx + 12) % 12;
 };
 
-const ActivePlayingView: React.FC<ActivePlayingViewProps> = ({ song, onBack, onSave, onEditChord, onUpdateSections, onClear }) => {
+const ActivePlayingView: React.FC<ActivePlayingViewProps> = ({ song, onBack, onSave, onEditChord, onUpdateSections, onClear, artistId }) => {
     const [transpose, setTranspose] = useState(0);
     const [instrument, setInstrument] = useState<'guitar' | 'keys'>('guitar');
     const [selectedChord, setSelectedChord] = useState<{ sIdx: number; bIdx: number }>({ sIdx: 0, bIdx: 0 });
@@ -70,9 +73,36 @@ const ActivePlayingView: React.FC<ActivePlayingViewProps> = ({ song, onBack, onS
     const [previewingChord, setPreviewingChord] = useState<{ sIdx: number; bIdx: number } | null>(null);
     const [dragSource, setDragSource] = useState<{ sIdx: number; bIdx: number } | null>(null);
     const [dragOverTarget, setDragOverTarget] = useState<{ sIdx: number; bIdx: number } | null>(null);
+    const [addChordTarget, setAddChordTarget] = useState<number | null>(null);
     const longPressTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
     const isLongPress = useRef(false);
     const baseKey = useRef(song.key || 'C'); // Original key of the song
+    const wakeLockRef = useRef<WakeLockSentinel | null>(null);
+
+    // Wake Lock API
+    useEffect(() => {
+        if (!wakeLockEnabled) {
+            wakeLockRef.current?.release().catch(() => {});
+            wakeLockRef.current = null;
+            return;
+        }
+        let cancelled = false;
+        const requestWakeLock = async () => {
+            try {
+                if ('wakeLock' in navigator) {
+                    const sentinel = await navigator.wakeLock.request('screen');
+                    if (cancelled) { sentinel.release(); return; }
+                    wakeLockRef.current = sentinel;
+                }
+            } catch { /* device doesn't support wake lock or permission denied */ }
+        };
+        requestWakeLock();
+        return () => {
+            cancelled = true;
+            wakeLockRef.current?.release().catch(() => {});
+            wakeLockRef.current = null;
+        };
+    }, [wakeLockEnabled]);
 
     // Reset state when a different song is loaded
     useEffect(() => {
@@ -104,8 +134,15 @@ const ActivePlayingView: React.FC<ActivePlayingViewProps> = ({ song, onBack, onS
         setShowSaveOverlay(false);
     };
 
-    const handleChordPressStart = (sIdx: number, bIdx: number, chord: string) => {
+    // Pointer-based drag and drop (works on mobile and desktop)
+    const dragLongPressTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+    const isDragging = useRef(false);
+
+    const handlePointerDown = (e: React.PointerEvent, sIdx: number, bIdx: number, chord: string) => {
+        isDragging.current = false;
         isLongPress.current = false;
+
+        // Start long-press timer for audio preview (300ms)
         longPressTimer.current = setTimeout(() => {
             isLongPress.current = true;
             const transposed = transposeChord(chord, transpose);
@@ -113,9 +150,102 @@ const ActivePlayingView: React.FC<ActivePlayingViewProps> = ({ song, onBack, onS
             setPreviewingChord({ sIdx, bIdx });
             playChord(notes, 2);
         }, 300);
+
+        // Start drag timer (500ms — longer than preview)
+        dragLongPressTimer.current = setTimeout(() => {
+            isDragging.current = true;
+            // Cancel audio preview if drag starts
+            if (longPressTimer.current) {
+                clearTimeout(longPressTimer.current);
+                longPressTimer.current = null;
+            }
+            if (previewingChord) {
+                setPreviewingChord(null);
+                stopPlayback();
+            }
+            setDragSource({ sIdx, bIdx });
+            (e.target as HTMLElement).setPointerCapture?.(e.pointerId);
+        }, 500);
     };
 
-    const handleChordPressEnd = (sIdx: number, bIdx: number) => {
+    const handlePointerMove = (e: React.PointerEvent) => {
+        if (!isDragging.current || !dragSource) return;
+        // Find element under pointer
+        const el = document.elementFromPoint(e.clientX, e.clientY);
+        if (el) {
+            const card = (el as HTMLElement).closest('[data-chord-pos]');
+            if (card) {
+                const pos = (card as HTMLElement).dataset.chordPos;
+                if (pos) {
+                    const [s, b] = pos.split(',').map(Number);
+                    setDragOverTarget({ sIdx: s, bIdx: b });
+                    return;
+                }
+            }
+        }
+        setDragOverTarget(null);
+    };
+
+    const handlePointerUp = (_e: React.PointerEvent, sIdx: number, bIdx: number) => {
+        // Clear timers
+        if (dragLongPressTimer.current) {
+            clearTimeout(dragLongPressTimer.current);
+            dragLongPressTimer.current = null;
+        }
+        if (longPressTimer.current) {
+            clearTimeout(longPressTimer.current);
+            longPressTimer.current = null;
+        }
+
+        if (isDragging.current && dragSource && dragOverTarget && onUpdateSections) {
+            // Perform the drop
+            const { sIdx: sourceSIdx, bIdx: sourceBIdx } = dragSource;
+            const { sIdx: targetSIdx, bIdx: targetBIdx } = dragOverTarget;
+
+            if (!(sourceSIdx === targetSIdx && sourceBIdx === targetBIdx)) {
+                const newSections = JSON.parse(JSON.stringify(song.sections));
+                const chord = newSections[sourceSIdx].bars[sourceBIdx];
+                newSections[sourceSIdx].bars.splice(sourceBIdx, 1);
+                let adjustedTargetBIdx = targetBIdx;
+                if (sourceSIdx === targetSIdx && sourceBIdx < targetBIdx) {
+                    adjustedTargetBIdx--;
+                }
+                newSections[targetSIdx].bars.splice(adjustedTargetBIdx, 0, chord);
+                onUpdateSections(newSections);
+            }
+            setDragSource(null);
+            setDragOverTarget(null);
+            isDragging.current = false;
+            return;
+        }
+
+        // Clean up drag state
+        if (isDragging.current) {
+            setDragSource(null);
+            setDragOverTarget(null);
+            isDragging.current = false;
+            return;
+        }
+
+        // Handle preview cleanup
+        if (previewingChord) {
+            setPreviewingChord(null);
+            stopPlayback();
+            return;
+        }
+
+        // Short tap: open hot swap
+        if (!isLongPress.current && !isDragging.current) {
+            setSelectedChord({ sIdx, bIdx });
+            setHotSwapTarget({ sIdx, bIdx });
+        }
+    };
+
+    const handlePointerCancel = () => {
+        if (dragLongPressTimer.current) {
+            clearTimeout(dragLongPressTimer.current);
+            dragLongPressTimer.current = null;
+        }
         if (longPressTimer.current) {
             clearTimeout(longPressTimer.current);
             longPressTimer.current = null;
@@ -124,64 +254,30 @@ const ActivePlayingView: React.FC<ActivePlayingViewProps> = ({ song, onBack, onS
             setPreviewingChord(null);
             stopPlayback();
         }
-        // If it wasn't a long press, open hot swap
-        if (!isLongPress.current) {
-            setSelectedChord({ sIdx, bIdx });
-            setHotSwapTarget({ sIdx, bIdx });
-        }
-    };
-
-    // Drag and drop handlers
-    const handleDragStart = (e: React.DragEvent, sIdx: number, bIdx: number) => {
-        setDragSource({ sIdx, bIdx });
-        e.dataTransfer.effectAllowed = 'move';
-        e.dataTransfer.setData('text/plain', `${sIdx},${bIdx}`);
-    };
-
-    const handleDragOver = (e: React.DragEvent, sIdx: number, bIdx: number) => {
-        e.preventDefault();
-        e.dataTransfer.dropEffect = 'move';
-        setDragOverTarget({ sIdx, bIdx });
-    };
-
-    const handleDragLeave = () => {
-        setDragOverTarget(null);
-    };
-
-    const handleDragEnd = () => {
         setDragSource(null);
         setDragOverTarget(null);
+        isDragging.current = false;
     };
 
-    const handleDrop = (e: React.DragEvent, targetSIdx: number, targetBIdx: number) => {
-        e.preventDefault();
-        if (!dragSource || !onUpdateSections) return;
-
-        const { sIdx: sourceSIdx, bIdx: sourceBIdx } = dragSource;
-
-        // Don't do anything if dropping on same position
-        if (sourceSIdx === targetSIdx && sourceBIdx === targetBIdx) {
-            handleDragEnd();
-            return;
+    const addSuggestionProgression = (chords: string[], sectionType: string) => {
+        if (onUpdateSections) {
+            const newSections = JSON.parse(JSON.stringify(song.sections));
+            const existingIdx = newSections.findIndex((s: Section) => s.name === sectionType);
+            if (existingIdx >= 0) {
+                newSections[existingIdx].bars.push(...chords);
+            } else {
+                newSections.push({ name: sectionType, bars: chords });
+            }
+            onUpdateSections(newSections);
         }
+    };
 
-        const newSections = JSON.parse(JSON.stringify(song.sections));
-        const chord = newSections[sourceSIdx].bars[sourceBIdx];
-
-        // Remove from source
-        newSections[sourceSIdx].bars.splice(sourceBIdx, 1);
-
-        // Adjust target index if in same section and after source
-        let adjustedTargetBIdx = targetBIdx;
-        if (sourceSIdx === targetSIdx && sourceBIdx < targetBIdx) {
-            adjustedTargetBIdx--;
+    const addChordToSection = (chord: string, sIdx: number) => {
+        if (onUpdateSections) {
+            const newSections = JSON.parse(JSON.stringify(song.sections));
+            newSections[sIdx].bars.push(chord);
+            onUpdateSections(newSections);
         }
-
-        // Insert at target
-        newSections[targetSIdx].bars.splice(adjustedTargetBIdx, 0, chord);
-
-        onUpdateSections(newSections);
-        handleDragEnd();
     };
 
     const swapChord = (newChord: string, sIdx: number, bIdx: number) => {
@@ -197,7 +293,9 @@ const ActivePlayingView: React.FC<ActivePlayingViewProps> = ({ song, onBack, onS
         if (onUpdateSections) {
             const newSections = JSON.parse(JSON.stringify(song.sections));
             newSections[sIdx].bars.splice(bIdx, 1);
-            onUpdateSections(newSections);
+            // Remove empty sections after deleting last chord
+            const filtered = newSections.filter((s: Section) => s.bars.length > 0);
+            onUpdateSections(filtered);
         }
         setHotSwapTarget(null);
     };
@@ -254,41 +352,31 @@ const ActivePlayingView: React.FC<ActivePlayingViewProps> = ({ song, onBack, onS
             </nav>
 
             <main className="max-w-2xl mx-auto">
-                {/* Global Transpose Slider */}
-                <div className="p-4 mt-2">
-                    <div className="rounded-lg border border-chord-cyan/20 bg-chord-cyan/5 p-4">
-                        <div className="flex w-full items-center justify-between mb-4">
-                            <div className="flex items-center gap-2">
-                                <span className="material-symbols-outlined text-chord-cyan text-sm">swap_vert</span>
-                                <p className="text-xs font-bold tracking-[0.2em] uppercase text-chord-cyan">Global Transpose</p>
-                            </div>
-                            <p className="text-chord-cyan font-mono font-bold text-lg">
-                                {transpose > 0 ? `+${transpose}` : transpose} <span className="text-[10px] opacity-60">ST</span>
-                            </p>
-                        </div>
-                        <div className="flex h-6 w-full items-center gap-4">
-                            <span className="text-[10px] font-bold opacity-40">-6</span>
-                            <div className="flex h-1.5 flex-1 rounded-full bg-chord-cyan/20 relative">
-                                <input
-                                    type="range"
-                                    min="-6"
-                                    max="6"
-                                    step="1"
-                                    value={transpose}
-                                    onChange={(e) => setTranspose(parseInt(e.target.value))}
-                                    className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10"
-                                />
-                                <div
-                                    className="h-full rounded-full bg-chord-cyan transition-all duration-150"
-                                    style={{ width: `${((transpose + 6) / 12) * 100}%` }}
-                                />
-                                <div
-                                    className="absolute -top-2 size-5 rounded-full bg-chord-cyan border-4 border-chord-dark shadow-[0_0_10px_rgba(0,212,255,0.5)] transition-all duration-150 pointer-events-none"
-                                    style={{ left: `calc(${((transpose + 6) / 12) * 100}% - 10px)` }}
-                                />
-                            </div>
-                            <span className="text-[10px] font-bold opacity-40">+6</span>
-                        </div>
+                {/* Key Picker */}
+                <div className="px-4 mt-2">
+                    <div className="flex items-center gap-2 mb-2">
+                        <span className="material-symbols-outlined text-chord-cyan text-sm">music_note</span>
+                        <p className="text-[10px] font-bold tracking-[0.2em] uppercase text-chord-cyan">Key</p>
+                        {transpose !== 0 && (
+                            <span className="text-[10px] font-mono text-chord-cyan/50">
+                                ({transpose > 0 ? '+' : ''}{transpose} ST)
+                            </span>
+                        )}
+                    </div>
+                    <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-hide -mx-4 px-4">
+                        {KEYS.map(k => (
+                            <button
+                                key={k}
+                                onClick={() => handleKeyChange(k)}
+                                className={`shrink-0 px-3 py-1.5 rounded-full text-xs font-bold uppercase tracking-wide transition-all ${
+                                    songKey === k
+                                        ? 'bg-chord-cyan text-chord-dark shadow-[0_0_12px_rgba(0,212,255,0.4)]'
+                                        : 'border border-chord-cyan/20 text-chord-cyan/60 hover:border-chord-cyan/60 hover:text-chord-cyan'
+                                }`}
+                            >
+                                {k}
+                            </button>
+                        ))}
                     </div>
                 </div>
 
@@ -305,38 +393,23 @@ const ActivePlayingView: React.FC<ActivePlayingViewProps> = ({ song, onBack, onS
                             {section.bars.map((chord, bIdx) => {
                                 const isSelected = selectedChord.sIdx === sIdx && selectedChord.bIdx === bIdx;
                                 const isPreviewing = previewingChord?.sIdx === sIdx && previewingChord?.bIdx === bIdx;
-                                const isDragging = dragSource?.sIdx === sIdx && dragSource?.bIdx === bIdx;
-                                const isDragOver = dragOverTarget?.sIdx === sIdx && dragOverTarget?.bIdx === bIdx;
                                 const currentTransposed = transposeChord(chord, transpose);
                                 const roman = getRomanNumeral(currentTransposed, keyToAnalysis(songKey));
                                 const notes = getChordNotes(currentTransposed);
+                                const isBeingDragged = dragSource?.sIdx === sIdx && dragSource?.bIdx === bIdx;
+                                const isDragOverThis = dragOverTarget?.sIdx === sIdx && dragOverTarget?.bIdx === bIdx;
                                 return (
                                     <div
                                         key={bIdx}
-                                        draggable
-                                        onDragStart={(e) => handleDragStart(e, sIdx, bIdx)}
-                                        onDragOver={(e) => handleDragOver(e, sIdx, bIdx)}
-                                        onDragLeave={handleDragLeave}
-                                        onDragEnd={handleDragEnd}
-                                        onDrop={(e) => handleDrop(e, sIdx, bIdx)}
-                                        onMouseDown={() => handleChordPressStart(sIdx, bIdx, chord)}
-                                        onMouseUp={() => handleChordPressEnd(sIdx, bIdx)}
-                                        onMouseLeave={() => {
-                                            if (longPressTimer.current) {
-                                                clearTimeout(longPressTimer.current);
-                                                longPressTimer.current = null;
-                                            }
-                                            if (previewingChord) {
-                                                setPreviewingChord(null);
-                                                stopPlayback();
-                                            }
-                                        }}
-                                        onTouchStart={() => handleChordPressStart(sIdx, bIdx, chord)}
-                                        onTouchEnd={() => handleChordPressEnd(sIdx, bIdx)}
-                                        className={`aspect-[16/10] flex flex-col justify-between p-3 rounded border bg-chord-card relative group cursor-grab transition-all duration-200 select-none ${
-                                            isDragging
-                                                ? 'opacity-50 border-dashed border-chord-cyan'
-                                                : isDragOver
+                                        data-chord-pos={`${sIdx},${bIdx}`}
+                                        onPointerDown={(e) => handlePointerDown(e, sIdx, bIdx, chord)}
+                                        onPointerMove={handlePointerMove}
+                                        onPointerUp={(e) => handlePointerUp(e, sIdx, bIdx)}
+                                        onPointerCancel={handlePointerCancel}
+                                        className={`aspect-[16/10] flex flex-col justify-between p-3 rounded border bg-chord-card relative group transition-all duration-200 select-none ${dragSource ? 'touch-none' : ''} ${
+                                            isBeingDragged
+                                                ? 'opacity-50 border-dashed border-chord-cyan scale-95'
+                                                : isDragOverThis
                                                     ? 'border-2 border-green-400 bg-green-400/10 shadow-[0_0_15px_rgba(74,222,128,0.3)]'
                                                     : isPreviewing
                                                         ? 'border-2 border-chord-cyan bg-chord-cyan/20 shadow-[0_0_20px_rgba(0,212,255,0.4)]'
@@ -345,36 +418,46 @@ const ActivePlayingView: React.FC<ActivePlayingViewProps> = ({ song, onBack, onS
                                                             : 'border-chord-cyan/10 hover:border-chord-cyan/40 hover:bg-chord-cyan/5'
                                         }`}
                                     >
-                                        <div className="flex justify-between items-start">
-                                            <span className="text-[10px] font-mono text-chord-cyan/40">
-                                                {(bIdx + 1).toString().padStart(2, '0')}
+                                        <div className="flex items-center justify-between">
+                                            <span className="text-sm font-mono font-black text-chord-cyan uppercase">
+                                                {roman}
                                             </span>
-                                            <div className="flex items-center gap-1">
-                                                {isPreviewing && (
-                                                    <span className="material-symbols-outlined text-chord-cyan text-xs animate-pulse">volume_up</span>
-                                                )}
-                                                <span className="text-xs font-mono font-bold text-chord-cyan/60 uppercase">
-                                                    {roman}
-                                                </span>
-                                            </div>
+                                            {isPreviewing && (
+                                                <span className="material-symbols-outlined text-chord-cyan text-xs animate-pulse">volume_up</span>
+                                            )}
                                         </div>
 
-                                        <h2 className={`font-black tracking-tighter text-center uppercase ${currentTransposed.length > 4 ? 'text-lg' : 'text-2xl'}`}>
+                                        <h2 className={`font-black tracking-tighter text-center uppercase ${currentTransposed.length > 5 ? 'text-lg' : 'text-2xl'}`}>
                                             {currentTransposed}
                                         </h2>
 
-                                        <div className="flex flex-wrap gap-1 mt-1 justify-center opacity-40 group-hover:opacity-100 transition-opacity">
-                                            {notes.slice(0, 4).map((n, i) => (
-                                                <span key={i} className="text-[8px] font-bold text-white leading-none">{n}</span>
+                                        <div className="flex flex-wrap gap-1 justify-center">
+                                            {notes.map((n, i) => (
+                                                <span key={i} className="text-[11px] font-bold text-white/70 leading-none">{n}</span>
                                             ))}
-                                            {notes.length > 4 && <span className="text-[8px] font-bold text-white/50">+</span>}
                                         </div>
                                     </div>
                                 );
                             })}
+                            {/* Add chord button */}
+                            <button
+                                onClick={() => setAddChordTarget(sIdx)}
+                                className="aspect-[16/10] flex flex-col items-center justify-center rounded border border-dashed border-chord-cyan/20 hover:border-chord-cyan/60 hover:bg-chord-cyan/5 transition-all"
+                            >
+                                <span className="material-symbols-outlined text-chord-cyan/40 text-2xl">add</span>
+                                <span className="text-[9px] text-chord-cyan/40 uppercase mt-1">Add</span>
+                            </button>
                         </div>
                     </div>
                 ))}
+
+                {/* Suggestion Panel */}
+                <SuggestionPanel
+                    artistId={artistId || null}
+                    songKey={songKey}
+                    existingSections={song.sections.map(s => s.name)}
+                    onAddProgression={addSuggestionProgression}
+                />
 
                 {/* Reference Card (Note Spelling) */}
                 <div className="px-4 mt-6">
@@ -413,6 +496,7 @@ const ActivePlayingView: React.FC<ActivePlayingViewProps> = ({ song, onBack, onS
                 <HotSwapMenu
                     chord={song.sections[hotSwapTarget.sIdx].bars[hotSwapTarget.bIdx]}
                     roman={getRomanNumeral(transposeChord(song.sections[hotSwapTarget.sIdx].bars[hotSwapTarget.bIdx], transpose), keyToAnalysis(songKey))}
+                    songKey={songKey}
                     onClose={() => setHotSwapTarget(null)}
                     onSwap={(newChord) => swapChord(newChord, hotSwapTarget.sIdx, hotSwapTarget.bIdx)}
                     onDelete={() => deleteChord(hotSwapTarget.sIdx, hotSwapTarget.bIdx)}
@@ -422,6 +506,18 @@ const ActivePlayingView: React.FC<ActivePlayingViewProps> = ({ song, onBack, onS
                         }
                         setHotSwapTarget(null);
                     }}
+                />
+            )}
+
+            {/* Inline Chord Picker Modal */}
+            {addChordTarget !== null && song.sections[addChordTarget] && (
+                <InlineChordPicker
+                    songKey={songKey}
+                    sectionName={song.sections[addChordTarget].name}
+                    onAdd={(chord) => {
+                        addChordToSection(chord, addChordTarget);
+                    }}
+                    onClose={() => setAddChordTarget(null)}
                 />
             )}
 
