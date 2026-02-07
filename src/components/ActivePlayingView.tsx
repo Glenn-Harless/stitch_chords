@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { transposeChord, getChordNotes, getRomanNumeral, getNoteIndex } from '../utils/theory';
-import { playChord, stopPlayback } from '../utils/audio';
+import { playChord, stopPlayback, resumeAudio } from '../utils/audio';
 import HotSwapMenu from './HotSwapMenu';
 import SaveOverlay from './SaveOverlay';
 import InlineChordPicker from './InlineChordPicker';
@@ -78,6 +78,23 @@ const ActivePlayingView: React.FC<ActivePlayingViewProps> = ({ song, onBack, onS
     const isLongPress = useRef(false);
     const baseKey = useRef(song.key || 'C'); // Original key of the song
     const wakeLockRef = useRef<WakeLockSentinel | null>(null);
+    const audioBootstrapped = useRef(false);
+
+    // Bootstrap audio context on first touch (required for iOS/mobile)
+    useEffect(() => {
+        const bootstrap = () => {
+            if (!audioBootstrapped.current) {
+                resumeAudio();
+                audioBootstrapped.current = true;
+            }
+        };
+        document.addEventListener('touchstart', bootstrap, { once: true });
+        document.addEventListener('pointerdown', bootstrap, { once: true });
+        return () => {
+            document.removeEventListener('touchstart', bootstrap);
+            document.removeEventListener('pointerdown', bootstrap);
+        };
+    }, []);
 
     // Wake Lock API
     useEffect(() => {
@@ -422,9 +439,21 @@ const ActivePlayingView: React.FC<ActivePlayingViewProps> = ({ song, onBack, onS
                                             <span className="text-sm font-mono font-black text-chord-cyan uppercase">
                                                 {roman}
                                             </span>
-                                            {isPreviewing && (
-                                                <span className="material-symbols-outlined text-chord-cyan text-xs animate-pulse">volume_up</span>
-                                            )}
+                                            <div className="flex items-center gap-1">
+                                                {isPreviewing && (
+                                                    <span className="material-symbols-outlined text-chord-cyan text-xs animate-pulse">volume_up</span>
+                                                )}
+                                                <button
+                                                    onPointerDown={(e) => e.stopPropagation()}
+                                                    onClick={(e) => {
+                                                        e.stopPropagation();
+                                                        deleteChord(sIdx, bIdx);
+                                                    }}
+                                                    className="p-0.5 rounded hover:bg-red-500/20 transition-colors"
+                                                >
+                                                    <span className="material-symbols-outlined text-white/20 hover:text-red-400 text-xs">close</span>
+                                                </button>
+                                            </div>
                                         </div>
 
                                         <h2 className={`font-black tracking-tighter text-center uppercase ${currentTransposed.length > 5 ? 'text-lg' : 'text-2xl'}`}>
@@ -516,6 +545,7 @@ const ActivePlayingView: React.FC<ActivePlayingViewProps> = ({ song, onBack, onS
                     sectionName={song.sections[addChordTarget].name}
                     onAdd={(chord) => {
                         addChordToSection(chord, addChordTarget);
+                        setAddChordTarget(null);
                     }}
                     onClose={() => setAddChordTarget(null)}
                 />
