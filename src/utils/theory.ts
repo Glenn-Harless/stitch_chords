@@ -34,26 +34,46 @@ const MAJOR_ROMAN = ['I', 'ii', 'iii', 'IV', 'V', 'vi', 'vii°'];
 const MINOR_ROMAN = ['i', 'ii°', 'III', 'iv', 'v', 'VI', 'VII'];
 
 export const CHORD_QUALITY_MAP: Record<string, string[]> = {
+    // Triads
     '': ['1', '3', '5'],
     'm': ['1', 'b3', '5'],
     'dim': ['1', 'b3', 'b5'],
     'aug': ['1', '3', '#5'],
+    // Suspended
+    'sus2': ['1', '2', '5'],
+    'sus4': ['1', '4', '5'],
+    // Sixths
+    '6': ['1', '3', '5', '6'],
+    'm6': ['1', 'b3', '5', '6'],
+    '6/9': ['1', '3', '5', '6', '9'],
+    // Sevenths
     'maj7': ['1', '3', '5', '7'],
     'm7': ['1', 'b3', '5', 'b7'],
     '7': ['1', '3', '5', 'b7'],
     'dim7': ['1', 'b3', 'b5', 'bb7'],
     'm7b5': ['1', 'b3', 'b5', 'b7'],
+    '7sus4': ['1', '4', '5', 'b7'],
+    '7#9': ['1', '3', '5', 'b7', '#9'],
+    // Ninths
     'maj9': ['1', '3', '5', '7', '9'],
     'm9': ['1', 'b3', '5', 'b7', '9'],
     '9': ['1', '3', '5', 'b7', '9'],
-    'sus4': ['1', '4', '5'],
-    '7sus4': ['1', '4', '5', 'b7'],
+    '9sus4': ['1', '4', '5', 'b7', '9'],
+    // Elevenths
+    'm11': ['1', 'b3', '5', 'b7', '9', '11'],
+    // Thirteenths
     'maj13': ['1', '3', '5', '7', '9', '13'],
     '13': ['1', '3', '5', 'b7', '9', '13'],
+    // Add chords
     'add9': ['1', '3', '5', '9'],
     'madd9': ['1', 'b3', '5', '9'],
-    '6': ['1', '3', '5', '6'],
-    'm6': ['1', 'b3', '5', '6'],
+    'add11': ['1', '3', '5', '11'],
+    'add9(no3)': ['1', '5', '9'],
+    // Extended maj7 variants
+    'maj7#11': ['1', '3', '5', '7', '#11'],
+    'maj9(no3)': ['1', '5', '7', '9'],
+    'madd11': ['1', 'b3', '5', '11'],
+    'maj7add6': ['1', '3', '5', '6', '7'],
 };
 
 export const SUPPORTED_QUALITIES = Object.keys(CHORD_QUALITY_MAP);
@@ -82,10 +102,17 @@ export function transposeNote(note: string, semitones: number, preferFlats = fal
 
 /**
  * Parses a chord string into its root and quality parts.
+ * Strips slash bass notes (e.g., "Gmaj7/B" -> root: "G", quality: "maj7").
  * Example: "Am9" -> { root: "A", quality: "m9" }
  */
 export function parseChord(chord: string): { root: string; quality: string } {
-    const match = chord.match(/^([A-G][#b]?)(.*)$/);
+    // Strip slash bass note (e.g., "Gmaj7/B" -> "Gmaj7")
+    // But don't strip "6/9" which is a chord quality
+    const slashIdx = chord.indexOf('/');
+    const afterSlash = slashIdx > 0 ? chord.slice(slashIdx + 1) : '';
+    const isSlashBass = slashIdx > 0 && /^[A-G][#b]?$/.test(afterSlash);
+    const base = isSlashBass ? chord.slice(0, slashIdx) : chord;
+    const match = base.match(/^([A-G][#b]?)(.*)$/);
     if (!match) return { root: chord, quality: '' };
     return { root: match[1], quality: match[2] };
 }
@@ -155,4 +182,40 @@ export function getRomanNumeral(chord: string, keyName: string): string {
     if (degree === undefined) return 'N.C.'; // Non-chromatic or pivot
     
     return isMinorKey ? MINOR_ROMAN[degree] : MAJOR_ROMAN[degree];
+}
+
+/**
+ * Returns the 7 diatonic seventh chords for a key.
+ * Key format: "C" (major), "Am" (minor), "F#" (major), "F#m" (minor)
+ * Returns: [{ root, quality, roman, chord, notes }]
+ */
+export function getDiatonicChords(key: string): { root: string; quality: string; roman: string; chord: string; notes: string[] }[] {
+    const isMinor = key.endsWith('m');
+    const keyRoot = isMinor ? key.slice(0, -1) : key;
+    const keyIdx = getNoteIndex(keyRoot);
+    if (keyIdx === -1) return [];
+
+    const useFlats = keyRoot.includes('b') || ['F', 'Bb', 'Eb', 'Ab', 'Db', 'Gb'].includes(keyRoot);
+    const scale = useFlats ? NOTES_FLAT : NOTES_SHARP;
+
+    // Major scale intervals in semitones: W W H W W W H
+    const majorSteps = [0, 2, 4, 5, 7, 9, 11];
+    // Natural minor: W H W W H W W
+    const minorSteps = [0, 2, 3, 5, 7, 8, 10];
+
+    const steps = isMinor ? minorSteps : majorSteps;
+    // Diatonic seventh chord qualities per degree
+    const majorQualities = ['maj7', 'm7', 'm7', 'maj7', '7', 'm7', 'm7b5'];
+    const minorQualities = ['m7', 'm7b5', 'maj7', 'm7', 'm7', 'maj7', '7'];
+    const qualities = isMinor ? minorQualities : majorQualities;
+    const romans = isMinor ? MINOR_ROMAN : MAJOR_ROMAN;
+
+    return steps.map((step, i) => {
+        const noteIdx = (keyIdx + step) % 12;
+        const root = scale[noteIdx];
+        const quality = qualities[i];
+        const chord = root + quality;
+        const notes = getChordNotes(chord);
+        return { root, quality, roman: romans[i], chord, notes };
+    });
 }

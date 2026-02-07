@@ -7,8 +7,9 @@ import ArtistList from './components/ArtistList'
 import ArtistLibrary from './components/ArtistLibrary'
 import ExpansionMenu from './components/ExpansionMenu'
 import ChordScratchpad from './components/ChordScratchpad'
+import VibeBrowser from './components/VibeBrowser'
 
-type ViewType = 'dashboard' | 'active' | 'library' | 'utility' | 'artists' | 'artist-detail' | 'expansion' | 'scratchpad'
+type ViewType = 'dashboard' | 'active' | 'library' | 'utility' | 'artists' | 'artist-detail' | 'expansion' | 'scratchpad' | 'vibe-browse'
 
 // Generate a new empty song with unique id
 const createNewSong = () => ({
@@ -64,6 +65,7 @@ function App() {
         ...prev,
         title: progression.name || prev.title,
         artist: selectedArtistId?.toUpperCase() || prev.artist,
+        key: progression.key || prev.key,
         sections: newSections
       }
     })
@@ -81,15 +83,16 @@ function App() {
       {currentView === 'dashboard' && (
         <Dashboard
           onSelect={() => setCurrentView('active')}
-          onSelectProgression={(prog) => {
-            setActiveSong(prog)
+          onSelectSong={(song) => {
+            updateLastOpened(song.id)
+            setActiveSong(song)
             setCurrentView('active')
           }}
           onNewSong={() => {
             setActiveSong(createNewSong())
             setCurrentView('artists')
           }}
-          songsCount={songs.length}
+          songs={songs}
           onNavigate={(view) => setCurrentView(view)}
         />
       )}
@@ -104,6 +107,8 @@ function App() {
           }}
           onEditChord={handleEditChord}
           onUpdateSections={(newSections) => setActiveSong({ ...activeSong, sections: newSections })}
+          onClear={() => setActiveSong(createNewSong())}
+          artistId={selectedArtistId}
         />
       )}
 
@@ -150,6 +155,13 @@ function App() {
             setEditingTarget(null)
             setCurrentView(returnToActive ? 'active' : 'dashboard')
           }}
+          onAddProgression={handleAddProgression}
+        />
+      )}
+
+      {currentView === 'vibe-browse' && (
+        <VibeBrowser
+          onBack={() => setCurrentView('dashboard')}
           onAddProgression={handleAddProgression}
         />
       )}
