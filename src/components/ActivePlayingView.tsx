@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { transposeChord, getChordNotes, getRomanNumeral, getNoteIndex } from '../utils/theory';
-import { playChord, stopPlayback, resumeAudio } from '../utils/audio';
+import { resumeAudio } from '../utils/audio';
 import HotSwapMenu from './HotSwapMenu';
 import SaveOverlay from './SaveOverlay';
 import InlineChordPicker from './InlineChordPicker';
@@ -70,12 +70,9 @@ const ActivePlayingView: React.FC<ActivePlayingViewProps> = ({ song, onBack, onS
     const [songKey, setSongKey] = useState(song.key || 'C');
     const [hotSwapTarget, setHotSwapTarget] = useState<{ sIdx: number; bIdx: number } | null>(null);
     const [showSaveOverlay, setShowSaveOverlay] = useState(false);
-    const [previewingChord, setPreviewingChord] = useState<{ sIdx: number; bIdx: number } | null>(null);
     const [dragSource, setDragSource] = useState<{ sIdx: number; bIdx: number } | null>(null);
     const [dragOverTarget, setDragOverTarget] = useState<{ sIdx: number; bIdx: number } | null>(null);
     const [addChordTarget, setAddChordTarget] = useState<number | null>(null);
-    const longPressTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
-    const isLongPress = useRef(false);
     const baseKey = useRef(song.key || 'C'); // Original key of the song
     const wakeLockRef = useRef<WakeLockSentinel | null>(null);
     const audioBootstrapped = useRef(false);
@@ -155,31 +152,12 @@ const ActivePlayingView: React.FC<ActivePlayingViewProps> = ({ song, onBack, onS
     const dragLongPressTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
     const isDragging = useRef(false);
 
-    const handlePointerDown = (e: React.PointerEvent, sIdx: number, bIdx: number, chord: string) => {
+    const handlePointerDown = (e: React.PointerEvent, sIdx: number, bIdx: number) => {
         isDragging.current = false;
-        isLongPress.current = false;
 
-        // Start long-press timer for audio preview (300ms)
-        longPressTimer.current = setTimeout(() => {
-            isLongPress.current = true;
-            const transposed = transposeChord(chord, transpose);
-            const notes = getChordNotes(transposed);
-            setPreviewingChord({ sIdx, bIdx });
-            playChord(notes, 2);
-        }, 300);
-
-        // Start drag timer (500ms — longer than preview)
+        // Start drag timer (500ms hold to drag)
         dragLongPressTimer.current = setTimeout(() => {
             isDragging.current = true;
-            // Cancel audio preview if drag starts
-            if (longPressTimer.current) {
-                clearTimeout(longPressTimer.current);
-                longPressTimer.current = null;
-            }
-            if (previewingChord) {
-                setPreviewingChord(null);
-                stopPlayback();
-            }
             setDragSource({ sIdx, bIdx });
             (e.target as HTMLElement).setPointerCapture?.(e.pointerId);
         }, 500);
@@ -204,14 +182,10 @@ const ActivePlayingView: React.FC<ActivePlayingViewProps> = ({ song, onBack, onS
     };
 
     const handlePointerUp = (_e: React.PointerEvent, sIdx: number, bIdx: number) => {
-        // Clear timers
+        // Clear drag timer
         if (dragLongPressTimer.current) {
             clearTimeout(dragLongPressTimer.current);
             dragLongPressTimer.current = null;
-        }
-        if (longPressTimer.current) {
-            clearTimeout(longPressTimer.current);
-            longPressTimer.current = null;
         }
 
         if (isDragging.current && dragSource && dragOverTarget && onUpdateSections) {
@@ -244,32 +218,15 @@ const ActivePlayingView: React.FC<ActivePlayingViewProps> = ({ song, onBack, onS
             return;
         }
 
-        // Handle preview cleanup
-        if (previewingChord) {
-            setPreviewingChord(null);
-            stopPlayback();
-            return;
-        }
-
         // Short tap: open hot swap
-        if (!isLongPress.current && !isDragging.current) {
-            setSelectedChord({ sIdx, bIdx });
-            setHotSwapTarget({ sIdx, bIdx });
-        }
+        setSelectedChord({ sIdx, bIdx });
+        setHotSwapTarget({ sIdx, bIdx });
     };
 
     const handlePointerCancel = () => {
         if (dragLongPressTimer.current) {
             clearTimeout(dragLongPressTimer.current);
             dragLongPressTimer.current = null;
-        }
-        if (longPressTimer.current) {
-            clearTimeout(longPressTimer.current);
-            longPressTimer.current = null;
-        }
-        if (previewingChord) {
-            setPreviewingChord(null);
-            stopPlayback();
         }
         setDragSource(null);
         setDragOverTarget(null);
@@ -409,7 +366,6 @@ const ActivePlayingView: React.FC<ActivePlayingViewProps> = ({ song, onBack, onS
                         <div className="grid grid-cols-2 gap-3 p-4">
                             {section.bars.map((chord, bIdx) => {
                                 const isSelected = selectedChord.sIdx === sIdx && selectedChord.bIdx === bIdx;
-                                const isPreviewing = previewingChord?.sIdx === sIdx && previewingChord?.bIdx === bIdx;
                                 const currentTransposed = transposeChord(chord, transpose);
                                 const roman = getRomanNumeral(currentTransposed, keyToAnalysis(songKey));
                                 const notes = getChordNotes(currentTransposed);
@@ -419,7 +375,7 @@ const ActivePlayingView: React.FC<ActivePlayingViewProps> = ({ song, onBack, onS
                                     <div
                                         key={bIdx}
                                         data-chord-pos={`${sIdx},${bIdx}`}
-                                        onPointerDown={(e) => handlePointerDown(e, sIdx, bIdx, chord)}
+                                        onPointerDown={(e) => handlePointerDown(e, sIdx, bIdx)}
                                         onPointerMove={handlePointerMove}
                                         onPointerUp={(e) => handlePointerUp(e, sIdx, bIdx)}
                                         onPointerCancel={handlePointerCancel}
@@ -428,32 +384,15 @@ const ActivePlayingView: React.FC<ActivePlayingViewProps> = ({ song, onBack, onS
                                                 ? 'opacity-50 border-dashed border-chord-cyan scale-95'
                                                 : isDragOverThis
                                                     ? 'border-2 border-green-400 bg-green-400/10 shadow-[0_0_15px_rgba(74,222,128,0.3)]'
-                                                    : isPreviewing
-                                                        ? 'border-2 border-chord-cyan bg-chord-cyan/20 shadow-[0_0_20px_rgba(0,212,255,0.4)]'
-                                                        : isSelected
-                                                            ? 'border-2 border-chord-cyan shadow-[0_0_15px_rgba(0,212,255,0.2)]'
-                                                            : 'border-chord-cyan/10 hover:border-chord-cyan/40 hover:bg-chord-cyan/5'
+                                                    : isSelected
+                                                        ? 'border-2 border-chord-cyan shadow-[0_0_15px_rgba(0,212,255,0.2)]'
+                                                        : 'border-chord-cyan/10 hover:border-chord-cyan/40 hover:bg-chord-cyan/5'
                                         }`}
                                     >
                                         <div className="flex items-center justify-between">
                                             <span className="text-sm font-mono font-black text-chord-cyan uppercase">
                                                 {roman}
                                             </span>
-                                            <div className="flex items-center gap-1">
-                                                {isPreviewing && (
-                                                    <span className="material-symbols-outlined text-chord-cyan text-xs animate-pulse">volume_up</span>
-                                                )}
-                                                <button
-                                                    onPointerDown={(e) => e.stopPropagation()}
-                                                    onClick={(e) => {
-                                                        e.stopPropagation();
-                                                        deleteChord(sIdx, bIdx);
-                                                    }}
-                                                    className="p-0.5 rounded hover:bg-red-500/20 transition-colors"
-                                                >
-                                                    <span className="material-symbols-outlined text-white/20 hover:text-red-400 text-xs">close</span>
-                                                </button>
-                                            </div>
                                         </div>
 
                                         <h2 className={`font-black tracking-tighter text-center uppercase ${currentTransposed.length > 5 ? 'text-lg' : 'text-2xl'}`}>

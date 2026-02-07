@@ -3,8 +3,8 @@ import react from '@vitejs/plugin-react'
 import { VitePWA } from 'vite-plugin-pwa'
 
 // https://vite.dev/config/
-export default defineConfig({
-  base: '/stitch_chords/',
+export default defineConfig(({ command }) => ({
+  base: command === 'build' ? '/stitch_chords/' : '/',
   plugins: [
     react(),
     VitePWA({
@@ -30,4 +30,4 @@ export default defineConfig({
       }
     })
   ],
-})
+}))

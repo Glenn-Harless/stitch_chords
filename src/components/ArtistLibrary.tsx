@@ -41,6 +41,18 @@ const ArtistLibrary: React.FC<ArtistLibraryProps> = ({ artistId, onBack, onAddPr
         }, 300);
     };
 
+    // Normalize electronic section names to standard ones
+    const normalizeSectionName = (name: string): string => {
+        const map: Record<string, string> = {
+            'DROP': 'CHORUS',
+            'BUILD': 'CHORUS',
+            'AMBIENT': 'VERSE',
+            'LOOP': 'VERSE',
+            'OUTRO': 'BRIDGE',
+        };
+        return map[name.toUpperCase()] || name;
+    };
+
     const handlePressEnd = (prog?: any) => {
         if (longPressTimer.current) {
             clearTimeout(longPressTimer.current);
@@ -49,11 +61,15 @@ const ArtistLibrary: React.FC<ArtistLibraryProps> = ({ artistId, onBack, onAddPr
         if (previewingId) {
             setPreviewingId(null);
             stopPlayback();
+            isLongPress.current = false;
+            return;
         }
-        // Short tap: add to suggested section
+        // Short tap: add to suggested section (normalized)
         if (!isLongPress.current && prog) {
-            onAddProgression(prog, prog.suggested_section || 'VERSE');
+            const section = normalizeSectionName(prog.suggested_section || 'VERSE');
+            onAddProgression(prog, section);
         }
+        isLongPress.current = false;
     };
 
     if (!artist) {
@@ -138,6 +154,7 @@ const ArtistLibrary: React.FC<ArtistLibraryProps> = ({ artistId, onBack, onAddPr
                                     onClick={(e) => { e.stopPropagation(); onAddProgression(prog, 'VERSE'); }}
                                     onMouseDown={(e) => e.stopPropagation()}
                                     onTouchStart={(e) => e.stopPropagation()}
+                                    onTouchEnd={(e) => e.stopPropagation()}
                                     className="flex flex-col items-center justify-center w-10 h-10 border border-chord-cyan/20 rounded hover:bg-chord-cyan hover:text-black transition-all group/btn"
                                     title="Add to Verse"
                                 >
@@ -148,6 +165,7 @@ const ArtistLibrary: React.FC<ArtistLibraryProps> = ({ artistId, onBack, onAddPr
                                     onClick={(e) => { e.stopPropagation(); onAddProgression(prog, 'BRIDGE'); }}
                                     onMouseDown={(e) => e.stopPropagation()}
                                     onTouchStart={(e) => e.stopPropagation()}
+                                    onTouchEnd={(e) => e.stopPropagation()}
                                     className="flex flex-col items-center justify-center w-10 h-10 border border-chord-cyan/20 rounded hover:bg-chord-cyan hover:text-black transition-all group/btn"
                                     title="Add to Bridge"
                                 >
@@ -158,6 +176,7 @@ const ArtistLibrary: React.FC<ArtistLibraryProps> = ({ artistId, onBack, onAddPr
                                     onClick={(e) => { e.stopPropagation(); onAddProgression(prog, 'CHORUS'); }}
                                     onMouseDown={(e) => e.stopPropagation()}
                                     onTouchStart={(e) => e.stopPropagation()}
+                                    onTouchEnd={(e) => e.stopPropagation()}
                                     className="flex flex-col items-center justify-center w-10 h-10 border border-chord-cyan/20 rounded hover:bg-chord-cyan hover:text-black transition-all group/btn"
                                     title="Add to Chorus"
                                 >
