@@ -179,11 +179,7 @@ const ActivePlayingView: React.FC<ActivePlayingViewProps> = ({ song, onBack, onS
                 const newSections = JSON.parse(JSON.stringify(song.sections));
                 const chord = newSections[sourceSIdx].bars[sourceBIdx];
                 newSections[sourceSIdx].bars.splice(sourceBIdx, 1);
-                let adjustedTargetBIdx = targetBIdx;
-                if (sourceSIdx === targetSIdx && sourceBIdx < targetBIdx) {
-                    adjustedTargetBIdx--;
-                }
-                newSections[targetSIdx].bars.splice(adjustedTargetBIdx, 0, chord);
+                newSections[targetSIdx].bars.splice(targetBIdx, 0, chord);
                 onUpdateSections(newSections);
             }
             setDragSource(null);
