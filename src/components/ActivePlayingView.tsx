@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { transposeChord, getChordNotes, getRomanNumeral, getNoteIndex } from '../utils/theory';
-import { resumeAudio } from '../utils/audio';
 import HotSwapMenu from './HotSwapMenu';
 import SaveOverlay from './SaveOverlay';
 import InlineChordPicker from './InlineChordPicker';
@@ -75,23 +74,6 @@ const ActivePlayingView: React.FC<ActivePlayingViewProps> = ({ song, onBack, onS
     const [addChordTarget, setAddChordTarget] = useState<number | null>(null);
     const baseKey = useRef(song.key || 'C'); // Original key of the song
     const wakeLockRef = useRef<WakeLockSentinel | null>(null);
-    const audioBootstrapped = useRef(false);
-
-    // Bootstrap audio context on first touch (required for iOS/mobile)
-    useEffect(() => {
-        const bootstrap = () => {
-            if (!audioBootstrapped.current) {
-                resumeAudio();
-                audioBootstrapped.current = true;
-            }
-        };
-        document.addEventListener('touchstart', bootstrap, { once: true });
-        document.addEventListener('pointerdown', bootstrap, { once: true });
-        return () => {
-            document.removeEventListener('touchstart', bootstrap);
-            document.removeEventListener('pointerdown', bootstrap);
-        };
-    }, []);
 
     // Wake Lock API
     useEffect(() => {

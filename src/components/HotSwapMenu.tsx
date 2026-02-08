@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { getDiatonicChords, getChordNotes, parseChord, getRomanNumeral } from '../utils/theory';
-import { playChord, stopPlayback } from '../utils/audio';
 
 interface HotSwapMenuProps {
     chord: string;
@@ -32,26 +31,15 @@ const HotSwapMenu: React.FC<HotSwapMenuProps> = ({ chord, onClose, onSwap, onDel
     const keyAnalysis = isMinor ? songKey.slice(0, -1) + ' MINOR' : songKey + ' MAJOR';
     const activeRoman = preview ? getRomanNumeral(activeChord, keyAnalysis) : roman;
 
-    const handlePreview = (chordName: string) => {
-        setPreview(chordName);
-        playChord(getChordNotes(chordName), 1.5);
-    };
-
     const handleConfirm = () => {
-        stopPlayback();
         if (preview && preview !== chord) {
             onSwap(preview);
         }
         onClose();
     };
 
-    const handleClose = () => {
-        stopPlayback();
-        onClose();
-    };
-
     return (
-        <div className="fixed inset-0 z-[100] flex items-end justify-center bg-chord-dark/60 backdrop-blur-sm p-4" onClick={handleClose}>
+        <div className="fixed inset-0 z-[100] flex items-end justify-center bg-chord-dark/60 backdrop-blur-sm p-4" onClick={onClose}>
             <div
                 className="w-full max-w-md bg-chord-card border border-chord-cyan/30 rounded-t-2xl shadow-[0_-10px_40px_rgba(0,0,0,0.5)] overflow-hidden animate-slide-up max-h-[85vh] overflow-y-auto"
                 onClick={(e) => e.stopPropagation()}
@@ -71,16 +59,9 @@ const HotSwapMenu: React.FC<HotSwapMenuProps> = ({ chord, onClose, onSwap, onDel
                             <div className="flex items-baseline gap-3">
                                 <h3 className="text-3xl font-bold text-white uppercase">{activeChord}</h3>
                                 <span className="text-xl font-mono text-chord-cyan/40">{activeRoman}</span>
-                                <button
-                                    onClick={() => playChord(activeNotes, 1.5)}
-                                    className="p-1.5 rounded-full hover:bg-chord-cyan/10 transition-colors"
-                                    title="Play chord"
-                                >
-                                    <span className="material-symbols-outlined text-chord-cyan text-lg">volume_up</span>
-                                </button>
                             </div>
                         </div>
-                        <button onClick={handleClose} className="p-2 rounded-full hover:bg-white/5">
+                        <button onClick={onClose} className="p-2 rounded-full hover:bg-white/5">
                             <span className="material-symbols-outlined text-zinc-500">close</span>
                         </button>
                     </div>
@@ -131,7 +112,7 @@ const HotSwapMenu: React.FC<HotSwapMenuProps> = ({ chord, onClose, onSwap, onDel
                             {diatonic.map((d) => (
                                 <button
                                     key={d.chord}
-                                    onClick={() => handlePreview(d.chord)}
+                                    onClick={() => setPreview(d.chord)}
                                     className={`py-2 px-1 rounded border transition-all text-center ${
                                         d.chord === activeChord
                                             ? 'border-chord-cyan bg-chord-cyan/20 text-chord-cyan'
@@ -158,7 +139,7 @@ const HotSwapMenu: React.FC<HotSwapMenuProps> = ({ chord, onClose, onSwap, onDel
                                         return (
                                             <button
                                                 key={q}
-                                                onClick={() => handlePreview(newChord)}
+                                                onClick={() => setPreview(newChord)}
                                                 className={`px-2 py-1 text-[10px] font-bold rounded border transition-all uppercase ${
                                                     newChord === activeChord
                                                         ? 'border-chord-cyan bg-chord-cyan/20 text-chord-cyan'
@@ -184,7 +165,7 @@ const HotSwapMenu: React.FC<HotSwapMenuProps> = ({ chord, onClose, onSwap, onDel
                             Scratchpad
                         </button>
                         <button
-                            onClick={() => { stopPlayback(); onDelete(); }}
+                            onClick={onDelete}
                             className="flex items-center justify-center gap-2 py-3 rounded-lg border border-red-500/30 text-red-500 font-black text-[10px] tracking-widest uppercase hover:bg-red-500/10 transition-all"
                         >
                             <span className="material-symbols-outlined text-sm">delete</span>

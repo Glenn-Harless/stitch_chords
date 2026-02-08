@@ -1,7 +1,6 @@
-import React, { useRef, useState } from 'react';
+import React from 'react';
 import artistsData from '../data/artists.json';
-import { getChordNotes, getRomanNumeral } from '../utils/theory';
-import { playProgression, stopPlayback } from '../utils/audio';
+import { getRomanNumeral } from '../utils/theory';
 
 interface ArtistLibraryProps {
     artistId: string;
@@ -17,59 +16,24 @@ const keyToAnalysis = (key: string): string => {
     return key + ' MAJOR';
 };
 
+// Normalize electronic section names to standard ones
+const normalizeSectionName = (name: string): string => {
+    const map: Record<string, string> = {
+        'DROP': 'CHORUS',
+        'BUILD': 'CHORUS',
+        'AMBIENT': 'VERSE',
+        'LOOP': 'VERSE',
+        'OUTRO': 'BRIDGE',
+    };
+    return map[name.toUpperCase()] || name;
+};
+
 const ArtistLibrary: React.FC<ArtistLibraryProps> = ({ artistId, onBack, onAddProgression }) => {
     const artist = artistsData.artists.find(a => a.id === artistId);
-    const [previewingId, setPreviewingId] = useState<string | null>(null);
-    const longPressTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-    const startPreview = (prog: any) => {
-        // Get chord notes for each chord in progression
-        const chordNotesList = prog.chords.map((c: any) =>
-            getChordNotes(c.root + (c.quality || ''))
-        );
-        setPreviewingId(prog.id);
-        playProgression(chordNotesList, prog.bpm || 120);
-    };
-
-    const isLongPress = useRef(false);
-
-    const handlePressStart = (prog: any) => {
-        isLongPress.current = false;
-        longPressTimer.current = setTimeout(() => {
-            isLongPress.current = true;
-            startPreview(prog);
-        }, 300);
-    };
-
-    // Normalize electronic section names to standard ones
-    const normalizeSectionName = (name: string): string => {
-        const map: Record<string, string> = {
-            'DROP': 'CHORUS',
-            'BUILD': 'CHORUS',
-            'AMBIENT': 'VERSE',
-            'LOOP': 'VERSE',
-            'OUTRO': 'BRIDGE',
-        };
-        return map[name.toUpperCase()] || name;
-    };
-
-    const handlePressEnd = (prog?: any) => {
-        if (longPressTimer.current) {
-            clearTimeout(longPressTimer.current);
-            longPressTimer.current = null;
-        }
-        if (previewingId) {
-            setPreviewingId(null);
-            stopPlayback();
-            isLongPress.current = false;
-            return;
-        }
-        // Short tap: add to suggested section (normalized)
-        if (!isLongPress.current && prog) {
-            const section = normalizeSectionName(prog.suggested_section || 'VERSE');
-            onAddProgression(prog, section);
-        }
-        isLongPress.current = false;
+    const handleTap = (prog: any) => {
+        const section = normalizeSectionName(prog.suggested_section || 'VERSE');
+        onAddProgression(prog, section);
     };
 
     if (!artist) {
@@ -125,26 +89,13 @@ const ArtistLibrary: React.FC<ArtistLibraryProps> = ({ artistId, onBack, onAddPr
                     {artist.progressions.map((prog) => (
                         <div
                             key={prog.id}
-                            className={`group flex items-center justify-between px-4 py-5 border-b border-white/5 transition-colors select-none ${
-                                previewingId === prog.id
-                                    ? 'bg-chord-cyan/20 border-l-2 border-l-chord-cyan'
-                                    : 'hover:bg-chord-cyan/[0.02]'
-                            }`}
-                            onMouseDown={() => handlePressStart(prog)}
-                            onMouseUp={() => handlePressEnd(prog)}
-                            onMouseLeave={() => handlePressEnd()}
-                            onTouchStart={(e) => { e.preventDefault(); handlePressStart(prog); }}
-                            onTouchEnd={(e) => { e.preventDefault(); handlePressEnd(prog); }}
+                            className="group flex items-center justify-between px-4 py-5 border-b border-white/5 transition-colors select-none hover:bg-chord-cyan/[0.02] active:bg-chord-cyan/10"
+                            onClick={() => handleTap(prog)}
                         >
                             <div className="flex flex-col gap-1 overflow-hidden">
-                                <div className="flex items-center gap-2">
-                                    <p className="text-chord-cyan text-lg font-bold tracking-wider uppercase leading-none">
-                                        {prog.chords.map((c: any) => getRomanNumeral(c.root + (c.quality || ''), keyToAnalysis(prog.key))).join(' - ')}
-                                    </p>
-                                    {previewingId === prog.id && (
-                                        <span className="material-symbols-outlined text-chord-cyan text-sm animate-pulse">volume_up</span>
-                                    )}
-                                </div>
+                                <p className="text-chord-cyan text-lg font-bold tracking-wider uppercase leading-none">
+                                    {prog.chords.map((c: any) => getRomanNumeral(c.root + (c.quality || ''), keyToAnalysis(prog.key))).join(' - ')}
+                                </p>
                                 <p className="text-zinc-500 text-xs font-medium tracking-tight opacity-80 uppercase">
                                     {prog.chords.map((c: any) => c.root + (c.quality || '')).join(' - ')}
                                 </p>
@@ -152,10 +103,7 @@ const ArtistLibrary: React.FC<ArtistLibraryProps> = ({ artistId, onBack, onAddPr
                             <div className="flex items-center gap-1 shrink-0 ml-4">
                                 <button
                                     onClick={(e) => { e.stopPropagation(); onAddProgression(prog, 'VERSE'); }}
-                                    onMouseDown={(e) => e.stopPropagation()}
-                                    onTouchStart={(e) => e.stopPropagation()}
-                                    onTouchEnd={(e) => e.stopPropagation()}
-                                    className="flex flex-col items-center justify-center w-10 h-10 border border-chord-cyan/20 rounded hover:bg-chord-cyan hover:text-black transition-all group/btn"
+                                    className="flex flex-col items-center justify-center w-10 h-10 border border-chord-cyan/20 rounded hover:bg-chord-cyan hover:text-black active:bg-chord-cyan active:text-black transition-all"
                                     title="Add to Verse"
                                 >
                                     <span className="text-[10px] font-bold">V</span>
@@ -163,10 +111,7 @@ const ArtistLibrary: React.FC<ArtistLibraryProps> = ({ artistId, onBack, onAddPr
                                 </button>
                                 <button
                                     onClick={(e) => { e.stopPropagation(); onAddProgression(prog, 'BRIDGE'); }}
-                                    onMouseDown={(e) => e.stopPropagation()}
-                                    onTouchStart={(e) => e.stopPropagation()}
-                                    onTouchEnd={(e) => e.stopPropagation()}
-                                    className="flex flex-col items-center justify-center w-10 h-10 border border-chord-cyan/20 rounded hover:bg-chord-cyan hover:text-black transition-all group/btn"
+                                    className="flex flex-col items-center justify-center w-10 h-10 border border-chord-cyan/20 rounded hover:bg-chord-cyan hover:text-black active:bg-chord-cyan active:text-black transition-all"
                                     title="Add to Bridge"
                                 >
                                     <span className="text-[10px] font-bold">B</span>
@@ -174,10 +119,7 @@ const ArtistLibrary: React.FC<ArtistLibraryProps> = ({ artistId, onBack, onAddPr
                                 </button>
                                 <button
                                     onClick={(e) => { e.stopPropagation(); onAddProgression(prog, 'CHORUS'); }}
-                                    onMouseDown={(e) => e.stopPropagation()}
-                                    onTouchStart={(e) => e.stopPropagation()}
-                                    onTouchEnd={(e) => e.stopPropagation()}
-                                    className="flex flex-col items-center justify-center w-10 h-10 border border-chord-cyan/20 rounded hover:bg-chord-cyan hover:text-black transition-all group/btn"
+                                    className="flex flex-col items-center justify-center w-10 h-10 border border-chord-cyan/20 rounded hover:bg-chord-cyan hover:text-black active:bg-chord-cyan active:text-black transition-all"
                                     title="Add to Chorus"
                                 >
                                     <span className="text-[10px] font-bold">C</span>
