@@ -1,73 +1,37 @@
-# React + TypeScript + Vite
+# Jam Companion POC
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Jam Companion is a personal electronica jamming tool. It helps a weaker-theory player quickly create a playable loop, then explains what to play for chords, bass, and melody.
 
-Currently, two official plugins are available:
+The active POC keeps the old Stitch Chords data as seed material, but the product direction has changed from "dense chord reference" to "guided jam copilot."
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Run
 
-## React Compiler
+Frontend only:
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Optional local API with SQLite persistence:
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm run api:dev
 ```
+
+The frontend saves to `http://localhost:8787/api/jams` when the API is running. If the API is offline, it falls back to browser localStorage.
+
+## Current POC Scope
+
+- React/Vite PWA frontend.
+- Deterministic jam generation from artist seed data plus theory fallbacks.
+- Key, vibe, energy, complexity, bar count, and reference artist controls.
+- Mobile-first layout with bottom-sheet tuning, tabbed guidance, and sticky bottom actions.
+- Chord grid with roman numerals, note spelling, voicing hints, bass guidance, and melody runway.
+- Browser bass preview with Web Audio.
+- Local Node API using built-in SQLite support.
+- SQLite tables for jam sessions and AI interaction logs.
+- AI endpoint placeholder so OpenAI orchestration can be added behind the backend without putting keys in the browser.
+
+## Direction
+
+The music engine should remain deterministic and testable. AI should explain, adapt, and propose variations through structured backend contracts, while the app validates and renders musical output locally.

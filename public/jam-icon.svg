@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Jam Companion icon">
+  <rect width="128" height="128" rx="18" fill="#081020"/>
+  <path d="M24 82c18-38 38-38 56 0 8 16 16 16 24 0" fill="none" stroke="#00d4ff" stroke-width="8" stroke-linecap="round"/>
+  <circle cx="38" cy="48" r="8" fill="#00d4ff"/>
+  <circle cx="64" cy="40" r="8" fill="#ffffff"/>
+  <circle cx="90" cy="48" r="8" fill="#00d4ff"/>
+  <path d="M34 104h60" stroke="#9ab8bc" stroke-width="6" stroke-linecap="round"/>
+</svg>
