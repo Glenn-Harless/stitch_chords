@@ -1,5 +1,7 @@
 # Stitch Chords PWA - Feature Dev Init Requirements
 
+> Superseded note, 2026-05-08: the active product direction is now Jam Companion. The legacy Stitch screens are retained as reference code, but the routed app now opens to the Jam Companion POC. Current active requirements live in `feature-dev-docs/feature-dev-jam-companion/requirements.md`.
+
 ## Summary
 Stitch Chords is a terminal-aesthetic PWA for dense chord and progression reference. The current implementation covers core screens (dashboard, artist discovery, scratchpad, active playing view, saved songs) using static JSON plus localStorage. Design references come from Stitch exports in `stitch-exports/stitch_chord_voicing_am9/`.
 
